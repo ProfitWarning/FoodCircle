@@ -28,7 +28,7 @@ angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider,
           origin: 'http://localhost:1337' // change the socket origin
         };
 
-        $authProvider.loginUrl = API_URL + 'auth/login';
+        $authProvider.loginUrl = API_URL + 'auth/';
 	      $authProvider.signupUrl = API_URL + 'auth/register';
 })
 .constant('API_URL', 'http://localhost:1337/');

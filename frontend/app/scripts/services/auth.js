@@ -4,16 +4,16 @@ angular.module('foodCircle').service('auth', ['$http','API_URL','authToken','$st
 
 	function authSuccessful(res) {
 		authToken.setToken(res.token);
-		$state.go('main');
+		$state.go('home');
 	}
-
-	this.login = function (email, password) {
-		return $http.post(API_URL + 'login', {
+/* jshint ignore:start */
+	this.login = function (email, password) {		
+		return $http.post(API_URL + 'auth', {
 			email: email,
 			password: password
 		}).success(authSuccessful);
 	};
-
+/* jshint ignore:end */
 	this.register = function (email, password) {
 		return $http.post(API_URL + 'register', {
 			email: email,
