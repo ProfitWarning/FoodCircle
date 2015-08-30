@@ -14,5 +14,10 @@ angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider)
         .state('about', {
           url: '/about',
           templateUrl: '/views/about.html'
+        })
+        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+        .state('login', {
+          url: '/login',
+          templateUrl: '/views/login.html'
         });
 });

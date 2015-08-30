@@ -49,8 +49,11 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less','newer:copy:styles'],
+        options: {
+          livereload: '<%= connect.options.livereload %>'
+        }
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -62,6 +65,7 @@ module.exports = function (grunt) {
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
           '.tmp/styles/{,*/}*.css',
+          'app/styles/{,*/}*.less',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
@@ -414,7 +418,8 @@ module.exports = function (grunt) {
             },
             files: {
               //compiling frontend.less into frontend.css
-              "./app/styles/bootstrap-superhero.css":"./app/styles/less/bootstrap-superhero.less"
+              "./app/styles/bootstrap-superhero.css":"./app/styles/less/bootstrap-superhero.less",
+              "./app/styles/main.css":"./app/styles/less/main.less",
             }
         }
     },
@@ -432,11 +437,11 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'less',
       'concurrent:server',
       'autoprefixer:server',
       'connect:livereload',
-      'watch',
-      'less'
+      'watch'
     ]);
   });
 
@@ -448,16 +453,17 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'wiredep',
+    'less',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'less',
     'karma'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'less',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -469,7 +475,6 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'filerev',
-    'less',
     'usemin',
     'htmlmin'
   ]);
