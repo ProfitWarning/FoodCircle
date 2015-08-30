@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name foodCircle.controller:LoginCtrl
@@ -8,19 +6,17 @@
  * Controller of the foodCircle
  */
  'use strict';
-
- angular.module('foodCircle').controller('LoginCtrl',['alert', function (alert, auth, $auth) {
+/* jshint ignore:start */
+ angular.module('foodCircle').controller('LoginCtrl',['alert', 'auth', function (alert, auth) {
   var vm = this;
 
   vm.submit = function () {
-    alert('info', 'submit');
+
+
  	};
 
- 	vm.authenticate = function (provider) {
-
- 	}
-
- 	function handleError(err) {
- 		alert('warning', 'Something went wrong :(', err.message);
- 	}
+ // 	function handleError(err) {
+ // 		alert('warning', 'Something went wrong :(', err.message);
+ // 	}
 }]);
+/* jshint ignore:end */

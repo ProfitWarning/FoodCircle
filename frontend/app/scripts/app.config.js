@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider) {
+angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -20,4 +20,15 @@ angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider)
           url: '/login',
           templateUrl: '/views/login.html'
         });
-});
+
+        sailsResourceProvider.configuration = {
+          verbose: true, // sailsResource will log messages to console
+          //prefix: 'myapi', // apply a prefix to all routes
+          //socket: io.connect('http://localhost:1337'), // provide your own socket instance,
+          origin: 'http://localhost:1337' // change the socket origin
+        };
+
+        $authProvider.loginUrl = API_URL + 'auth/login';
+	      $authProvider.signupUrl = API_URL + 'auth/register';
+})
+.constant('API_URL', 'http://localhost:1337/');
