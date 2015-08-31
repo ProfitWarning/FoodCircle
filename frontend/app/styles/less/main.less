@@ -1,3 +1,6 @@
+/* imports */
+@import 'variables.less';
+
 /* Space out content a bit */
 
 body {
@@ -24,6 +27,11 @@ body {
   }
 }
 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+   background-color: @brand-primary;
+}
 
 .footer {
     padding-top: 19px;

@@ -7,7 +7,7 @@
  */
  'use strict';
 /* jshint ignore:start */
- angular.module('foodCircle').controller('LoginCtrl',['alert', '$auth', function (alert, $auth) {
+ angular.module('foodCircle').controller('LoginCtrl', ['alert', '$auth', function (alert, $auth) {
   var vm = this;
 
   vm.submit = function () {
