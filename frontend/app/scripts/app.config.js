@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('foodCircle').config(function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
+angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
 
         $urlRouterProvider.otherwise('/home');
 
@@ -39,5 +39,5 @@ angular.module('foodCircle').config(function ($stateProvider, $urlRouterProvider
 
         $authProvider.loginUrl = API_URL + 'auth/';
         $authProvider.signupUrl = API_URL + 'auth/register';
-    })
+    }])
     .constant('API_URL', 'http://localhost:1337/');

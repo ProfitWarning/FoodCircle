@@ -34,6 +34,7 @@ module.exports = function(config) {
       'bower_components/satellizer/satellizer.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
+      "app/scripts/app.js",
       "app/scripts/**/*.js",
       "test/mock/**/*.js",
       "test/spec/**/*.js"
@@ -61,7 +62,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       "karma-phantomjs-launcher",
-      "karma-jasmine"
+      "karma-jasmine",
+      "karma-chrome-launcher"
     ],
 
     // Continuous Integration mode

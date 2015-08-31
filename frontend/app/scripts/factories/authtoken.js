@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('foodCircle').factory('authToken', function($window) {
+angular.module('foodCircle').factory('authToken', ['$window', function($window) {
     var storage = $window.localStorage;
     var cachedToken;
     var userToken = 'userToken';
@@ -29,4 +29,4 @@ angular.module('foodCircle').factory('authToken', function($window) {
     };
 
     return authToken;
-});
+}]);
