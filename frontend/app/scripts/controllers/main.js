@@ -7,11 +7,10 @@
  * # MainCtrl
  * Controller of the foodCircle
  */
-angular.module('foodCircle')
-  .controller('MainCtrl', function () {
+angular.module('foodCircle').controller('MainCtrl', function () {
     this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
+        'HTML5 Boilerplate',
+        'AngularJS',
+        'Karma'
     ];
-  });
+});
