@@ -7,8 +7,8 @@ body {
 .header,
 .marketing,
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  /*padding-left: 15px;
+    padding-right: 15px;*/
 }
 /* Custom page header */
 .header {
@@ -50,23 +50,6 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
-}
 .form-signin {
   max-width: 280px;
   padding: 15px;
@@ -106,6 +89,7 @@ body {
   border-right-style: solid;
   border-bottom-style: solid;
   border-left-style: solid;
+  margin-bottom: 5px;
 }
 .main-alert {
   position: absolute;
@@ -115,11 +99,12 @@ body {
   max-width: 400px;
   margin: 0 auto;
 }
-Taskmaster.S01E03Taskmaster.S01E03 .alert-hidden {
+.alert-hidden {
   visibility: hidden;
 }
 .ui-view-container {
   position: relative;
+  padding: 0 10px;
 }
 [ui-view].ng-enter,
 [ui-view].ng-leave {
@@ -151,4 +136,24 @@ Taskmaster.S01E03Taskmaster.S01E03 .alert-hidden {
 }
 [ui-view].ng-leave-active {
   opacity: 0;
+}
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+  .ui-view-container {
+    padding: 0;
+  }
 }
