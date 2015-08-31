@@ -5,29 +5,31 @@
  * # LoginCtrl
  * Controller of the foodCircle
  */
- 'use strict';
-/* jshint ignore:start */
- angular.module('foodCircle').controller('LoginCtrl', ['alert', '$auth', function (alert, $auth) {
-  var vm = this;
 
-  vm.submit = function () {
-    $auth.login({
-    			email: vm.email,
-    			password: vm.password
-    		}).then(function (res) {
-    			var message = 'Thanks for coming back ' + res.data.user.email + '!';
+'use strict';
+/* jshint debug:true */
+angular.module('foodCircle').controller('LoginCtrl', ['alert', '$auth', '$state', function (alert, $auth, $state) {
+    var vm = this;
 
-    			// if (!res.data.user.active)
-    			// 	message = 'Just a reminder, please activate your account soon :)';
+    vm.submit = function () {
+        $auth.login({
+            email: vm.email,
+            password: vm.password
+        }).then(function (res) {
+            var message = 'Thanks for coming back ' + res.data.user.email + '!';
 
-    			alert('success', 'Welcome', message);
-    		}).catch(handleError);
- 	};
+            // if (!res.data.user.active)
+            // 	message = 'Just a reminder, please activate your account soon :)';
 
-  function handleError(res) {
-    if(res && res.data){
-      alert('warning', 'Something went wrong :', res.data.err);
+            alert('success', 'Welcome', message);
+            $state.go('home');
+
+        }).catch(handleError);
+    };
+
+    function handleError(res) {
+        if (res && res.data) {
+            alert('warning', 'Something went wrong :', res.data.err);
+        }
     }
- 	}
 }]);
-/* jshint ignore:end */

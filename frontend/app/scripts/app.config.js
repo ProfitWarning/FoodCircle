@@ -1,38 +1,43 @@
 'use strict';
 
-angular.module('foodCircle').config(function($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
+angular.module('foodCircle').config(function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
 
-    $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/home');
 
-    $stateProvider
+        $stateProvider
         // HOME STATES AND NESTED VIEWS ========================================
-        .state('home', {
-            url: '/home',
-            templateUrl: '/views/main.html'
-        })
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('about', {
-          url: '/about',
-          templateUrl: '/views/about.html'
-        })
-        .state('impressum', {
-          url: '/impressum',
-          templateUrl: '/views/impressum.html'
-        })
-        // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-        .state('login', {
-          url: '/login',
-          templateUrl: '/views/login.html'
-        });
+            .state('home', {
+                url: '/home',
+                templateUrl: '/views/main.html'
+            })
+            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+            .state('about', {
+                url: '/about',
+                templateUrl: '/views/about.html'
+            })
+            .state('impressum', {
+                url: '/impressum',
+                templateUrl: '/views/impressum.html'
+            })
+            // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
+            .state('login', {
+                url: '/login',
+                templateUrl: '/views/login.html'
+            })
+            .state('logout', {
+                url: '/logout',
+                controller: 'LogoutCtrl'
+            });
+
 
         sailsResourceProvider.configuration = {
-          verbose: true, // sailsResource will log messages to console
-          //prefix: 'myapi', // apply a prefix to all routes
-          //socket: io.connect('http://localhost:1337'), // provide your own socket instance,
-          origin: 'http://localhost:1337' // change the socket origin
+            verbose: true, // sailsResource will log messages to console
+            //prefix: 'myapi', // apply a prefix to all routes
+            //socket: io.connect('http://localhost:1337'), // provide your own socket instance,
+            origin: 'http://localhost:1337' // change the socket origin
         };
 
         $authProvider.loginUrl = API_URL + 'auth/';
-	      $authProvider.signupUrl = API_URL + 'auth/register';
-})
-.constant('API_URL', 'http://localhost:1337/');
+        $authProvider.signupUrl = API_URL + 'auth/register';
+    })
+    .constant('API_URL', 'http://localhost:1337/');
