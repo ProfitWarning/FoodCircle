@@ -16,7 +16,7 @@ module.exports = {
             type: 'string'
         },
 
-        owner: {
+        savedIngredients: {
             model: 'Recipe'
         }
 

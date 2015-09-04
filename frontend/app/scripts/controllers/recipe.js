@@ -8,20 +8,28 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipeCtrl', ['Ingredient', function (Ingredient) {
-        var vm = this;
+    angular.module('foodCircle').controller('RecipeCtrl', ['Ingredient', 'Recipe', 'alert', function (Ingredient, Recipe, alert) {
+        var vm = this;//Recipe
         vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
         vm.ingredients = [];
-        vm.ingredientsInputs = [];
-        vm.ingredientsInputs.push(new Ingredient('', '', ''));
+        vm.ingredients.push(new Ingredient('', '', ''));
 
         vm.addIngredientInput = function () {
-            vm.ingredientsInputs.push(new Ingredient('', '', ''));
-            console.log(vm.ingredientsInputs.length);
+            vm.ingredients.push(new Ingredient('', '', ''));
         };
 
         vm.removeIngredientInput = function () {
-            vm.ingredientsInputs.pop();
+            vm.ingredients.pop();
+        };
+
+        vm.submit = function (event) {
+            event.preventDefault();
+
+            Recipe.createDto(vm).$save(function (newRecipe) {
+
+            }, function (error) {
+                alert('error', error.message);
+            });
         };
 
     }]);

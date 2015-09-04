@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').factory('authInterceptor', ['authToken', 'alert', function (authToken) {
+    angular.module('foodCircle').factory('authInterceptor', ['authToken', function (authToken) {
         return {
             request: function (config) {
                 var token = authToken.getToken();

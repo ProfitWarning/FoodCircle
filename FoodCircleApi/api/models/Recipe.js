@@ -16,10 +16,13 @@ module.exports = {
             type: 'string'
         },
 
-        ingrediants: {
-            collection: 'ingrediant',
-            via: 'owner'
-        }
+        ingredients: {
+            collection: 'Ingredient',
+            via: 'savedIngredients'
+        },
 
+        recipeowner : {
+            model: 'User'
+        }
     }
 };
