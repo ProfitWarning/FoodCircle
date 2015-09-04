@@ -5,8 +5,12 @@
  * # HeaderCtrl
  * Controller of the foodCircle
  */
-'use strict';
-angular.module('foodCircle').controller('HeaderCtrl', ['$auth', function ($auth) {
-    var vm = this;
-    vm.isAuthenticated = $auth.isAuthenticated;
-}]);
+
+(function () {
+    'use strict';
+
+    angular.module('foodCircle').controller('HeaderCtrl', ['$auth', function ($auth) {
+        var vm = this;
+        vm.isAuthenticated = $auth.isAuthenticated;
+    }]);
+}());

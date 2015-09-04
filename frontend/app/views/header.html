@@ -25,6 +25,9 @@
                     <li ui-sref-active="active">
                         <a ui-sref="impressum">Impressum</a>
                     </li>
+                    <li ng-show="!vm.isAuthenticated()" ui-sref-active="active">
+                        <a ui-sref="recipe">My Recipes</a>
+                    </li>
                     <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
                         <a ui-sref="logout">Logout</a>
                     </li>

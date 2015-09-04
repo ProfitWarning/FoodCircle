@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name foodCircle.controller:MainCtrl
@@ -7,10 +5,11 @@
  * # MainCtrl
  * Controller of the foodCircle
  */
-angular.module('foodCircle').controller('MainCtrl', function () {
-    this.awesomeThings = [
-        'HTML5 Boilerplate',
-        'AngularJS',
-        'Karma'
-    ];
-});
+
+(function () {
+    'use strict';
+
+    angular.module('foodCircle').controller('MainCtrl', function () {
+
+    });
+}());

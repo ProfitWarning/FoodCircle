@@ -1,0 +1,60 @@
+<form class="form-horizontal" action="" method="post">
+    <fieldset>
+        <legend class="text-center">New recipe</legend>
+
+        <!-- Name input-->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="name">Name</label>
+            <div class="col-md-9">
+                <input id="name" name="name" type="text" placeholder="Name" class="form-control">
+            </div>
+        </div>
+
+        <!-- Message body -->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Your recipe description</label>
+            <div class="col-md-9">
+                <textarea class="form-control" id="description" name="description" placeholder="Please enter your description here..." rows="5"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="message">Ingrediants</label>
+            <div class="col-md-9">
+                <div class="form-group row" ng-repeat="input in vm.ingredientsInputs">
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" placeholder="amount">
+                    </div>
+                    <div class="col-xs-2">
+                        <input type="text" class="form-control" placeholder="unit">
+                    </div>
+                    <div class="col-xs-8">
+                        <input type="text" class="form-control" id="inputValue" placeholder="Ingrediant">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="text-right">
+                    <button type="button" class="btn btn-success btn-add" ng-click="vm.addIngredientInput()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" class="btn btn-danger btn-add" ng-show="vm.ingredientsInputs.length > 1" ng-click="vm.removeIngredientInput()">
+                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <!-- Form actions -->
+        <div class="form-group">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

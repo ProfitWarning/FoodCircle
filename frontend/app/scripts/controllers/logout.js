@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name foodCircle.controller:LogoutCtrl
@@ -7,8 +5,13 @@
  * # LogoutCtrl
  * Controller of the foodCircle
  */
-angular.module('foodCircle')
-	.controller('LogoutCtrl', ['$auth', '$state', function ($auth, $state) {
-		$auth.logout();
-		$state.go('home');
-	}]);
+
+(function () {
+    'use strict';
+
+    angular.module('foodCircle')
+        .controller('LogoutCtrl', ['$auth', '$state', function ($auth, $state) {
+            $auth.logout();
+            $state.go('home');
+        }]);
+}());

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc overview
  * @name foodCircle
@@ -9,5 +7,11 @@
  * Main module of the application.
  */
 
-angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize','ui.router', 'sailsResource', 'satellizer']);
-window.io.sails.url = 'http://localhost:1337';
+(function () {
+
+    'use strict';
+
+    angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'sailsResource', 'satellizer']);
+    window.io.sails.url = 'http://localhost:1337';
+
+}());
