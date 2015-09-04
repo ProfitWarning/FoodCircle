@@ -9,7 +9,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('LoginCtrl', ['alert', '$auth', '$state', function (alert, $auth, $state) {
+    angular.module('foodCircle').controller('LoginCtrl', ['alert', 'authService', '$state', function (alert, authService, $state) {
         var vm = this;
 
         function handleError(res) {
@@ -19,19 +19,19 @@
         }
 
         vm.submit = function () {
-            $auth.login({
-                email: vm.email,
-                password: vm.password
-            }).then(function (res) {
-                var message = 'Thanks for coming back ' + res.data.user.email + '!';
+            authService.login(vm.email, vm.password)
+                .then(function () {
+                    var message = 'Thanks for coming back ' + authService.currentUser().email + '!';
 
-                // if (!res.data.user.active)
-                // message = 'Just a reminder, please activate your account soon :)';
+                    // if (!res.data.user.active)
+                    // message = 'Just a reminder, please activate your account soon :)';
 
-                alert('success', 'Welcome', message);
-                $state.go('home');
+                    alert('success', 'Welcome', message);
+                    $state.go('home');
 
-            }).catch(handleError);
+                }, function (err) {
+                    handleError(err);
+                });
         };
     }]);
 }());

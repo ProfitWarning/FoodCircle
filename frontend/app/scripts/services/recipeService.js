@@ -1,9 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').factory('Recipe', ['Ingredient', 'sailsResource', function (Ingredient, sailsResource) {
+    angular.module('foodCircle').service('recipeService', ['Ingredient', 'sailsResource', function (Ingredient, sailsResource) {
 
-        var Recipe = function (amount, unit, name, ingredient) {
+        var Recipe = function (amount, unit, name) {
             this.name = amount;
             this.description = unit;
             this.name = name;
@@ -19,6 +19,10 @@
             RecipeDto.ingredients = data.ingredients;
 
             return RecipeDto;
+        };
+
+        Recipe.getRecipeList = function () {
+            return sailsResource(sailsResourceName).query();
         };
 
         Recipe.create = function (data) {

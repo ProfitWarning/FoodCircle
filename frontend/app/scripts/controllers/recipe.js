@@ -8,8 +8,11 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipeCtrl', ['Ingredient', 'Recipe', 'alert', function (Ingredient, Recipe, alert) {
-        var vm = this;//Recipe
+    angular.module('foodCircle').controller('RecipeEditorCtrl', ['Ingredient', 'Recipe', 'alert', function (Ingredient, Recipe, alert) {
+        var vm = this;//Recipe view model
+
+        vm.recipeEditor = {};
+
         vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
         vm.ingredients = [];
         vm.ingredients.push(new Ingredient('', '', ''));
@@ -25,7 +28,7 @@
         vm.submit = function (event) {
             event.preventDefault();
 
-            Recipe.createDto(vm).$save(function (newRecipe) {
+            Recipe.createDto(vm).$save(function () {
 
             }, function (error) {
                 alert('error', error.message);

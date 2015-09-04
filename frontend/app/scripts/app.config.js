@@ -30,10 +30,15 @@
                     url: '/logout',
                     controller: 'LogoutCtrl'
                 })
-                .state('recipe', {
-                    url: '/recipe',
-                    controller: 'RecipeCtrl as vm',
-                    templateUrl: '/views/recipe.html'
+                .state('editrecipe', {
+                    url: '/editrecipe',
+                    controller: 'RecipeEditorCtrl as vm',
+                    templateUrl: '/views/editRecipe.html'
+                })
+                .state('listrecipes', {
+                    url: '/listrecipes',
+                    controller: 'ListRecipesCtrl as vm',
+                    templateUrl: '/views/listRecipes.html'
                 });
 
 
