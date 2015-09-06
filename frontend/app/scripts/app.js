@@ -11,7 +11,7 @@
 
     'use strict';
 
-    angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'sailsResource', 'satellizer']);
+    angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'sailsResource', 'satellizer', 'LocalStorageModule']);
     window.io.sails.url = 'http://localhost:1337';
 
 }());

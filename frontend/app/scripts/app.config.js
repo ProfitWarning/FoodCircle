@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL',
-        function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL) {
+    angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
+        function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
             $urlRouterProvider.otherwise('/home');
 
@@ -35,10 +35,33 @@
                     controller: 'RecipeEditorCtrl as vm',
                     templateUrl: '/views/editRecipe.html'
                 })
-                .state('listrecipes', {
-                    url: '/listrecipes',
-                    controller: 'ListRecipesCtrl as vm',
-                    templateUrl: '/views/listRecipes.html'
+                .state('myrecipes', {
+                    url: '/myrecipes',
+                    templateUrl: '/views/myRecipes.html'
+
+                })
+                .state('myrecipes.list', {
+                    url: '/myrecipes/list',
+                    views: {
+                        'display' : {
+                            controller: 'MyRecipesCtrl as vm',
+                            templateUrl: '/views/listRecipes.html'
+                        },
+                        'tools': {
+                            controller: 'RecipesToolsCtrl as vm',
+                            templateUrl: '/views/myRecipes.tools.html'
+                        }
+                    }
+
+                })
+                .state('myrecipes.create', {
+                    url: '/myrecipes/create',
+                    views: {
+                        'display': {
+                            controller: 'RecipeEditorCtrl as vm',
+                            templateUrl: '/views/myRecipes.create.html'
+                        }
+                    }
                 });
 
 
@@ -55,6 +78,16 @@
 
             $httpProvider.interceptors.push('authInterceptor');
 
+            localStorageServiceProvider.setPrefix('ls');
+
         }])
-        .constant('API_URL', 'http://localhost:1337/');
+        .constant('API_URL', 'http://localhost:1337/')
+        .constant('AUTH_EVENTS', {
+            loginSuccess: 'auth-login-success',
+            loginFailed: 'auth-login-failed',
+            logoutSuccess: 'auth-logout-success',
+            sessionTimeout: 'auth-session-timeout',
+            notAuthenticated: 'auth-not-authenticated',
+            notAuthorized: 'auth-not-authorized'
+        });
 }());

@@ -9,11 +9,8 @@
 (function () {
     'use strict';
 
-angular.module('foodCircle').controller('ListRecipesCtrl',['recipeService', function (recipeService) {
-    var vm = this;
-    vm.recipeList = recipeService.getRecipeList();
-
-
+    angular.module('foodCircle').controller('ListRecipesCtrl', ['recipeService', function (recipeService) {
+        var vm = this;
+        vm.recipeList = recipeService.getFullRecipeList();
     }]);
 }());
-

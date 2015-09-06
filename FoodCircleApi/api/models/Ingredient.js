@@ -16,8 +16,8 @@ module.exports = {
             type: 'string'
         },
 
-        savedIngredients: {
-            model: 'Recipe'
+        forrecipe: {
+            model: 'recipe'
         }
 
     }

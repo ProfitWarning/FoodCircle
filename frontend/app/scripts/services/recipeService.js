@@ -1,44 +1,45 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['Ingredient', 'sailsResource', function (Ingredient, sailsResource) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', function (IngredientModel, sailsResource) {
 
-        var Recipe = function (amount, unit, name) {
-            this.name = amount;
-            this.description = unit;
-            this.name = name;
-        },
+        var recipeService = {},
 
-            sailsResourceName = 'recipe';
+            sailsResourceName = 'recipe',
 
-        Recipe.createDto = function (data) {
-            var Resource = sailsResource(sailsResourceName),
-                RecipeDto = new Resource();
-            RecipeDto.name = data.name;
-            RecipeDto.description = data.description;
-            RecipeDto.ingredients = data.ingredients;
 
-            return RecipeDto;
-        };
+            createDto = function (data) {
+                var Resource = sailsResource(sailsResourceName),
+                    RecipeDto = new Resource();
+                RecipeDto.name = data.name;
+                RecipeDto.description = data.description;
+                RecipeDto.ingredients = data.ingredients;
 
-        Recipe.getRecipeList = function () {
+                return RecipeDto;
+            };
+
+
+        recipeService.getFullRecipeList = function () {
             return sailsResource(sailsResourceName).query();
         };
 
-        Recipe.create = function (data) {
-            var t = new Ingredient(
-                data.amount,
-                data.unit,
-                data.name
-            );
-            angular.forEach(data.ingredients, function (ingr) {
-                if (!t.ingredients) {
-                    t.ingredients = [];
-                }
-                t.ingredients.push(Ingredient.create(ingr));
-            });
+        recipeService.getRecipeListByUser = function (user) {
+            return sailsResource(sailsResourceName).query({recipeowner: user.id});
         };
 
-        return Recipe;
+        recipeService.createNewRecipe = function (data, userid) {
+            var recipeDto = createDto(data);
+            console.log('[createNewRecipe]: userid: ' + userid);
+            recipeDto.recipeowner = userid;
+            return recipeDto.$save();
+        };
+
+        recipeService.updateRecipe = function (data, userid) {
+            var recipeDto = createDto(data);
+            recipeDto.recipeowner = userid;
+            return recipeDto.$save();
+        };
+
+        return recipeService;
     }]);
 }());

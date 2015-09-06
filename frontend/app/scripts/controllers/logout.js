@@ -10,8 +10,9 @@
     'use strict';
 
     angular.module('foodCircle')
-        .controller('LogoutCtrl', ['$auth', '$state', function ($auth, $state) {
+        .controller('LogoutCtrl', ['$auth', '$state', 'localStorageService', function ($auth, $state, localStorageService) {
             $auth.logout();
+            localStorageService.remove('currentUser');
             $state.go('home');
         }]);
 }());

@@ -1,13 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('authService', ['$auth', '$window', '$q', function ($auth, $window, $q) {
-        var authService = {},
-            currentUser;
-
+    angular.module('foodCircle').service('authService', ['$auth', '$window', '$q', 'localStorageService', function ($auth, $window, $q, localStorageService) {
+        var authService = {};
 
         authService.currentUser = function () {
-            return currentUser;
+            return localStorageService.get('currentUser');
         };
 
         authService.login = function (email, password) {
@@ -18,7 +16,7 @@
                 password: password
             })
                 .then(function (response) {
-                    currentUser = response.data.user;
+                    localStorageService.set('currentUser', response.data.user);
                     deferred.resolve(response.data.user);
                 })
                 .catch(function (err) {

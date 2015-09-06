@@ -17,8 +17,8 @@ module.exports = {
         },
 
         ingredients: {
-            collection: 'Ingredient',
-            via: 'savedIngredients'
+            collection: 'ingredient',
+            via: 'forrecipe'
         },
 
         recipeowner : {

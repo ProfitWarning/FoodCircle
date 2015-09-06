@@ -1,0 +1,17 @@
+<div class="well well-sm">
+    <strong>Display:</strong>
+    <div class="btn-group">
+        <a ng-disabled="vm.listActive" ng-click="vm.onListViewClick($event)" id="list" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-th-list"></span>List
+        </a>
+        <a ng-disabled="!vm.listActive" ng-click="vm.onGridViewClick($event)" id="grid" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-th"></span>Grid
+        </a>
+    </div>
+    <strong>&nbsp;Tools:</strong>
+    <div class="btn-group">
+        <a ui-sref="myrecipes.create" id="grid" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-plus"></span>Add
+        </a>
+    </div>
+</div>
