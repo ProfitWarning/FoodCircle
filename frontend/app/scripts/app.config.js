@@ -10,21 +10,21 @@
             // HOME STATES AND NESTED VIEWS ========================================
                 .state('home', {
                     url: '/home',
-                    templateUrl: '/views/main.html'
+                    templateUrl: 'views/main.html'
                 })
                 // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
                 .state('about', {
                     url: '/about',
-                    templateUrl: '/views/about.html'
+                    templateUrl: 'views/about.html'
                 })
                 .state('impressum', {
                     url: '/impressum',
-                    templateUrl: '/views/impressum.html'
+                    templateUrl: 'views/impressum.html'
                 })
                 // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
                 .state('login', {
                     url: '/login',
-                    templateUrl: '/views/login.html'
+                    templateUrl: 'views/login.html'
                 })
                 .state('logout', {
                     url: '/logout',
@@ -33,11 +33,11 @@
                 .state('editrecipe', {
                     url: '/editrecipe',
                     controller: 'RecipeEditorCtrl as vm',
-                    templateUrl: '/views/editRecipe.html'
+                    templateUrl: 'views/editRecipe.html'
                 })
                 .state('myrecipes', {
                     url: '/myrecipes',
-                    templateUrl: '/views/myRecipes.html'
+                    templateUrl: 'views/myRecipes.html'
 
                 })
                 .state('myrecipes.list', {
@@ -45,11 +45,11 @@
                     views: {
                         'display' : {
                             controller: 'MyRecipesCtrl as vm',
-                            templateUrl: '/views/listRecipes.html'
+                            templateUrl: 'views/listRecipes.html'
                         },
                         'tools': {
                             controller: 'RecipesToolsCtrl as vm',
-                            templateUrl: '/views/myRecipes.tools.html'
+                            templateUrl: 'views/myRecipes.tools.html'
                         }
                     }
 
@@ -59,7 +59,7 @@
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
-                            templateUrl: '/views/myRecipes.create.html'
+                            templateUrl: 'views/myRecipes.create.html'
                         }
                     }
                 });
