@@ -20,6 +20,7 @@
 
 
         recipeService.getFullRecipeList = function () {
+
             return sailsResource(sailsResourceName).query();
         };
 

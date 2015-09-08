@@ -61,7 +61,8 @@
                             controller: 'RecipeEditorCtrl as vm',
                             templateUrl: 'views/myRecipes.create.html'
                         }
-                    }
+                    },
+                    parent: 'myrecipes'
                 });
 
 
@@ -89,5 +90,27 @@
             sessionTimeout: 'auth-session-timeout',
             notAuthenticated: 'auth-not-authenticated',
             notAuthorized: 'auth-not-authorized'
-        });
+        })
+        .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', function ($rootScope, $location, $state, $auth, AUTH_EVENTS) {
+
+            $rootScope.$on('$stateChangeStart', function (e, toState/*, toParams, fromState, fromParams*/) {
+
+                if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home') {
+                    return; // no need to redirect
+                }
+
+                // now, redirect only not authenticated
+                if (!$auth.isAuthenticated()) {
+                    e.preventDefault(); // stop current execution
+                    $state.go('login'); // go to login
+                }
+            });
+
+            $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
+                $state.go('login'); // go to login
+            });
+            $rootScope.$on('$sailsSocketError', function() {
+                console.log('$sailsSocketError');
+            });
+        }]);
 }());

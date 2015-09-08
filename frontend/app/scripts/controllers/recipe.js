@@ -8,7 +8,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipeEditorCtrl', ['recipeService', 'IngredientModel', 'alert', 'authService', function (recipeService, IngredientModel, alert, authService) {
+    angular.module('foodCircle').controller('RecipeEditorCtrl', ['recipeService', 'IngredientModel', 'alert', 'authService', '$state', function (recipeService, IngredientModel, alert, authService, $state) {
         var vm = this;//Recipe view model
 
         vm.recipeEditor = {};
@@ -29,7 +29,7 @@
             event.preventDefault();
 
             recipeService.createNewRecipe(vm, authService.currentUser().id).then(function () {
-
+                $state.go('myrecipes.list');
             }, function (error) {
                 alert('error', error.message);
             });

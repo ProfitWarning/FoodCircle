@@ -52,14 +52,15 @@ module.exports.policies = {
     '*': ['isAuthorized'], // Everything resctricted here
 
     'UserController': {
-        '*': true // We dont need authorization here, allowing public access
+        '*': false,
+        'create': true
     },
 
     'AuthController': {
-        '*': true // We dont need authorization here, allowing public access
+        '*': true
     },
 
     'RecipeController': {
-        '*': true // We dont need authorization here, allowing public access
+        '*': true
     }
 };

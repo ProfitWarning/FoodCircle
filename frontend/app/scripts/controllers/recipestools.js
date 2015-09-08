@@ -8,7 +8,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipesToolsCtrl', [function (recipeService) {
+    angular.module('foodCircle').controller('RecipesToolsCtrl', [function ($) {
         var vm = this;
         vm.listActive = false;
 

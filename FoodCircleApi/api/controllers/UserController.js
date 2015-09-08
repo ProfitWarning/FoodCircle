@@ -29,5 +29,11 @@ module.exports = {
                 });
             }
         });
-    }
+    }/*,
+
+    profile: function (req, res) {
+        User.findOne({id: req.param('id')}, function (err, user) {
+            res.json(user);
+        });
+    }*/
 };

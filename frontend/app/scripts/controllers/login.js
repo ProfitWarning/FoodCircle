@@ -27,7 +27,7 @@
                     // message = 'Just a reminder, please activate your account soon :)';
 
                     alert('success', 'Welcome', message);
-                    $state.go('home');
+                    $state.go('myrecipes.list');
 
                 }, function (err) {
                     handleError(err);
