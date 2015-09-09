@@ -93,24 +93,24 @@
         })
         .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', function ($rootScope, $location, $state, $auth, AUTH_EVENTS) {
 
-            $rootScope.$on('$stateChangeStart', function (e, toState/*, toParams, fromState, fromParams*/) {
-
+            $rootScope.$on('$stateChangeStart', function (event, toState /*, toParams, fromState, fromParams*/) {
                 if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home') {
                     return; // no need to redirect
                 }
 
                 // now, redirect only not authenticated
                 if (!$auth.isAuthenticated()) {
-                    e.preventDefault(); // stop current execution
+                    event.preventDefault(); // stop current execution
                     $state.go('login'); // go to login
                 }
             });
 
-            $rootScope.$on(AUTH_EVENTS.notAuthorized, function() {
+            $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
                 $state.go('login'); // go to login
             });
-            $rootScope.$on('$sailsSocketError', function() {
-                console.log('$sailsSocketError');
+
+            $rootScope.$on('$sailsSocketError', function () {
+
             });
         }]);
 }());
