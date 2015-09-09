@@ -41,7 +41,7 @@
 
                 })
                 .state('myrecipes.list', {
-                    url: '/myrecipes/list',
+                    url: '/list',
                     views: {
                         'display' : {
                             controller: 'MyRecipesCtrl as vm',
@@ -55,14 +55,13 @@
 
                 })
                 .state('myrecipes.create', {
-                    url: '/myrecipes/create',
+                    url: '/create',
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
                             templateUrl: 'views/myRecipes.create.html'
                         }
-                    },
-                    parent: 'myrecipes'
+                    }
                 });
 
 
