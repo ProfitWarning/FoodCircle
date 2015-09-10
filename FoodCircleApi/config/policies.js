@@ -61,6 +61,6 @@ module.exports.policies = {
     },
 
     'RecipeController': {
-        '*': true
+        '*': false
     }
 };
