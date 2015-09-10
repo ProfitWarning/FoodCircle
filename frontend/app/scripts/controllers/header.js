@@ -1,6 +1,6 @@
 /**
  * @ngdoc function
- * @name foodCircle.controller:HeaderctrlCtrl
+ * @name foodCircle.controller:HeaderCtrl
  * @description
  * # HeaderCtrl
  * Controller of the foodCircle
