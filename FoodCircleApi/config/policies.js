@@ -42,7 +42,7 @@ module.exports.policies = {
 
     // For the action `nurture`, apply the 'isRabbitMother' policy
     // (this overrides `false` above)
-    // nurture	: 'isRabbitMother',
+    // nurture    : 'isRabbitMother',
 
     // Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
     // before letting any users feed our rabbits
@@ -52,8 +52,7 @@ module.exports.policies = {
     '*': ['isAuthorized'], // Everything resctricted here
 
     'UserController': {
-        '*': false,
-        'create': true
+        'create': true //no
     },
 
     'AuthController': {
@@ -61,6 +60,6 @@ module.exports.policies = {
     },
 
     'RecipeController': {
-        '*': false
+        'find': true
     }
 };

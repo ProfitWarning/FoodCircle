@@ -93,6 +93,7 @@
         .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', function ($rootScope, $location, $state, $auth, AUTH_EVENTS) {
 
             $rootScope.$on('$stateChangeStart', function (event, toState /*, toParams, fromState, fromParams*/) {
+
                 if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home') {
                     return; // no need to redirect
                 }
@@ -105,6 +106,7 @@
             });
 
             $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
+                $auth.logout();
                 $state.go('login'); // go to login
             });
 
