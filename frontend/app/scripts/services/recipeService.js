@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', function (IngredientModel, sailsResource) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', 'authToken', function (IngredientModel, sailsResource, authToken) {
 
         var recipeService = {},
 
@@ -14,23 +14,28 @@
                 RecipeDto.name = data.name;
                 RecipeDto.description = data.description;
                 RecipeDto.ingredients = data.ingredients;
+                RecipeDto.token = authToken.getToken();
 
                 return RecipeDto;
-            };
+            },
 
+            createQueryDto = function (query) {
+                var tmpQuery = query || {};
+                tmpQuery.token = authToken.getToken();
+                return tmpQuery;
+            };
 
         recipeService.getFullRecipeList = function () {
 
-            return sailsResource(sailsResourceName).query();
+            return sailsResource(sailsResourceName).query(createQueryDto());
         };
 
         recipeService.getRecipeListByUser = function (user) {
-            return sailsResource(sailsResourceName).query({recipeowner: user.id});
+            return sailsResource(sailsResourceName).query(createQueryDto({recipeowner: user.id}));
         };
 
         recipeService.createNewRecipe = function (data, userid) {
             var recipeDto = createDto(data);
-            console.log('[createNewRecipe]: userid: ' + userid);
             recipeDto.recipeowner = userid;
             return recipeDto.$save();
         };
