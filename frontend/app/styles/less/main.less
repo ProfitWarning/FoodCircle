@@ -66,6 +66,22 @@ body {
     }
 }
 
+form {
+    .form-group {
+
+        .help-block {
+            display: none;
+        }
+
+        .has-error {
+
+            .help-block {
+                display: block;
+            }
+        }
+    }
+}
+
 .form-signin {
     max-width: 280px;
     padding: 15px;
@@ -110,10 +126,10 @@ body {
 }
 
 .main-alert {
-	position:absolute;
-	top: 70px;
-	left: 5px;
-	right: 5px;
+    position:absolute;
+    top: 70px;
+    left: 5px;
+    right: 5px;
     max-width: 400px;
     margin: 0 auto;
 }

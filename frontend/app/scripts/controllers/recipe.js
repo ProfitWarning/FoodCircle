@@ -25,7 +25,10 @@
             vm.ingredients.pop();
         };
 
-        vm.submit = function (event) {
+        vm.submit = function (isValidForm, event) {
+            if (!isValidForm) {
+                return;
+            }
             event.preventDefault();
 
             recipeService.createNewRecipe(vm, authService.currentUser().id).then(function () {

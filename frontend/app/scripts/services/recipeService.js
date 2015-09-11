@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', 'authToken', function (IngredientModel, sailsResource, authToken) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', '$auth', function (IngredientModel, sailsResource, $auth) {
 
         var recipeService = {},
 
@@ -14,14 +14,14 @@
                 RecipeDto.name = data.name;
                 RecipeDto.description = data.description;
                 RecipeDto.ingredients = data.ingredients;
-                RecipeDto.token = authToken.getToken();
+                RecipeDto.token = $auth.getToken();
 
                 return RecipeDto;
             },
 
             createQueryDto = function (query) {
                 var tmpQuery = query || {};
-                tmpQuery.token = authToken.getToken();
+                tmpQuery.token = $auth.getToken();
                 return tmpQuery;
             };
 

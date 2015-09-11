@@ -56,6 +56,12 @@ body {
 .marketing p + h4 {
   margin-top: 28px;
 }
+form .form-group .help-block {
+  display: none;
+}
+form .form-group .has-error .help-block {
+  display: block;
+}
 .form-signin {
   max-width: 280px;
   padding: 15px;

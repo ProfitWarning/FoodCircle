@@ -1,22 +1,28 @@
-<form class="form-horizontal">
+<form class="form-horizontal" ng-submit="vm.submit(recipeForm.$valid)" name="recipeForm" novalidate>
     <fieldset>
         <legend class="text-center">New recipe</legend>
 
         <!-- Name input-->
         <div class="form-group">
             <label class="col-md-3 control-label" for="name">Name</label>
-            <div class="col-md-9">
+            <div class="col-md-9" ng-class="{ 'has-error': recipeForm.name.$touched && recipeForm.name.$invalid }">
                 <input id="name" name="name" type="text" placeholder="Name" class="form-control" ng-model="vm.name" required>
+                <div class="help-block" ng-messages="recipeForm.name.$error" ng-show="recipeForm.name.$touched">
+                    <p ng-message="required">Name is required.</p>
+                </div>
             </div>
         </div>
 
         <!-- Message body -->
         <div class="form-group">
             <label class="col-md-3 control-label" for="description">Your recipe description</label>
-            <div class="col-md-9">
+            <div class="col-md-9" ng-class="{ 'has-error': recipeForm.description.$touched && recipeForm.description.$invalid }">
                 <textarea class="form-control" id="description" name="description"
                           placeholder="Please enter your description here..." rows="5"
                           ng-model="vm.description" required></textarea>
+                 <div class="help-block" ng-messages="recipeForm.description.$error" ng-show="recipeForm.description.$touched">
+                    <p ng-message="required">Description is required.</p>
+                </div>
             </div>
         </div>
 
@@ -25,15 +31,26 @@
             <label class="col-md-3 control-label" for="message">Ingrediants</label>
             <div class="col-md-9">
                 <div class="form-group row" ng-repeat="ingredient in vm.ingredients">
-                    <div class="col-xs-2">
-                        <input type="text" class="form-control" placeholder="amount" ng-model="ingredient.amount" required>
-                    </div>
-                    <div class="col-xs-2">
-                        <input type="text" class="form-control" placeholder="unit" ng-model="ingredient.unit" required>
-                    </div>
-                    <div class="col-xs-8">
-                        <input type="text" class="form-control" placeholder="Ingrediant" ng-model="ingredient.name" required>
-                    </div>
+                    <ng-form name="innerFormDescription">
+                        <div class="col-xs-2" ng-class="{ 'has-error': innerFormDescription.amount.$touched && innerFormDescription.amount.$invalid }">
+                            <input type="text" class="form-control" name="amount" placeholder="amount" ng-model="ingredient.amount" required>
+                            <div class="help-block" ng-messages="innerFormDescription.amount.$error" ng-show="innerFormDescription.amount.$touched">
+                                <p ng-message="required">Amount is required.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-2" ng-class="{ 'has-error': innerFormDescription.unit.$touched && innerFormDescription.unit.$invalid }">
+                            <input type="text" class="form-control" placeholder="unit" name="unit" ng-model="ingredient.unit" required>
+                            <div class="help-block" ng-messages="innerFormDescription.unit.$error" ng-show="innerFormDescription.unit.$touched">
+                                <p ng-message="required">amount is required.</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-8" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
+                            <input type="text" name="ingrediantName" class="form-control" placeholder="Ingrediant" ng-model="ingredient.name" required>
+                            <div class="help-block" ng-messages="innerFormDescription.ingrediantName.$error" ng-show="innerFormDescription.ingrediantName.$touched">
+                                <p ng-message="required">Name is required.</p>
+                            </div>
+                        </div>
+                    </ng-form>
                 </div>
             </div>
 
@@ -52,7 +69,7 @@
         <!-- Form actions -->
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" ng-click="vm.submit($event)" class="btn btn-primary btn-lg">Save</button>
+                <button type="submit"  class="btn btn-primary btn-lg">Save</button>
             </div>
         </div>
     </fieldset>
