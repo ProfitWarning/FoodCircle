@@ -12,7 +12,6 @@
         var vm = this;
         recipeService.getRecipeListByUser(authService.currentUser()).$promise
             .then(function (item) {
-                console.log(item);
                 vm.recipeList = item;
             })
             .catch(function (error) {

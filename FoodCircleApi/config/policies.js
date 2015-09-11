@@ -60,6 +60,6 @@ module.exports.policies = {
     },
 
     'RecipeController': {
-        'find': true
+        'find': ['isAuthorized']
     }
 };
