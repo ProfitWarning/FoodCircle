@@ -7,7 +7,6 @@
         return {
             request: function (config) {
                 var token = authToken.getToken();
-                console.log('token: ' + token);
                 if (token) {
                     config.headers.Authorization = 'Bearer ' + token;
                 }
@@ -19,8 +18,6 @@
             },
 
             responseError: function (response) {
-
-                console.log('responseError: ' + response.status);
                 $rootScope.$broadcast({
                     401: AUTH_EVENTS.notAuthenticated,
                     403: AUTH_EVENTS.notAuthorized,
