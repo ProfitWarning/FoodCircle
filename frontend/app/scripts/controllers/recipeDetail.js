@@ -9,7 +9,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipeDetailCtrl', ['recipeService', function (recipeService) {
-        var vm = this;        
+    angular.module('foodCircle').controller('RecipeDetailCtrl', ['recipeService', 'recipeDetail', function (recipeService, recipeDetail) {
+        var vm = this;
+        vm.recipeDetail = recipeDetail;
     }]);
 }());

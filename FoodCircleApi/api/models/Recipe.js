@@ -9,7 +9,8 @@ module.exports = {
 
     attributes: {
         name: {
-            type: 'string'
+            type: 'string',
+            required: true
         },
 
         description: {
@@ -22,7 +23,8 @@ module.exports = {
         },
 
         recipeowner : {
-            model: 'User'
+            model: 'User',
+            required: true
         }
     }
 };

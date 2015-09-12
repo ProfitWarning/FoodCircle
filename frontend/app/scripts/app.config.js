@@ -10,6 +10,7 @@
             // HOME STATES AND NESTED VIEWS ========================================
                 .state('home', {
                     url: '/home',
+                    controller: 'MainCtrl as vm',
                     templateUrl: 'views/main.html'
                 })
                 // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
@@ -62,6 +63,20 @@
                             templateUrl: 'views/myRecipes.create.html'
                         }
                     }
+                })
+                .state('myrecipes.detail', {
+                    url: '/:id',
+                    views: {
+                        'display': {
+                            controller: 'RecipeDetailCtrl as vm',
+                            templateUrl: 'views/myRecipe.detail.html'
+                        }
+                    },
+                    resolve: {
+                        recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                            return recipeService.get({id: $stateParams.id});
+                        }]
+                    }
                 });
 
 
@@ -92,9 +107,9 @@
         })
         .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', function ($rootScope, $location, $state, $auth, AUTH_EVENTS) {
 
-            $rootScope.$on('$stateChangeStart', function (event, toState /*, toParams, fromState, fromParams*/) {
+            $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
 
-                if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home') {
+                if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home' || toState.name === 'myrecipes.detail') {
                     return; // no need to redirect
                 }
 

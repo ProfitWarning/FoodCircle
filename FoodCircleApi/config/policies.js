@@ -60,6 +60,8 @@ module.exports.policies = {
     },
 
     'RecipeController': {
-        'find': ['isAuthorized']
+        'create': ['isAuthorized'],
+        'find': true,
+        'findOne': true
     }
 };

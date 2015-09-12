@@ -25,9 +25,8 @@
                 return tmpQuery;
             };
 
-        recipeService.getFullRecipeList = function () {
-
-            return sailsResource(sailsResourceName).query(createQueryDto());
+        recipeService.getRecipeList = function (query) {
+            return sailsResource(sailsResourceName).query(createQueryDto(query));
         };
 
         recipeService.getRecipeListByUser = function (user) {
@@ -44,6 +43,10 @@
             var recipeDto = createDto(data);
             recipeDto.recipeowner = userid;
             return recipeDto.$save();
+        };
+
+        recipeService.get = function (query) {
+            return sailsResource(sailsResourceName).get(createQueryDto(query));
         };
 
         return recipeService;

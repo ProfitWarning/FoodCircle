@@ -179,6 +179,7 @@ form .form-group .has-error .help-block {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
+  min-height: 285px;
 }
 .item.list-group-item {
   float: none;
@@ -197,6 +198,7 @@ form .form-group .has-error .help-block {
 }
 .item.list-group-item .caption {
   padding: 9px 9px 0px 9px;
+  position: relative;
 }
 .item.list-group-item .caption .row {
   float: left;
@@ -217,4 +219,5 @@ form .form-group .has-error .help-block {
 }
 .list-group-item-text {
   margin: 0 0 11px;
+  min-height: 45px;
 }
