@@ -10,23 +10,23 @@
 
             createDto = function (data) {
                 var Resource = sailsResource(sailsResourceName),
-                    RecipeDto = new Resource();
-                RecipeDto.name = data.name;
-                RecipeDto.description = data.description;
-                RecipeDto.ingredients = data.ingredients;
-                RecipeDto.token = $auth.getToken();
+                    UserDto = new Resource();
+                UserDto.name = data.name;
+                UserDto.email = data.email;
+                UserDto.token = $auth.getToken();
 
-                return RecipeDto;
+                return UserDto;
             },
 
             createQueryDto = function (query) {
                 var tmpQuery = query || {};
+                debugger;
                 tmpQuery.token = $auth.getToken();
                 return tmpQuery;
             };
 
         userService.get = function (query) {
-            return sailsResource(sailsResourceName).query(createQueryDto(query));
+            return sailsResource(sailsResourceName).get({id: 7});
         };
 
         return userService;

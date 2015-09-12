@@ -38,8 +38,12 @@
                 })
                 .state('myrecipes', {
                     url: '/myrecipes',
-                    templateUrl: 'views/myRecipes.html'
-
+                    templateUrl: 'views/myRecipes.html',
+                    resolve: {
+                        authorize: ['authorization', function (authorization) {
+                            return authorization.authorize();
+                        }]
+                    }
                 })
                 .state('myrecipes.list', {
                     url: '/list',
@@ -53,7 +57,6 @@
                             templateUrl: 'views/myRecipes.tools.html'
                         }
                     }
-
                 })
                 .state('myrecipes.create', {
                     url: '/create',
@@ -74,7 +77,26 @@
                     },
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.get({id: $stateParams.id});
+                            return recipeService.get({id: $stateParams.id}).$promise.then(function (recipe) {
+                                return recipe;
+                            });
+                        }]
+                    }
+                })
+                .state('user', {
+                    url: '/user',
+                    template: '<ui-view/>',
+                    abstract: true
+                })
+                .state('user.detail', {
+                    url: '/:id',
+                    controller: 'UserCtrl as vm',
+                    templateUrl: 'views/user.detail.html',
+                    resolve: {
+                        user: ['userService', '$stateParams', function (userService, $stateParams) {
+                            return userService.get({id: $stateParams.id}).$promise.then(function (user) {
+                                return user;
+                            });
                         }]
                     }
                 });
@@ -105,11 +127,17 @@
             notAuthenticated: 'auth-not-authenticated',
             notAuthorized: 'auth-not-authorized'
         })
-        .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', function ($rootScope, $location, $state, $auth, AUTH_EVENTS) {
+        .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', function ($rootScope, $location, $state, $auth, AUTH_EVENTS, authorization, alert) {
 
             $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
 
-                if (toState.name === 'home' || toState.name === 'login' || toState.name === 'impressum' || toState.name === 'home' || toState.name === 'myrecipes.detail') {
+                /*if (toState.name === 'home' ||
+                        toState.name === 'login' ||
+                        toState.name === 'impressum' ||
+                        toState.name === 'home' ||
+                        toState.name === 'myrecipes.detail' ||
+                        toState.name === 'user.detail'
+                        ) {
                     return; // no need to redirect
                 }
 
@@ -117,12 +145,23 @@
                 if (!$auth.isAuthenticated()) {
                     event.preventDefault(); // stop current execution
                     $state.go('login'); // go to login
+                }*/
+            });
+
+            $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+                if (error.message === AUTH_EVENTS.notAuthorized) {
+                    event.preventDefault(); // stop current execution
+                    $auth.logout();
+                    $state.go('login'); // go to login
+                    alert('warning', 'Not authorized!');
                 }
             });
 
             $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
+                event.preventDefault();
                 $auth.logout();
                 $state.go('login'); // go to login
+                alert('warning', 'Not authorized!');
             });
 
             $rootScope.$on('$sailsSocketError', function () {
