@@ -6,7 +6,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="name">Name</label>
             <div class="col-md-9" ng-class="{ 'has-error': recipeForm.name.$touched && recipeForm.name.$invalid }">
-                <input id="name" name="name" type="text" placeholder="Name" class="form-control" ng-model="vm.name" required>
+                <input id="name" name="name" type="text" placeholder="Name" class="form-control" ng-model="vm.recipe.name" required>
                 <div class="help-block" ng-messages="recipeForm.name.$error" ng-show="recipeForm.name.$touched">
                     <p ng-message="required">Name is required.</p>
                 </div>
@@ -19,7 +19,7 @@
             <div class="col-md-9" ng-class="{ 'has-error': recipeForm.description.$touched && recipeForm.description.$invalid }">
                 <textarea class="form-control" id="description" name="description"
                           placeholder="Please enter your description here..." rows="5"
-                          ng-model="vm.description" required></textarea>
+                          ng-model="vm.recipe.description" required></textarea>
                  <div class="help-block" ng-messages="recipeForm.description.$error" ng-show="recipeForm.description.$touched">
                     <p ng-message="required">Description is required.</p>
                 </div>
@@ -30,7 +30,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label" for="message">Ingrediants</label>
             <div class="col-md-9">
-                <div class="form-group row" ng-repeat="ingredient in vm.ingredients">
+                <div class="form-group row" ng-repeat="ingredient in vm.recipe.ingredients">
                     <ng-form name="innerFormDescription">
                         <div class="col-xs-2" ng-class="{ 'has-error': innerFormDescription.amount.$touched && innerFormDescription.amount.$invalid }">
                             <input type="text" class="form-control" name="amount" placeholder="amount" ng-model="ingredient.amount" required>

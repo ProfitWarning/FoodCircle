@@ -63,7 +63,7 @@
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
-                            templateUrl: 'views/myRecipes.create.html'
+                            templateUrl: 'views/myrecipe.create.html'
                         }
                     }
                 })
@@ -72,11 +72,11 @@
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
-                            templateUrl: 'views/myrecipe.edit.html'
+                            templateUrl: 'views/myrecipe.create.html'
                         }
                     },
                     resolve: {
-                        recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                        recipeToEdit: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
                             return recipeService.get({where: {id: $stateParams.id}}).$promise.then(function (recipe) {
                                 return recipe;
                             });

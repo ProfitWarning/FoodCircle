@@ -34,7 +34,7 @@
             return sailsResource(sailsResourceName).query(createQueryDto({where: { recipeowner: user.id}}));
         };
 
-        recipeService.createNewRecipe = function (data, userid) {
+        recipeService.createOrUpdateRecipe = function (data, userid) {
             var recipeDto = createDto(data);
             recipeDto.recipeowner = userid;
             return recipeDto.$save();
