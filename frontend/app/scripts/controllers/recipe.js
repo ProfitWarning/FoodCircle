@@ -12,7 +12,6 @@
         var vm = this;//Recipe view model
 
         vm.recipeEditor = {};
-
         vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
         vm.ingredients = [];
         vm.ingredients.push(new IngredientModel('', '', ''));
@@ -37,6 +36,5 @@
                 alert('error', error.message);
             });
         };
-
     }]);
 }());

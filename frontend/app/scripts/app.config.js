@@ -72,12 +72,12 @@
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
-                            templateUrl: 'views/myRecipe.detail.html'
+                            templateUrl: 'views/myrecipe.edit.html'
                         }
                     },
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.get({id: $stateParams.id}).$promise.then(function (recipe) {
+                            return recipeService.get({where: {id: $stateParams.id}}).$promise.then(function (recipe) {
                                 return recipe;
                             });
                         }]

@@ -8,11 +8,14 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'authService', 'AUTH_EVENTS', '$rootScope', function (recipeService, authService, AUTH_EVENTS, $rootScope) {
+    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'authService', 'AUTH_EVENTS', '$rootScope', 'toolsService', function (recipeService, authService, AUTH_EVENTS, $rootScope, toolsService) {
         var vm = this;
+        vm.selectedRecipes = [];
+
         recipeService.getRecipeListByUser(authService.currentUser()).$promise
             .then(function (item) {
                 vm.recipeList = item;
+                vm.showEditBtn = true;
             })
             .catch(function (error) {
                 console.log('MyRecipesCtrl: ' + error.statusCode);
@@ -23,5 +26,10 @@
                     440: AUTH_EVENTS.sessionTimeout
                 }[error.statusCode], error);
             });
+
+
+        vm.onSelectRecipe = function (recipe, event) {
+            toolsService.selectedRecipes.push(recipe);
+        };
     }]);
 }());
