@@ -67,11 +67,11 @@
                         }
                     }
                 })
-                .state('myrecipes.detail', {
+                .state('myrecipes.edit', {
                     url: '/:id',
                     views: {
                         'display': {
-                            controller: 'RecipeDetailCtrl as vm',
+                            controller: 'RecipeEditorCtrl as vm',
                             templateUrl: 'views/myRecipe.detail.html'
                         }
                     },
@@ -96,6 +96,23 @@
                         user: ['userService', '$stateParams', function (userService, $stateParams) {
                             return userService.get({id: $stateParams.id}).$promise.then(function (user) {
                                 return user;
+                            });
+                        }]
+                    }
+                })
+                .state('recipe', {
+                    url: '/recipe',
+                    template: '<ui-view/>',
+                    abstract: true
+                })
+                .state('recipe.detail', {
+                    url: '/:id',
+                    controller: 'RecipeDetailCtrl as vm',
+                    templateUrl: 'views/myRecipe.detail.html',
+                    resolve: {
+                        recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                            return recipeService.get({id: $stateParams.id}).$promise.then(function (recipe) {
+                                return recipe;
                             });
                         }]
                     }

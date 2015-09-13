@@ -25,6 +25,16 @@ module.exports = {
         recipeowner : {
             model: 'User',
             required: true
+        },
+        // We don't wan't to send back encrypted password either
+        toJSON: function () {
+            var obj = this.toObject();
+            delete obj.token;
+            return obj;
         }
+    },
+    beforeCreate: function (values, next) {
+        delete values.token;
+        next();
     }
 };
