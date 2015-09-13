@@ -10,11 +10,16 @@
 
             createDto = function (data) {
                 var Resource = sailsResource(sailsResourceName),
+                    RecipeDto;
+                if (data.id) {
+                    RecipeDto = recipeService.get({where: {id: data.id}});
+                    angular.extend(RecipeDto, data);
+                    RecipeDto.token = $auth.getToken();
+                } else {
                     RecipeDto = new Resource();
-                RecipeDto.name = data.name;
-                RecipeDto.description = data.description;
-                RecipeDto.ingredients = data.ingredients;
-                RecipeDto.token = $auth.getToken();
+                    angular.extend(RecipeDto, data);
+                    RecipeDto.token = $auth.getToken();
+                }
 
                 return RecipeDto;
             },
@@ -48,6 +53,10 @@
 
         recipeService.get = function (query) {
             return sailsResource(sailsResourceName).get(createQueryDto(query));
+        };
+
+        recipeService.getById = function (id) {
+            return recipeService.get({where: {id: id}});
         };
 
         return recipeService;

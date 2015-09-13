@@ -31,10 +31,10 @@
             if (curUser) {
                 sailsResource('User').query({id: curUser.id},
                     function (response) {
-                    debugger;
+
                     },
                     function (response) { // second function is error handler
-                    debugger;
+
                     });
             }
         };

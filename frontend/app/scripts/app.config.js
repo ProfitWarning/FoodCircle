@@ -4,7 +4,7 @@
     angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
         function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
-            $urlRouterProvider.otherwise('/home');
+            //$urlRouterProvider.otherwise('/home');
 
             $stateProvider
             // HOME STATES AND NESTED VIEWS ========================================
@@ -65,6 +65,9 @@
                             controller: 'RecipeEditorCtrl as vm',
                             templateUrl: 'views/myrecipe.create.html'
                         }
+                    },
+                    resolve: {
+                        recipeToEdit: function () {}
                     }
                 })
                 .state('myrecipes.edit', {
@@ -77,7 +80,7 @@
                     },
                     resolve: {
                         recipeToEdit: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.get({where: {id: $stateParams.id}}).$promise.then(function (recipe) {
+                            return recipeService.getById($stateParams.id).$promise.then(function (recipe) {
                                 return recipe;
                             });
                         }]
@@ -94,7 +97,7 @@
                     templateUrl: 'views/user.detail.html',
                     resolve: {
                         user: ['userService', '$stateParams', function (userService, $stateParams) {
-                            return userService.get({id: $stateParams.id}).$promise.then(function (user) {
+                            return userService.getById($stateParams.id).$promise.then(function (user) {
                                 return user;
                             });
                         }]
@@ -111,14 +114,16 @@
                     templateUrl: 'views/myRecipe.detail.html',
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.get({id: $stateParams.id}).$promise.then(function (recipe) {
+                            return recipeService.getById($stateParams.id).$promise.then(function (recipe) {
                                 return recipe;
                             });
                         }]
                     }
+                })
+                .state('404', {
+                    url: '^*path',
+                    templateUrl: '/404.html'
                 });
-
-
 
             sailsResourceProvider.configuration = {
                 verbose: true, // sailsResource will log messages to console
@@ -147,7 +152,6 @@
         .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', function ($rootScope, $location, $state, $auth, AUTH_EVENTS, authorization, alert) {
 
             $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
-
                 /*if (toState.name === 'home' ||
                         toState.name === 'login' ||
                         toState.name === 'impressum' ||
@@ -163,6 +167,12 @@
                     event.preventDefault(); // stop current execution
                     $state.go('login'); // go to login
                 }*/
+            });
+
+            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+                console.log(unfoundState.to); // "lazy.state"
+                console.log(unfoundState.toParams); // {a:1, b:2}
+                console.log(unfoundState.options); // {inherit:false} + default options
             });
 
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {

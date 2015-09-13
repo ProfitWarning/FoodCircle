@@ -8,7 +8,7 @@
             sailsResourceName = 'User',
 
 
-            createDto = function (data) {
+            /*createDto = function (data) {
                 var Resource = sailsResource(sailsResourceName),
                     UserDto = new Resource();
                 UserDto.name = data.name;
@@ -16,17 +16,20 @@
                 UserDto.token = $auth.getToken();
 
                 return UserDto;
-            },
+            },*/
 
             createQueryDto = function (query) {
                 var tmpQuery = query || {};
-                debugger;
                 tmpQuery.token = $auth.getToken();
                 return tmpQuery;
             };
 
         userService.get = function (query) {
-            return sailsResource(sailsResourceName).get({id: 7});
+            return sailsResource(sailsResourceName).get(createQueryDto(query));
+        };
+
+         userService.getById = function (id) {
+            return userService.get({where: {id: id}});
         };
 
         return userService;

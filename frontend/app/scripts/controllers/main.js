@@ -14,7 +14,7 @@
             initRecentRecipes = function () {
                 return recipeService.getRecipeList({
                     limit: 3,
-                    sort: 'updatedAt ASC'
+                    sort: 'updatedAt DESC'
                 }).$promise;
             };
 

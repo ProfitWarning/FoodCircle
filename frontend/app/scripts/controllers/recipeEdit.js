@@ -9,35 +9,38 @@
     'use strict';
 
     angular.module('foodCircle').controller('RecipeEditorCtrl', ['recipeService', 'IngredientModel', 'alert', 'authService', '$state', 'recipeToEdit', function (recipeService, IngredientModel, alert, authService, $state, recipeToEdit) {
-        var vm = this;//Recipe view model
-
+        var vm = this;
         vm.recipeEditor = {};
         vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
-        vm.ingredients = [];
-        vm.ingredients.push(new IngredientModel('', '', ''));
-        if(recipeToEdit) {
+        vm.recipe = {};
+
+        if (recipeToEdit) {
             vm.recipe = recipeToEdit;
-            debugger;
         }
 
+        if (!vm.recipe.ingredients || vm.recipe.ingredients.length === 0) {
+            vm.recipe.ingredients = [];
+            vm.recipe.ingredients.push(new IngredientModel('', '', ''));
+        }
 
         vm.addIngredientInput = function () {
-            vm.ingredients.push(new IngredientModel('', '', ''));
+            vm.recipe.ingredients.push(new IngredientModel('', '', ''));
         };
 
         vm.removeIngredientInput = function () {
-            vm.ingredients.pop();
+            vm.recipe.ingredients.pop();
         };
 
         vm.submit = function (isValidForm, event) {
+            event.preventDefault();
+
             if (!isValidForm) {
                 return;
             }
-            event.preventDefault();
 
             recipeService.createOrUpdateRecipe(vm.recipe, authService.currentUser().id).then(function () {
                 $state.go('myrecipes.list');
-                alert('info', 'Recipe updated.');
+                alert('info', 'Recipe ' + (!vm.recipe.id ? 'save.' : 'updated.'));
             }, function (error) {
                 alert('error', error.message);
             });
