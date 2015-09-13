@@ -11,8 +11,8 @@
                 </p>
                 <div class="row">
                     <div class="checkbox checkbox-success" ng-click="vm.onSelectRecipe(recipe, $event)">
-                        <input type="checkbox">
-                        <label></label>
+                        <input id="in_{{recipe.id}}" type="checkbox">
+                        <label for="in_{{recipe.id}}"></label>
                     </div>
                     <div class="col-xs-6 col-md-6" ng-hide="vm.showEditBtn">
                         <a class="btn btn-success" ui-sref="recipe.detail({id:{{recipe.id}}})">Detail</a>

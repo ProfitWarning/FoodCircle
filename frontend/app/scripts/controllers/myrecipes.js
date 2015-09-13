@@ -29,7 +29,13 @@
 
 
         vm.onSelectRecipe = function (recipe, event) {
-            toolsService.selectedRecipes.push(recipe);
+            if (!recipe.selected) {
+                toolsService.selectedRecipes.push(recipe);
+                recipe.selected = true;
+            } else {
+                toolsService.removeSelectedRecipe(recipe.id);
+                recipe.selected = false;
+            }
         };
     }]);
 }());

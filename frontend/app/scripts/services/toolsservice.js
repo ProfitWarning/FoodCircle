@@ -13,7 +13,7 @@
         toolsService.selectedRecipes = [];
 
         /*jslint plusplus: true */
-        removeSelectedRecipe = function (recipeId) {
+        toolsService.removeSelectedRecipe = function (recipeId) {
             var i, recipe;
             for (i = 0; i < toolsService.selectedRecipes.length; i++) {
                 recipe = toolsService.selectedRecipes[i];
