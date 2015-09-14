@@ -170,6 +170,9 @@ form .form-group .has-error .help-block {
   }
 }
 /* list vie rwcipes*/
+#recipes {
+  padding: 0 5px;
+}
 .glyphicon {
   margin-right: 5px;
 }
@@ -179,7 +182,22 @@ form .form-group .has-error .help-block {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   border-radius: 0px;
-  min-height: 285px;
+}
+.item .caption {
+  max-height: 210px;
+}
+.item .caption .list-group-item-text {
+  display: block;
+  /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 86px;
+  /* Fallback for non-webkit */
+  margin: 0 auto;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
 }
 .item.list-group-item {
   float: none;
@@ -199,6 +217,19 @@ form .form-group .has-error .help-block {
 .item.list-group-item .caption {
   padding: 9px 9px 0px 9px;
   position: relative;
+}
+.item.list-group-item .caption .list-group-item-text {
+  display: block;
+  /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 142px;
+  /* Fallback for non-webkit */
+  margin: 0 auto;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
 }
 .item.list-group-item .caption .row {
   float: left;
