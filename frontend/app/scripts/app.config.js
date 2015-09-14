@@ -4,7 +4,7 @@
     angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
         function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
-            //$urlRouterProvider.when('', '/home');
+            $urlRouterProvider.when('', '/home');
 
             $stateProvider
             // HOME STATES AND NESTED VIEWS ========================================

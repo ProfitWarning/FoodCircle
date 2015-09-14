@@ -199,7 +199,9 @@ form {
 /* list vie rwcipes*/
 
 #recipes {
-    padding: 0 5px;
+    &.list-view {
+        padding: 0 5px;
+    }
 }
 
 .glyphicon { margin-right:5px; }
@@ -296,3 +298,8 @@ form {
     min-height: 45px;
 }
 
+#recipeForm {
+    textarea {
+        min-height: 200px;
+    }
+}

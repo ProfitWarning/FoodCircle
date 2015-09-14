@@ -170,7 +170,7 @@ form .form-group .has-error .help-block {
   }
 }
 /* list vie rwcipes*/
-#recipes {
+#recipes.list-view {
   padding: 0 5px;
 }
 .glyphicon {
@@ -251,4 +251,7 @@ form .form-group .has-error .help-block {
 .list-group-item-text {
   margin: 0 0 11px;
   min-height: 45px;
+}
+#recipeForm textarea {
+  min-height: 200px;
 }
