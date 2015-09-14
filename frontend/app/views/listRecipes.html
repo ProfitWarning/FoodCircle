@@ -22,7 +22,7 @@
                     <div class="col-xs-6 col-md-6" ng-show="vm.showEditBtn">
                         <a class="btn btn-success btn-sm" ui-sref="myrecipes.edit({id:{{recipe.id}}})">Edit</a>
                     </div>
-                    <div class="col-xs-6 col-md-6" ng-show="vm.showCreatorLink">
+                    <div class="col-xs-6 col-md-6">
                         <p class="small text-right">
                             by: <a class="small" ui-sref="user.detail({id:{{recipe.recipeowner.id}}})"> {{recipe.recipeowner.name}}</a>
                         </p>

@@ -11,7 +11,14 @@
                 .state('home', {
                     url: '/home',
                     controller: 'MainCtrl as vm',
-                    templateUrl: 'views/main.html'
+                    templateUrl: 'views/main.html',
+                    resolve: {
+                        recipeList: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                            return recipeService.getRecipeList({where: {id: {'!': ''}}, imit: 6, sort: 'updatedAt DESC'}).$promise.then(function (recipeList) {
+                                return recipeList;
+                            });
+                        }]
+                    }
                 })
                 // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
                 .state('about', {
@@ -103,10 +110,17 @@
                         }]
                     }
                 })
-                .state('recipe', {
-                    url: '/recipe',
-                    template: '<ui-view/>',
-                    abstract: true
+                .state('recipes', {
+                    url: '/recipes',
+                    controller: 'RecipesCtrl as vm',
+                    templateUrl: 'views/recipes.html',
+                    resolve: {
+                        recipes: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                            return recipeService.getRecipeList({where: {id: {'!': ''}}, sort: 'updatedAt DESC'}).$promise.then(function (recipes) {
+                                return recipes;
+                            });
+                        }]
+                    }
                 })
                 .state('recipe.detail', {
                     url: '/:id',
@@ -114,8 +128,8 @@
                     templateUrl: 'views/myRecipe.detail.html',
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.getById($stateParams.id).$promise.then(function (recipe) {
-                                return recipe;
+                            return recipeService.getRecipeList({where: {id: {'!': ''}}, imit: 6, sort: 'updatedAt DESC'}).$promise.then(function (recipeList) {
+                                return recipeList;
                             });
                         }]
                     }

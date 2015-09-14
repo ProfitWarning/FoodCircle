@@ -117,7 +117,8 @@ module.exports = function (grunt) {
       dist: {
         options: {
           open: true,
-          base: '<%= yeoman.dist %>'
+          base: '<%= yeoman.dist %>',
+          livereload: false
         }
       }
     },
@@ -420,7 +421,7 @@ module.exports = function (grunt) {
     less: {
         development: {
             options: {
-              compress: false,  //minifying the result
+              compress: true,  //minifying the result
             },
             files: {
               //compiling frontend.less into frontend.css

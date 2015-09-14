@@ -23,11 +23,11 @@
 
         if (!vm.recipe.ingredients || vm.recipe.ingredients.length === 0) {
             vm.recipe.ingredients = [];
-            vm.recipe.ingredients.push(new IngredientModel('', '', ''));
+            vm.recipe.ingredients.push(new IngredientModel('', 'g', ''));
         }
 
         vm.addIngredientInput = function () {
-            vm.recipe.ingredients.push(new IngredientModel('', '', ''));
+            vm.recipe.ingredients.push(new IngredientModel('', 'g', ''));
         };
 
         vm.removeIngredientInput = function () {
