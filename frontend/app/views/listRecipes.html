@@ -1,5 +1,5 @@
 <div id="recipes" class="row list-group">
-    <div class="item col-xs-4 col-lg-4" ng-repeat="recipe in vm.recipeList">
+    <div id="recipe_{{recipe.id}}" class="item col-xs-4 col-lg-4" ng-repeat="recipe in vm.recipeList" ng-click="vm.onSelectRecipe(recipe, $event)">
         <div class="thumbnail">
             <img class="group list-group-image" src="images/placeholder_recipe.png" alt="" />
             <div class="caption">
@@ -9,12 +9,12 @@
                 <p class="group inner list-group-item-text">
                     {{recipe.description}}
                 </p>
-                <div class="">
-                     <div class="checkbox checkbox-success" ng-click="vm.onSelectRecipe(recipe, $event)">
+                <!--<div class="">
+                     <div class="checkbox checkbox-success">
                         <input id="in_{{recipe.id}}" type="checkbox">
                         <label for="in_{{recipe.id}}"></label>
                     </div>
-                </div>
+                </div>-->
                 <div class="row">
                     <div class="col-xs-6 col-md-6" ng-hide="vm.showEditBtn">
                         <a class="btn btn-success btn-sm" ui-sref="recipe.detail({id:{{recipe.id}}})">Detail</a>

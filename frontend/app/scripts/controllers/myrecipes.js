@@ -32,9 +32,11 @@
             if (!recipe.selected) {
                 toolsService.selectedRecipes.push(recipe);
                 recipe.selected = true;
+                toolsService.scale3dRecipe(recipe.id);
             } else {
                 toolsService.removeSelectedRecipe(recipe.id);
                 recipe.selected = false;
+                toolsService.removeVisuals(recipe.id);
             }
         };
     }]);

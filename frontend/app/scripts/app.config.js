@@ -150,8 +150,8 @@
             notAuthorized: 'auth-not-authorized'
         })
         .run(['$rootScope', '$location', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', function ($rootScope, $location, $state, $auth, AUTH_EVENTS, authorization, alert) {
-
-            $rootScope.$on('$stateChangeStart', function (event, toState/*, toParams, fromState, fromParams*/) {
+                                                        /*event, toState, toParams, fromState, fromParams*/
+            $rootScope.$on('$stateChangeStart', function (event, toState) {
                 /*if (toState.name === 'home' ||
                         toState.name === 'login' ||
                         toState.name === 'impressum' ||

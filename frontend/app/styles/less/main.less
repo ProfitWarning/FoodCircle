@@ -41,7 +41,7 @@ body {
 
 @media (min-width: 768px) {
     .container {
-        max-width: 730px;
+        max-width: 764px;
     }
 }
 .container-narrow > hr {
@@ -217,13 +217,14 @@ form {
 }
 .item {
     .caption {
+
         max-height: 210px;
         .list-group-item-text {
             display: block; /* Fallback for non-webkit */
             display: -webkit-box;
-            height: 86px; /* Fallback for non-webkit */
-            margin: 0 auto;
-            -webkit-line-clamp: 5;
+            height: 111px; /* Fallback for non-webkit */
+            margin: 0 auto 10px auto;
+            -webkit-line-clamp: 6;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -302,4 +303,12 @@ form {
     textarea {
         min-height: 200px;
     }
+}
+
+.toScale {
+    transform: scale3d(1.04, 1.04, 1.04);
+    -moz-transform: scale3d(1.04, 1.04, 1.04);
+    -ms-transform: scale3d(1.04, 1.04, 1.04);
+    -o-transform: scale3d(1.04, 1.04, 1.04);
+    -webkit-transform: scale3d(1.04, 1.04, 1.04);
 }
