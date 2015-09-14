@@ -217,8 +217,8 @@ form {
 }
 .item {
     .caption {
-
         max-height: 210px;
+
         .list-group-item-text {
             display: block; /* Fallback for non-webkit */
             display: -webkit-box;
@@ -229,6 +229,10 @@ form {
             overflow: hidden;
             text-overflow: ellipsis;
             font-size: 14px;
+        }
+
+        .user-detail-link {
+            line-height: 35px;
         }
     }
 }
@@ -259,19 +263,21 @@ form {
     .list-group-item-text {
         display: block; /* Fallback for non-webkit */
         display: -webkit-box;
-        height: 142px; /* Fallback for non-webkit */
+        height: 160px; /* Fallback for non-webkit */
         margin: 0 auto;
-        -webkit-line-clamp: 8;
+        -webkit-line-clamp: 9;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: 14px;
+        margin-bottom: 10px;
     }
 }
 
 .item.list-group-item .caption .row
 {
     float:left;
+    width: 44%;
 }
 
 .item.list-group-item:nth-of-type(odd)
