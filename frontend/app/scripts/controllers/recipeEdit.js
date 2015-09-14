@@ -9,6 +9,9 @@
     'use strict';
 
     angular.module('foodCircle').controller('RecipeEditorCtrl', ['recipeService', 'IngredientModel', 'alert', 'authService', '$state', 'recipeToEdit', function (recipeService, IngredientModel, alert, authService, $state, recipeToEdit) {
+        /*Private*/
+
+        /*Public*/
         var vm = this;
         vm.recipeEditor = {};
         vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
@@ -31,6 +34,11 @@
             vm.recipe.ingredients.pop();
         };
 
+        vm.onUnitClick = function (ingredient, unit, event) {
+            event.preventDefault();
+            ingredient.unit = unit;
+        };
+
         vm.submit = function (isValidForm, event) {
             event.preventDefault();
 
@@ -45,5 +53,7 @@
                 alert('error', error.message);
             });
         };
+
+
     }]);
 }());

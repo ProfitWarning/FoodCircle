@@ -1,3 +1,19 @@
-<div>
-<h4>{{vm.recipeDetail.updatedAt}}</h4>
+<div class="">
+    <h1>{{vm.recipe.name}}</h4>
+</div>
+<div class="">
+    <h2>Ingrediants</h2>
+    <div class="container ingrediants-list-container">
+        <!--<div class="row" ng-repeat="ingredient in vm.recipe.ingredients">
+            <div class="col-xs-2 text-right">Amount</div>
+            <div class="col-xs-1">Unit</div>
+            <div class="col-xs-9">Name</div>
+        </div>
+        <hr>-->
+        <div class="row" ng-repeat="ingredient in vm.recipe.ingredients">
+            <div class="col-xs-2 text-right">{{ingredient.amount}}</div>
+            <div class="col-xs-1">{{ingredient.unit}}</div>
+            <div class="col-xs-9">{{ingredient.name}}</div>
+        </div>
+    </div>
 </div>

@@ -12,7 +12,7 @@
         var vm = this;
         vm.selectedRecipes = [];
 
-        recipeService.getRecipeListByUser(authService.currentUser()).$promise
+        recipeService.getRecipeListByUser(authService.currentUser(), {sort: 'updatedAt DESC'}).$promise
             .then(function (item) {
                 vm.recipeList = item;
                 vm.showEditBtn = true;

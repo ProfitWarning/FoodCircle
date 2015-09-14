@@ -34,9 +34,13 @@
             return sailsResource(sailsResourceName).query(createQueryDto(query));
         };
 
-        recipeService.getRecipeListByUser = function (user) {
+        recipeService.getRecipeListByUser = function (user, query) {
             //explicit where to ignore token param
-            return sailsResource(sailsResourceName).query(createQueryDto({where: { recipeowner: user.id}}));
+            var userQuery = {where: { recipeowner: user.id}};
+            if (query) {
+                angular.extend(userQuery, query);
+            }
+            return sailsResource(sailsResourceName).query(createQueryDto(userQuery));
         };
 
         recipeService.createOrUpdateRecipe = function (data, userid) {
