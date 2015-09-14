@@ -36,7 +36,7 @@
                                 <p ng-message="required">Amount is required.</p>
                             </div>
                         </div>
-                        <div class="col-xs-2" ng-class="{ 'has-error': innerFormDescription.unit.$touched && innerFormDescription.unit.$invalid }">
+                        <div class="col-xs-3" ng-class="{ 'has-error': innerFormDescription.unit.$touched && innerFormDescription.unit.$invalid }">
                             <!--<input type="text" class="form-control" placeholder="unit" name="unit" ng-model="ingredient.unit" required>-->
 
                             <div class="btn-group">
@@ -52,7 +52,7 @@
                                 <p ng-message="required">Unit is required.</p>
                             </div>
                         </div>
-                        <div class="col-xs-8" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
+                        <div class="col-xs-7" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
                             <input type="text" name="ingrediantName" class="form-control" placeholder="Ingrediant" ng-model="ingredient.name" required>
                             <div class="help-block" ng-messages="innerFormDescription.ingrediantName.$error" ng-show="innerFormDescription.ingrediantName.$touched">
                                 <p ng-message="required">Name is required.</p>

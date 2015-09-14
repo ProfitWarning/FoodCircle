@@ -14,7 +14,7 @@
         /*Public*/
         var vm = this;
         vm.recipeEditor = {};
-        vm.units = ['g', 'kg', 'El', 'Tl', 'ml', 'Liter', ''];
+        vm.units = ['g', 'kg', 'EL', 'TL', 'ml', 'Liter', 'Prise(n)', 'kleine', 'große', 'Zehe/n', 'Bund', 'Dose', 'Spritzer', '---'];
         vm.recipe = {};
 
         if (recipeToEdit) {
