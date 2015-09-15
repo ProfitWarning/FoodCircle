@@ -28,7 +28,7 @@
             });
 
 
-        vm.onSelectRecipe = function (recipe, event) {
+        vm.onSelectRecipe = function (recipe) {
             if (!recipe.selected) {
                 toolsService.selectedRecipes.push(recipe);
                 recipe.selected = true;

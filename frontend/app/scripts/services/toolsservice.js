@@ -8,9 +8,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('toolsService', ['jQuery', '$timeout', function ($, $timeout) {
-        var toolsService = {}, removeSelectedRecipe,
-            alertTimeout;
+    angular.module('foodCircle').service('toolsService', ['jQuery', function ($) {
+        var toolsService = {};
         toolsService.selectedRecipes = [];
 
         /*jslint plusplus: true */

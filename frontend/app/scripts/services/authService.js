@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('authService', ['$auth', '$window', '$q', 'localStorageService', 'sailsResource', function ($auth, $window, $q, localStorageService, sailsResource) {
+    angular.module('foodCircle').service('authService', ['$auth', '$window', '$q', 'localStorageService', function ($auth, $window, $q, localStorageService) {
         var authService = {};
 
         authService.currentUser = function () {
@@ -24,19 +24,6 @@
                 });
 
             return deferred.promise;
-        };
-
-        authService.getUserInfo = function () {
-            var curUser = authService.currentUser();
-            if (curUser) {
-                sailsResource('User').query({id: curUser.id},
-                    function (response) {
-
-                    },
-                    function (response) { // second function is error handler
-
-                    });
-            }
         };
 
         return authService;
