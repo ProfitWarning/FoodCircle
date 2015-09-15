@@ -17,14 +17,14 @@
                 </div>-->
                 <div class="row">
                     <div class="col-xs-6 col-md-6" ng-hide="vm.showEditBtn">
-                        <a class="btn btn-success btn-sm" ui-sref="recipe.detail({id:{{recipe.id}}})">Detail</a>
+                        <a class="btn btn-success btn-sm" ui-sref="recipe.detail({name:'{{recipe.name}}'})">Detail</a>
                     </div>
                     <div class="col-xs-6 col-md-6" ng-show="vm.showEditBtn">
-                        <a class="btn btn-success btn-sm" ui-sref="myrecipes.edit({id:{{recipe.id}}})">Edit</a>
+                        <a class="btn btn-success btn-sm" ui-sref="myrecipes.edit({name:'{{recipe.name}}'})">Edit</a>
                     </div>
                     <div class="col-xs-6 col-md-6">
                         <p class="small text-right user-detail-link">
-                            by: <a class="small" ui-sref="user.detail({id:{{recipe.recipeowner.id}}})"> {{recipe.recipeowner.name}}</a>
+                            by: <a class="small" ui-sref="user.detail({id:'{{recipe.recipeowner.id}}'})"> {{recipe.recipeowner.name}}</a>
                         </p>
                     </div>
                 </div>

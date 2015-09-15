@@ -78,7 +78,7 @@
                     }
                 })
                 .state('myrecipes.edit', {
-                    url: '/:id',
+                    url: '/:name',
                     views: {
                         'display': {
                             controller: 'RecipeEditorCtrl as vm',
@@ -87,7 +87,7 @@
                     },
                     resolve: {
                         recipeToEdit: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.getById($stateParams.id).$promise.then(function (recipe) {
+                            return recipeService.getByName($stateParams.name).$promise.then(function (recipe) {
                                 return recipe;
                             });
                         }]
@@ -110,8 +110,13 @@
                         }]
                     }
                 })
-                .state('recipes', {
-                    url: '/recipes',
+                .state('recipe', {
+                    url: '/recipe',
+                    template: '<ui-view/>',
+                    abstract: true
+                })
+                .state('recipe.list', {
+                    url: '/list',
                     controller: 'RecipesCtrl as vm',
                     templateUrl: 'views/recipes.html',
                     resolve: {
@@ -123,13 +128,13 @@
                     }
                 })
                 .state('recipe.detail', {
-                    url: '/:id',
+                    url: '/:name',
                     controller: 'RecipeDetailCtrl as vm',
                     templateUrl: 'views/myRecipe.detail.html',
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.getRecipeList({where: {id: {'!': ''}}, imit: 6, sort: 'updatedAt DESC'}).$promise.then(function (recipeList) {
-                                return recipeList;
+                             return recipeService.getByName($stateParams.name).$promise.then(function (recipe) {
+                                return recipe;
                             });
                         }]
                     }

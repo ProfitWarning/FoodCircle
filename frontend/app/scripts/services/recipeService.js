@@ -63,6 +63,10 @@
             return recipeService.get({where: {id: id}});
         };
 
+        recipeService.getByName = function (id) {
+            return recipeService.get({where: {name: id}});
+        };
+
         return recipeService;
     }]);
 }());
