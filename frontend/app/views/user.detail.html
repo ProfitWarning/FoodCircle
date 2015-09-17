@@ -1,1 +1,57 @@
-<p>{{vm.user.name}}</p>
+<div class="">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+         <div class="profile">
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                    <h2>{{vm.user.name}}</h2>
+                    <p><strong>About: </strong> Web Designer / UI. </p>
+                    <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
+                    <p><strong>Skills: </strong>
+                        <span class="tags">html5</span>
+                        <span class="tags">css3</span>
+                        <span class="tags">jquery</span>
+                        <span class="tags">bootstrap3</span>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <figure>
+                        <img src="http://placehold.it/380x500" alt="" class="img-circle img-responsive">
+                        <!--<figcaption class="ratings">
+                            <p>Ratings
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                <span class="fa fa-star"></span>
+                            </a>
+                            <a href="#">
+                                 <span class="fa fa-star-o"></span>
+                            </a>
+                            </p>
+                        </figcaption>-->
+                    </figure>
+                </div>
+            </div>
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-6 emphasis">
+                    <h2><strong> {{vm.user.recipes.length}} </strong></h2>
+                    <p><small><a ui-sref="recipe.list({query:'recipeowner:{{vm.user.id}}'})">Recipes</a> </small></p>
+                    <!--<button class="btn btn-success btn-block"><span class="fa fa-bars"></span> Recipes</button>-->
+                </div>
+                <div class="col-xs-12 col-sm-6 emphasis">
+                    <h2><strong>245</strong></h2>
+                    <p><small>Comments</small></p>
+                    <!--<button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button>-->
+                </div>
+            </div>
+         </div>
+        </div>
+    </div>
+</div>

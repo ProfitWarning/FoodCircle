@@ -116,12 +116,14 @@
                     abstract: true
                 })
                 .state('recipe.list', {
-                    url: '/list',
+                    url: '/list/:query',
                     controller: 'RecipesCtrl as vm',
                     templateUrl: 'views/recipes.html',
                     resolve: {
-                        recipes: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.getRecipeList({where: {id: {'!': ''}}, sort: 'updatedAt DESC'}).$promise.then(function (recipes) {
+                        recipes: ['recipeService', '$stateParams', 'queryService', function (recipeService, $stateParams, queryService) {
+
+                            var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
+                            return recipeService.getRecipeList(queryService.queryFromUrlParam(defaultQuery, $stateParams.query)).$promise.then(function (recipes) {
                                 return recipes;
                             });
                         }]
