@@ -93,6 +93,22 @@
                         }]
                     }
                 })
+                .state('myrecipes.imageupload', {
+                    url: '/:name',
+                    views: {
+                        'display': {
+                            controller: 'ImageuploadCtrl as vm',
+                            templateUrl: 'views/myrecipe.fileupload.html'
+                        }
+                    },
+                    resolve: {
+                        recipeToEdit: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                            return recipeService.getByName($stateParams.name).$promise.then(function (recipe) {
+                                return recipe;
+                            });
+                        }]
+                    }
+                })
                 .state('user', {
                     url: '/user',
                     template: '<ui-view/>',
