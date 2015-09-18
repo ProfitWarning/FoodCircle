@@ -94,7 +94,7 @@
                     }
                 })
                 .state('myrecipes.imageupload', {
-                    url: '/:name',
+                    url: 'upload/:name',
                     views: {
                         'display': {
                             controller: 'ImageuploadCtrl as vm',

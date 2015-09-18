@@ -14,20 +14,25 @@ module.exports = {
             });
         }
 
-        var uploadFile = req.file('recipeFile');
-        console.log(uploadFile);
-        var imagePath =
+        var uploadFile = req.file('file'),
+            imagePath = '../../assets/images/' + req.body.recipename;
 
-        uploadFile.upload({ dirname: '../../assets/images'}, function onUploadComplete(err, files) {
-            // Access it via localhost:1337/images/file-name
+
+        uploadFile.upload({ dirname: imagePath }, function onUploadComplete(err, files) {
+            // Access it via localhost:1337/images/[recipe name]file-name
             //    IF ERROR Return and send 500 error with error
-            if (err) {return res.serverError(err); }
+            if (err) { return res.serverError(err); }
 
-            console.log(files);
             res.json({
                 status: 200,
                 file: files
             });
+        });
+    },
+    create: function (req, res) {
+        return res.json({
+            status: '401',
+            message: 'Simple POST not allowed.'
         });
     }
 };
