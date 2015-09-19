@@ -1,65 +1,31 @@
-<!--<form id="fileuploadForm" name="fileuploadForm">
-    <fieldset>
-        <legend>Upload on form submit</legend>
-        Photo:
-        <input type="file" ngf-select ng-model="vm.picFile" name="recipefile" accept="image/*" ngf-max-size="2MB" required>
-
-        <br>
-        <i ng-show="fileuploadForm.recipefile.$error.maxSize">File too large
-          {{vm.picrecipefile.size / 1000000|number:1}}MB: max {{vm.picrecipefile.$errorParam}}</i>
-        <img ng-show="fileuploadForm.recipefile.$valid" ngf-src="!vm.picrecipefile.$error && vm.picFile" class="thumb">
-        <br>
-        <button ng-disabled="!fileuploadForm.$valid" ng-click="vm.uploadImage(vm.picFile)" class="btn">Submit</button>
-        <span class="progress" ng-show="vm.picrecipefile.progress >= 0">
-        <div style="width:{{vm.picrecipefile.progress}}%" ng-bind="vm.picrecipefile.progress + '%'"></div>
-      </span>
-        <span ng-show="vm.picrecipefile.result">Upload Successful</span>
-        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
-    </fieldset>
-    <br>
-</form>-->
-<div class="panel panel-default recipe-image-list">
-    <div class="panel-heading"><strong>Images:</strong> <small>{{vm.recipe.name}}</small></div>
-    <div class="row">
-        <div class="col-xs-4">
-            <img src="http://placehold.it/240x200">
-        </div>
-        <div class="col-xs-4">
-            <img src="http://placehold.it/240x200">
-        </div>
-        <div class="col-xs-4">
-            <img src="http://placehold.it/240x200">
-        </div>
-    </div>
-</div>
-
 <div class="panel panel-default">
-    <div class="panel-heading"><strong>Upload Files</strong> <small>Bootstrap files upload</small></div>
-    <div class="panel-body">
-
-        <!-- Standar Form -->
-        <h4>Select files from your computer</h4>
-        <form id="fileuploadForm" name="fileuploadForm">
-            <div class="form-inline">
-                <div class="form-group">
-                    <!--<input type="file" name="files[]" id="js-upload-files" multiple>-->
-                    <input type="file" ngf-select ng-model="vm.picFile" name="recipefile" accept="image/*" ngf-max-size="2MB" required>
-                    <div class="form-inline" ng-class="{ 'has-error': fileuploadForm.recipefile.$touched && fileuploadForm.recipefile.$invalid }">
-                        <div class="help-block" ng-messages="fileuploadForm.recipefile.$error" ng-show="fileuploadForm.recipefile.$touched">
-                            <p ng-message="required">Amount is required.</p>
+    <div class="panel-heading"><strong>Upload Files</strong> <small></small></div>
+    <div class="panel-body row">
+        <div class="col-xs-12 col-md-7">
+            <!-- Standar Form -->
+            <h4>Select files from your computer</h4>
+            <form id="fileuploadForm" name="fileuploadForm" role="form">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <!--<input type="file" name="files[]" id="js-upload-files" multiple>-->
+                        <input type="file" ngf-select ng-model="vm.picFile" name="recipefile" accept="image/*" ngf-max-size="2MB" required>
+                        <div class="form-inline" ng-class="{ 'has-error': fileuploadForm.recipefile.$touched && fileuploadForm.recipefile.$invalid }">
+                            <div class="help-block" ng-messages="fileuploadForm.recipefile.$error" ng-show="fileuploadForm.recipefile.$touched">
+                                <p ng-message="required">Amount is required.</p>
+                            </div>
                         </div>
                     </div>
+                    <button ng-click="vm.uploadImage(vm.picFile)" ng-disabled="!fileuploadForm.$valid" class="btn btn-sm btn-primary" id="js-upload-submit">Upload file</button>
                 </div>
-                <button ng-click="vm.uploadImage(vm.picFile)" ng-disabled="!fileuploadForm.$valid" class="btn btn-sm btn-primary" id="js-upload-submit">Upload file</button>
+            </form>
+         </div>
+        <div class="col-xs-12 col-md-5">
+            <!-- Drop Zone -->
+            <h4>Or drag and drop files below</h4>
+            <div class="upload-drop-zone" id="drop-zone">
+                Just drag and drop files here
             </div>
-        </form>
-
-        <!-- Drop Zone -->
-        <h4>Or drag and drop files below</h4>
-        <div class="upload-drop-zone" id="drop-zone">
-            Just drag and drop files here
         </div>
-
         <!-- Progress Bar -->
         <div class="progress">
             <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.progress.valuenow}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.picrecipefile.progress}}%;">
@@ -70,10 +36,22 @@
         <!-- Upload Finished -->
         <div class="js-upload-finished">
             <h3>Processed files</h3>
-            <div class="list-group">
+            <!--<div class="list-group">
                 <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
                 <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-            </div>
+            </div>-->
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default recipe-image-list">
+    <div class="panel-heading">
+        <strong>Images:</strong> <small>{{vm.recipe.name}}</small>
+        <span ng-click="vm.imagesCollapsed = !vm.imagesCollapsed" class="chevron glyphicon" ng-class="{'glyphicon-chevron-up': !vm.imagesCollapsed,'glyphicon-chevron-down': vm.imagesCollapsed}"></span>
+    </div>
+    <div class="row" collapse="vm.imagesCollapsed">
+        <div class="col-xs-6 col-md-4 text-left" ng-class="{'text-center': $index % 3 == 1,'text-right': $index % 3 == 2,'mbottom': $index < vm.recipe.images.length - 3 }" ng-repeat="image in vm.recipe.images">
+            <img src="{{image.image}}" style="max-width:99.0%">
         </div>
     </div>
 </div>

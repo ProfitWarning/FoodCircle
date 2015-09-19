@@ -10,12 +10,23 @@
     'use strict';
 
     angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', function (recipeToEdit, Upload, API_URL) {
-        var vm = this;
+        var vm = this, i,
+
+            getSlides = function () {
+                var newWidth = 300 + vm.recipe.images.length + 1;
+                vm.recipe.images.push({
+                    image: '//placekitten.com/' + newWidth + '/' + newWidth
+                });
+            };
+
         vm.recipe = recipeToEdit;
+        vm.recipe.images = [];
+        for (i = 0; i < 6; i++) {
+            getSlides();
+        }
 
 
         vm.uploadImage = function (image) {
-            debugger;
             image.upload = Upload.upload({
                 url: API_URL + 'image/upload',
                 fields: {
@@ -38,5 +49,7 @@
                 image.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
             });
         };
+
+        vm.imagesCollapsed = false;
     }]);
 }());
