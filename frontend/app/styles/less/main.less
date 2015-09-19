@@ -383,8 +383,7 @@ span.tags
     background-image:none !important;
 }
 .carousel-control {
-    background:    #ddd;
-    color:#999;
+    color:#fff;
     padding: 4px 0;
     width:26px;
     top:auto;
@@ -392,11 +391,12 @@ span.tags
     bottom:0;
     opacity:1;
     text-shadow:none;
-}
-.carousel-control.right {
-    right: 5px;
-}
-.carousel-control.left {
-    right: 35px;
+    cursor: pointer;
+    &.right {
+        right: 5px;
+    }
+    &.left {
+        right: 35px;
+    }
 }
 
