@@ -8,7 +8,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipesToolsCtrl', ['jQuery', 'toolsService', 'alert', function ($, toolsService, alert) {
+    angular.module('foodCircle').controller('RecipesToolsCtrl', ['jQuery', 'toolsService', 'alert', '$confirm', function ($, toolsService, alert, $confirm) {
         var vm = this;
         vm.listActive = false;
 
@@ -31,7 +31,18 @@
             event.preventDefault();
             if (toolsService.selectedRecipes.length < 1) {
                 alert('warning', 'Please select a recipe to delete.');
+                return;
             }
+            $confirm({
+                text: 'Are you sure you want to delete?'
+            })
+                .then(function () {
+                    alert('info', 'Deleted.');
+                });
+        };
+
+        vm.selectedRecipesCnt = function () {
+            return toolsService.selectedRecipes.length;
         };
 
     }]);

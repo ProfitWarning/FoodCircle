@@ -38,6 +38,10 @@
             $('#recipe_' + recipeid).removeClass('toScale');
         };
 
+        toolsService.getSelectedRecipesCnt = function () {
+            return toolsService.selectedRecipes.length;
+        }
+
         return toolsService;
     }]);
 }());
