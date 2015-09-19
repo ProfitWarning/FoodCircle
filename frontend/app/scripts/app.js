@@ -11,7 +11,7 @@
 
     'use strict';
 
-    angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'sailsResource', 'satellizer', 'LocalStorageModule', 'ngFileUpload']);
+    angular.module('foodCircle', ['ngCookies', 'ngResource', 'ngSanitize', 'ui.router', 'sailsResource', 'satellizer', 'LocalStorageModule', 'ngFileUpload', 'ui.bootstrap']);
     //window.io.sails.url = 'http://localhost:1337';
     window.io.sails.autoConnect = false;
 

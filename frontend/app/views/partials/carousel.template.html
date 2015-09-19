@@ -1,0 +1,10 @@
+
+<div ng-mouseenter="pause()" ng-mouseleave="play()" class="carousel" ng-swipe-right="prev()" ng-swipe-left="next()">
+
+    <div class="carousel-inner" ng-transclude></div>
+
+    <div class="carousel-controls">
+      <a class="left carousel-control"  ng-click="prev()" ng-show="slides.length > 1" ><span class="fa fa-angle-double-left"></span></a>
+      <a class="right carousel-control" ng-click="next()" ng-show="slides.length > 1" ><span class="fa fa-angle-double-right"></span></a>
+    </div>
+</div>
