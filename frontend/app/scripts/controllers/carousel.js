@@ -19,11 +19,11 @@ angular.module('foodCircle').controller('CarouselCtrl', function () {
         };
 
     vm.carousel = {
-        myInterval: 5000,
+        interval: 5000,
         noWrapSlides: false,
         slides: []
     };
-
+    /*jslint plusplus: true */
     for (i = 0; i < 4; i++) {
         getSlides();
     }
