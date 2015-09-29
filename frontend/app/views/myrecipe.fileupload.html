@@ -22,7 +22,12 @@
         <div class="col-xs-12 col-md-5">
             <!-- Drop Zone -->
             <h4>Or drag and drop files below</h4>
-            <div class="upload-drop-zone" id="drop-zone">
+            <div ngf-drop ngf-select
+                 ng-model="dropFiles"
+                 ngf-drag-over-class="dragover"
+                 ngf-multiple="true" ngf-allow-dir="true"
+                 accept="image/*,application/pdf" ngf-pattern="'image/*'"
+                 class="upload-drop-zone" id="drop-zone">
                 Just drag and drop files here
             </div>
         </div>
