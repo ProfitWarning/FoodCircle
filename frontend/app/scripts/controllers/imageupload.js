@@ -25,7 +25,7 @@
             });
 
             image.upload.then(function (response) {
-                debugger;
+                //TODO refresh
             }, function (response) {
                 debugger;
                 if (response.status > 0) {
@@ -40,16 +40,9 @@
         };
 
         /* image drop zone*/
-        vm.dropUpload = function (files) {
-
-            if (files && files.length) {
-                /*jslint plusplus: true */
-                for (d = 0; i < files.length; i++) {
-                    var file = files[i];
-                    if (!file.$error) {
-                        vm.uploadImage(file);
-                    }
-                }
+        vm.onFileDroped = function () {
+            if (vm.dropFiles !== null) {
+                vm.uploadImage(vm.dropFiles);
             }
         };
 
