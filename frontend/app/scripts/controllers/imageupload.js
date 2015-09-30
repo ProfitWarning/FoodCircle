@@ -40,15 +40,16 @@
             if (!images) {
                 images = vm.imagesToUpload;
             }
-            images.upload = Upload.upload({
+            $scope.upload = Upload.upload({
                 url: API_URL + 'image/upload',
-                fields: {
-                    recipename: vm.recipe.name
+                data: {
+                    recipename: vm.recipe.name,
+                    file: images
                 },
-                file: images
+                arrayKey: ''
             });
 
-            images.upload.then(function (response) {
+            $scope.upload.then(function (response) {
 
             }, function (response) {
                 if (response.status > 0) {
@@ -56,9 +57,8 @@
                 }
             });
 
-            images.upload.progress(function (evt) {
+            $scope.upload.progress(function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
-                debugger;
                 vm.uploadImage.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
             });
         };
