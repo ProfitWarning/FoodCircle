@@ -38,5 +38,8 @@
       "fonts": "fonts/*",
       "css": "css/font-awesome.css"
     }
+  },
+  "resolutions": {
+    "ng-file-upload": "~8.0.4"
   }
 }

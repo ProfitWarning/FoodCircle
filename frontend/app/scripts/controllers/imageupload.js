@@ -9,40 +9,70 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', function (recipeToEdit, Upload, API_URL) {
+    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$scope', function (recipeToEdit, Upload, API_URL, $scope) {
         var vm = this, i, d, getSlides;
 
+        vm.scope = $scope;
         vm.recipe = recipeToEdit;
         vm.recipe.images = [];
+        vm.imagesToUpload = [];
 
-        vm.uploadImage = function (image) {
-            image.upload = Upload.upload({
+        vm.createProgressbar = function (images) {
+        //multiple images html5 create progressbars
+            if (images) {
+                vm.imagesToUpload = images;
+            }
+            if (angular.isArray(vm.imagesToUpload)) {
+                //TODO set error in image progressbar
+                //TODO show why error e.g. image too big
+                angular.forEach(vm.imagesToUpload, function (image) {
+                    image.progress = 100;
+                    if (image.$error) {
+                        //remove error image
+                        //images.splice(i, 1);
+                    }
+                });
+
+            }
+            //vm.uploadImage(vm.imagesToUpload);
+        };
+        vm.uploadImage = function (images) {
+            if (!images) {
+                images = vm.imagesToUpload;
+            }
+            images.upload = Upload.upload({
                 url: API_URL + 'image/upload',
                 fields: {
                     recipename: vm.recipe.name
                 },
-                file: image
+                file: images
             });
 
-            image.upload.then(function (response) {
-                //TODO refresh
+            images.upload.then(function (response) {
+
             }, function (response) {
-                debugger;
                 if (response.status > 0) {
                     vm.errorMsg = response.status + ': ' + response.data;
                 }
             });
 
-            image.upload.progress(function (evt) {
+            images.upload.progress(function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
-                image.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
+                debugger;
+                vm.uploadImage.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
             });
         };
 
         /* image drop zone*/
         vm.onFileDroped = function () {
-            if (vm.dropFiles !== null) {
-                vm.uploadImage(vm.dropFiles);
+            if (vm.dropFiles && vm.dropFiles !== null) {
+                if (angular.isArray(vm.dropFiles)) {
+                    vm.createProgressbar(vm.dropFiles);
+                } else {
+                    debugger;
+                    vm.createProgressbar([vm.dropFiles]);
+                }
+                vm.uploadImage();
             }
         };
 
