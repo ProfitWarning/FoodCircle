@@ -9,7 +9,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$scope', function (recipeToEdit, Upload, API_URL, $scope) {
+    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$scope', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $scope, $timeout, alert) {
         var vm = this, i, d, getSlides;
 
         vm.scope = $scope;
@@ -24,17 +24,14 @@
             }
             if (angular.isArray(vm.imagesToUpload)) {
                 //TODO set error in image progressbar
-                //TODO show why error e.g. image too big
+                //show why error e.g. image too big
                 angular.forEach(vm.imagesToUpload, function (image) {
-                    image.progress = 100;
                     if (image.$error) {
-                        //remove error image
-                        //images.splice(i, 1);
+
                     }
                 });
 
             }
-            //vm.uploadImage(vm.imagesToUpload);
         };
         vm.uploadImage = function (images) {
             if (!images) {
@@ -50,6 +47,13 @@
             });
 
             $scope.upload.then(function (response) {
+                //upload finished reset everything
+                alert('success', 'Upload finished');
+                $timeout(function () {
+                    vm.uploadImage.progress = 0;
+                    vm.imagesToUpload = [];
+                }, 1500);
+
 
             }, function (response) {
                 if (response.status > 0) {
@@ -69,7 +73,6 @@
                 if (angular.isArray(vm.dropFiles)) {
                     vm.createProgressbar(vm.dropFiles);
                 } else {
-                    debugger;
                     vm.createProgressbar([vm.dropFiles]);
                 }
                 vm.uploadImage();
@@ -79,8 +82,7 @@
         vm.imagesCollapsed = false;
 
 
-
-        //dummy
+        //TODO remove getSlides, images will be provided by server
         getSlides = function () {
             var newWidth = 300 + vm.recipe.images.length + 1;
             vm.recipe.images.push({

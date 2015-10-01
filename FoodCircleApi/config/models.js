@@ -17,8 +17,8 @@ module.exports.models = {
   * connections (see `config/connections.js`)                                *
   *                                                                          *
   ***************************************************************************/
-  // connection: 'localDiskDb',
-  connection: 'someMongodbServer'
+   connection: 'localDiskDb'
+
 
   /***************************************************************************
   *                                                                          *
@@ -29,5 +29,4 @@ module.exports.models = {
   *                                                                          *
   ***************************************************************************/
   // migrate: 'alter'
-
 };
