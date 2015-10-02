@@ -9,9 +9,10 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('HeaderCtrl', ['$auth', 'jQuery', function ($auth, $) {
+    angular.module('foodCircle').controller('HeaderCtrl', ['$auth', 'jQuery', '$rootScope', function ($auth, $, $rootScope) {
         var vm = this, navbarBtn, profileBtn;
         vm.isAuthenticated = $auth.isAuthenticated;
+        vm.recipeActive = false;
 
         navbarBtn = $('#js-navbar-collapse');
         profileBtn = $('#js-profile-collapse');
@@ -21,6 +22,10 @@
         });
         profileBtn.on('show.bs.collapse', function () {
             navbarBtn.collapse('hide');
+        });
+
+        $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+            vm.recipeActive = toState.name.indexOf('recipe.') > -1;
         });
     }]);
 }());

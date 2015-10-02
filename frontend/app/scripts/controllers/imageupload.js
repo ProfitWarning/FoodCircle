@@ -9,10 +9,9 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$scope', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $scope, $timeout, alert) {
+    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $timeout, alert) {
         var vm = this, i, d, getSlides;
 
-        vm.scope = $scope;
         vm.recipe = recipeToEdit;
         vm.recipe.images = [];
         vm.imagesToUpload = [];
@@ -37,7 +36,7 @@
             if (!images) {
                 images = vm.imagesToUpload;
             }
-            $scope.upload = Upload.upload({
+            vm.upload = Upload.upload({
                 url: API_URL + 'image/upload',
                 data: {
                     recipename: vm.recipe.name,
@@ -46,7 +45,7 @@
                 arrayKey: ''
             });
 
-            $scope.upload.then(function (response) {
+            vm.upload.then(function (response) {
                 //upload finished reset everything
                 alert('success', 'Upload finished');
                 $timeout(function () {
@@ -61,7 +60,7 @@
                 }
             });
 
-            $scope.upload.progress(function (evt) {
+            vm.upload.progress(function (evt) {
                 // Math.min is to fix IE which reports 200% sometimes
                 vm.uploadImage.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
             });

@@ -12,7 +12,11 @@
                 var Resource = sailsResource(sailsResourceName),
                     RecipeDto;
                 if (data.id) {
-                    RecipeDto = recipeService.get({where: {id: data.id}});
+                    RecipeDto = recipeService.get({
+                        where: {
+                            id: data.id
+                        }
+                    });
                     angular.extend(RecipeDto, data);
                     RecipeDto.token = $auth.getToken();
                 } else {
@@ -36,7 +40,11 @@
 
         recipeService.getRecipeListByUser = function (user, query) {
             //explicit where to ignore token param
-            var userQuery = {where: { recipeowner: user.id}};
+            var userQuery = {
+                where: {
+                    recipeowner: user.id
+                }
+            };
             if (query) {
                 angular.extend(userQuery, query);
             }
@@ -60,11 +68,25 @@
         };
 
         recipeService.getById = function (id) {
-            return recipeService.get({where: {id: id}});
+            if (!id) {
+                return [];
+            }
+            return recipeService.get({
+                where: {
+                    id: id
+                }
+            });
         };
 
-        recipeService.getByName = function (id) {
-            return recipeService.get({where: {name: id}});
+        recipeService.getByName = function (name) {
+            if (!name) {
+                return [];
+            }
+            return recipeService.get({
+                where: {
+                    name: name
+                }
+            });
         };
 
         return recipeService;

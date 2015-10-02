@@ -4,14 +4,20 @@
     angular.module('foodCircle').config(['$stateProvider', '$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
         function ($stateProvider, $urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
-            $urlRouterProvider.when('', '/home');
+            $urlRouterProvider.when('', '/');
 
             $stateProvider
-            // HOME STATES AND NESTED VIEWS ========================================
-                .state('home', {
-                    url: '/home',
+                .state('main', {
+                    abstract: true,
+                    url: '',
                     controller: 'MainCtrl as vm',
-                    templateUrl: 'views/main.html',
+                    templateUrl: 'views/main.html'
+                })
+            // HOME STATES AND NESTED VIEWS ========================================
+                .state('main.home', {
+                    url: '/',
+                    controller: 'HomeCtrl as vm',
+                    templateUrl: 'views/home.html',
                     resolve: {
                         recipeList: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
                             return recipeService.getRecipeList({where: {id: {'!': ''}}, imit: 6, sort: 'updatedAt DESC'}).$promise.then(function (recipeList) {
@@ -20,21 +26,21 @@
                         }]
                     }
                 })
-                // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-                .state('about', {
+                // ABOUT PAGE  =================================
+                .state('main.about', {
                     url: '/about',
                     templateUrl: 'views/about.html'
                 })
-                .state('impressum', {
+                .state('main.impressum', {
                     url: '/impressum',
                     templateUrl: 'views/impressum.html'
                 })
-                // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
-                .state('login', {
+                // LOGIN PAGE =================================
+                .state('main.login', {
                     url: '/login',
                     templateUrl: 'views/login.html'
                 })
-                .state('logout', {
+                .state('main.logout', {
                     url: '/logout',
                     controller: 'LogoutCtrl'
                 })
@@ -43,7 +49,7 @@
                     controller: 'RecipeEditorCtrl as vm',
                     templateUrl: 'views/editRecipe.html'
                 })
-                .state('myrecipes', {
+                .state('main.myrecipes', {
                     url: '/myrecipes',
                     templateUrl: 'views/myRecipes.html',
                     resolve: {
@@ -52,7 +58,7 @@
                         }]
                     }
                 })
-                .state('myrecipes.list', {
+                .state('main.myrecipes.list', {
                     url: '/list',
                     views: {
                         'display' : {
@@ -65,7 +71,7 @@
                         }
                     }
                 })
-                .state('myrecipes.create', {
+                .state('main.myrecipes.create', {
                     url: '/create',
                     views: {
                         'display': {
@@ -77,7 +83,7 @@
                         recipeToEdit: function () {}
                     }
                 })
-                .state('myrecipes.edit', {
+                .state('main.myrecipes.edit', {
                     url: '/:name',
                     views: {
                         'display': {
@@ -93,7 +99,7 @@
                         }]
                     }
                 })
-                .state('myrecipes.imageupload', {
+                .state('main.myrecipes.imageupload', {
                     url: 'upload/:name',
                     views: {
                         'display': {
@@ -109,12 +115,12 @@
                         }]
                     }
                 })
-                .state('user', {
+                .state('main.user', {
                     url: '/user',
                     template: '<ui-view/>',
                     abstract: true
                 })
-                .state('user.detail', {
+                .state('main.user.detail', {
                     url: '/:id',
                     controller: 'UserCtrl as vm',
                     templateUrl: 'views/user.detail.html',
@@ -126,35 +132,42 @@
                         }]
                     }
                 })
-                .state('recipe', {
+                .state('main.recipe', {
                     url: '/recipe',
-                    template: '<ui-view/>',
-                    abstract: true
+                    abstract: true,
+                    templateUrl: 'views/recipes.html'
                 })
-                .state('recipe.list', {
+                .state('main.recipe.list', {
                     url: '/list/:query',
-                    controller: 'RecipesCtrl as vm',
-                    templateUrl: 'views/recipes.html',
                     resolve: {
                         recipes: ['recipeService', '$stateParams', 'queryService', function (recipeService, $stateParams, queryService) {
-
                             var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
                             return recipeService.getRecipeList(queryService.queryFromUrlParam(defaultQuery, $stateParams.query)).$promise.then(function (recipes) {
                                 return recipes;
                             });
                         }]
+                    },
+                    views: {
+                        'recipelist': {
+                            controller: 'RecipesCtrl as vm',
+                            templateUrl: 'views/listRecipes.html'
+                        }
                     }
                 })
-                .state('recipe.detail', {
+                .state('main.recipe.detail', {
                     url: '/:name',
-                    controller: 'RecipeDetailCtrl as vm',
-                    templateUrl: 'views/myRecipe.detail.html',
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
                             return recipeService.getByName($stateParams.name).$promise.then(function (recipe) {
                                 return recipe;
                             });
                         }]
+                    },
+                    views: {
+                        'recipedetail': {
+                            controller: 'RecipeDetailCtrl as vm',
+                            templateUrl: 'views/myRecipe.detail.html'
+                        }
                     }
                 })
                 .state('404', {

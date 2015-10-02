@@ -28,18 +28,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-
-    <div class="container">
-        <div class="">
-            <div ng-include="'views/header.html'"></div>
-        </div>
-        <div class="">
-            <div class="ui-view-container">
-                <div ui-view></div>
-            </div>
-        </div>
-        <div ng-include="'views/alert.html'"></div>
-    </div>
+    <div ui-view></div>
 
     <div class="footer">
         <div class="container">
@@ -96,6 +85,7 @@
     <script src="scripts/services/queryservice.js"></script>
     <script src="scripts/controllers/imageupload.js"></script>
     <script src="scripts/controllers/carousel.js"></script>
+    <script src="scripts/controllers/home.js"></script>
     <!-- endbuild -->
 </body>
 

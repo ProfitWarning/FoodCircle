@@ -16,7 +16,7 @@ module.exports = {
 
         //TODO move path to config
         var uploadFile = req.file('file'),
-            imagePath = '../../.uploads/images' + req.body.recipename;
+            imagePath = '../../.uploads/images/' + req.body.recipename;
 
 
         uploadFile.on('progress', function (event) {

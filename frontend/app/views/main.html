@@ -1,24 +1,11 @@
-<div class="jumbotron">
-  <h1>'Kulinarischer Zirkel'</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-</div>
-
-  <h4>Latest recipes</h4>
-
-<div ng-include="'views/listRecipes.html'"></div>
-
-<div class="row marketing">
-  <h4>Welcome to your little circle</h4>
-  <p>
-    lorem ... you know the rest
-  </p>
-
-  <h4>Heading 4</h4>
-  <p>
-    lorem ... you know the rest
-  </p>
-
+<div class="container">
+    <div class="">
+        <div ng-include="'views/header.html'"></div>
+    </div>
+    <div class="">
+        <div class="ui-view-container">
+            <div ui-view></div>
+        </div>
+    </div>
+    <div ng-include="'views/alert.html'"></div>
 </div>

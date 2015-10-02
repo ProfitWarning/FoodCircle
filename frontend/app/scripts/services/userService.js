@@ -29,6 +29,9 @@
         };
 
          userService.getById = function (id) {
+             if (!id) {
+                 return {};
+             }
             return userService.get({where: {id: id}});
         };
 

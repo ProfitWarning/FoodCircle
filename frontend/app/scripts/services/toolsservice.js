@@ -40,7 +40,7 @@
 
         toolsService.getSelectedRecipesCnt = function () {
             return toolsService.selectedRecipes.length;
-        }
+        };
 
         return toolsService;
     }]);

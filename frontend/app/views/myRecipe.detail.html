@@ -2,7 +2,7 @@
     <h1>{{vm.recipe.name}}</h4>
 </div>
 <div class="row">
-    <div class="col-md-6" ng-controller="CarouselCtrl as vm">
+    <div class="col-xs-12 col-sm-8" ng-controller="CarouselCtrl as vm">
         <carousel interval="vm.carousel.interval" no-wrap="vm.carousel.noWrapSlides" template-url="views/partials/carousel.template.html">
             <slide ng-repeat="slide in vm.carousel.slides" active="slide.active">
                 <img ng-src="{{slide.image}}" style="margin:auto">
