@@ -60,19 +60,33 @@ module.exports = {
             }
 
             createNewArray(files, function (newImages) {
-                Recipe.update({name: recipeName}, {images: newImages}).exec(function (err, recipe) {
-                    if (err) {
-                        return res.json('401', {
-                            err: err.details
+
+                Recipe.findOne({name: recipeName}).populate('images').exec(function (err, recipe) {
+
+                    if (!recipe.images) {
+                        recipe.images = newImages;
+                    } else {
+                        newImages.forEach(function (imgItem) {
+                            recipe.images.add(imgItem);
                         });
                     }
+                    recipe.save(function (err, updatedRecipe) {
+                        if (err) {
+                            return res.json('401', {
+                                err: err.details
+                            });
+                        }
 
-                    res.json({
-                        status: 200,
-                        file: newImages
+                        res.json({
+                            status: 200,
+                            file: newImages
+                        });
+
                     });
-
                 });
+
+
+
             });
 
         });

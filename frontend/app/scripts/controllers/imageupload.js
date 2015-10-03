@@ -10,10 +10,16 @@
     'use strict';
 
     angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $timeout, alert) {
+        // config services
+        /*Upload.setDefaults({
+            ngfResize: {width: 20, height: 20}
+        });*/
         var vm = this, i, getSlides;
 
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
+
+
         vm.createProgressbar = function (images) {
 
             //multiple images html5 create progressbars
@@ -47,6 +53,7 @@
             });
 
             vm.upload.then(function (res) {
+                vm.recipe.images = vm.recipe.images.concat(res.data.file);
                 //upload finished reset everything
                 alert('success', 'Success', 'Upload finished', 2000);
                 $timeout(function () {
@@ -83,14 +90,14 @@
 
         //TODO remove getSlides, images will be provided by server
         getSlides = function () {
-            var newWidth = 300 + vm.recipe.images.length + 1;
+            var newWidth = 400 + vm.recipe.images.length + 1;
             vm.recipe.images.push({
                 image: '//placekitten.com/' + newWidth + '/' + newWidth
             });
         };
         /*jslint plusplus: true */
-        for (i = 0; i < 6; i++) {
+        /*for (i = 0; i < 6; i++) {
             getSlides();
-        }
+        }*/
     }]);
 }());
