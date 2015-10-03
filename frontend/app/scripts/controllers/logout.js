@@ -13,6 +13,6 @@
         .controller('LogoutCtrl', ['$auth', '$state', 'localStorageService', function ($auth, $state, localStorageService) {
             $auth.logout();
             localStorageService.remove('currentUser');
-            $state.go('home');
+            $state.go('main.home');
         }]);
 }());

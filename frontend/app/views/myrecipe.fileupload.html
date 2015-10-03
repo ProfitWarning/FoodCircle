@@ -8,7 +8,7 @@
                 <div class="form-inline">
                     <div class="form-group">
                         <!--<input type="file" name="files[]" id="js-upload-files" multiple>-->
-                        <input type="file" ngf-select ngf-multiple="true" ng-model="vm.imagesToUpload" multiple ngf-change="vm.createProgressbar(vm.imagesToUpload)">
+                        <input type="file" ngf-select ngf-multiple="true" ng-model="vm.imagesToUpload" multiple ngf-change="vm.createProgressbar(vm.imagesToUpload)" required>
                         <div class="form-inline" ng-class="{ 'has-error': fileuploadForm.recipefile.$touched && fileuploadForm.recipefile.$invalid }">
                             <div class="help-block" ng-messages="fileuploadForm.recipefile.$error" ng-show="fileuploadForm.recipefile.$touched">
                                 <p ng-message="required">Amount is required.</p>

@@ -26,6 +26,7 @@
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             vm.recipeActive = toState.name.indexOf('recipe.') > -1;
+            vm.profileActive = toState.name.indexOf('myrecipes.') > -1;
         });
     }]);
 }());
