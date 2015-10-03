@@ -8,13 +8,34 @@
 module.exports = {
 
     attributes: {
-        name: {
+        filename: {
             type: 'string',
             unique: true
         },
-        url: {
+
+        size: {
+            type: 'integer'
+        },
+
+        type: {
+            type: 'string'
+        },
+
+        fd: {
             type: 'string',
-            unique: true
+            maxLength: 1000
+        },
+
+        data: {
+            type: 'binary'
+        },
+
+        base64: {
+            type: 'text'
+        },
+
+        forrecipe: {
+            model: 'recipe'
         }
     }
 };

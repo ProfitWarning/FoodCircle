@@ -23,6 +23,11 @@ module.exports = {
             via: 'forrecipe'
         },
 
+        images: {
+            collection: 'image',
+            via: 'forrecipe'
+        },
+
         recipeowner : {
             model: 'User',
             required: true

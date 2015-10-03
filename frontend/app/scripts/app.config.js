@@ -219,17 +219,17 @@
                 }*/
             });
 
-            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+            /*$rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
                 console.log(unfoundState.to); // "lazy.state"
                 console.log(unfoundState.toParams); // {a:1, b:2}
                 console.log(unfoundState.options); // {inherit:false} + default options
-            });
+            });*/
 
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 if (error.message === AUTH_EVENTS.notAuthorized) {
                     event.preventDefault(); // stop current execution
                     $auth.logout();
-                    $state.go('login'); // go to login
+                    $state.go('main.login'); // go to login
                     alert('warning', 'Not authorized!');
                 }
             });
@@ -237,7 +237,7 @@
             $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
                 event.preventDefault();
                 $auth.logout();
-                $state.go('login'); // go to login
+                $state.go('main.login'); // go to login
                 alert('warning', 'Not authorized!');
             });
 

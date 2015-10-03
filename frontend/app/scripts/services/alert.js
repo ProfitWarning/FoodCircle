@@ -20,6 +20,7 @@
                 message: message,
                 title: title
             };
+
             $timeout.cancel(alertTimeout);
             alertTimeout = $timeout(function () {
                 $rootScope.alert.show = false;

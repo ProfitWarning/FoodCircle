@@ -10,14 +10,13 @@
     'use strict';
 
     angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $timeout, alert) {
-        var vm = this, i, d, getSlides;
+        var vm = this, i, getSlides;
 
         vm.recipe = recipeToEdit;
-        vm.recipe.images = [];
         vm.imagesToUpload = [];
-
         vm.createProgressbar = function (images) {
-        //multiple images html5 create progressbars
+
+            //multiple images html5 create progressbars
             if (images) {
                 vm.imagesToUpload = images;
             }
@@ -36,23 +35,24 @@
             if (!images) {
                 images = vm.imagesToUpload;
             }
+
             vm.upload = Upload.upload({
                 url: API_URL + 'image/upload',
                 data: {
                     recipename: vm.recipe.name,
+                    recipeId: vm.recipe.id,
                     file: images
                 },
                 arrayKey: ''
             });
 
-            vm.upload.then(function (response) {
+            vm.upload.then(function (res) {
                 //upload finished reset everything
-                alert('success', 'Upload finished');
+                alert('success', 'Success', 'Upload finished', 2000);
                 $timeout(function () {
                     vm.uploadImage.progress = 0;
                     vm.imagesToUpload = [];
                 }, 1500);
-
 
             }, function (response) {
                 if (response.status > 0) {

@@ -16,26 +16,65 @@ module.exports = {
 
         //TODO move path to config
         var uploadFile = req.file('file'),
-            imagePath = '../../.uploads/images/' + req.body.recipename;
+            recipeName = req.body.recipename,
+            imagePath = '../../.uploads/images/' + recipeName,
+            recipeId = req.body.recipeId,
+            newImages = [],
+
+            createNewArray = function (files, cb) {
+                var SkipperDisk = require('skipper-disk'),
+                    fileAdapter = SkipperDisk();/* optional opts */
+
+                files.forEach(function (img) {
+                    fileAdapter.read(img.fd, function (err, file) {
+                        if (err) {
+                            res.json(err);
+
+                        } else {
+                            newImages.push({
+                                filename: img.filename,
+                                size: img.size,
+                                type: img.type,
+                                fd: img.fd,
+                                base64: file.toString('base64'),
+                                forrecipe: recipeId
+                            });
+                        }
+                        if (newImages.length === files.length) {
+                            cb(newImages);
+                        }
+                    });
+                });
+
+
+            };
 
 
         uploadFile.on('progress', function (event) {
             return event;
-        }).upload({
-            dirname: imagePath
-        }, function onUploadComplete(err, files) {
+
+        }).upload({dirname: imagePath}, function onUploadComplete(err, files) {
             //    IF ERROR Return and send 500 error with error
             if (err) {
                 return res.serverError(err);
             }
 
-            //TODO store base64 image on recipe model
-            //find by name + add image
+            createNewArray(files, function (newImages) {
+                Recipe.update({name: recipeName}, {images: newImages}).exec(function (err, recipe) {
+                    if (err) {
+                        return res.json('401', {
+                            err: err.details
+                        });
+                    }
 
-            res.json({
-                status: 200,
-                file: files
+                    res.json({
+                        status: 200,
+                        file: newImages
+                    });
+
+                });
             });
+
         });
     },
     create: function (req, res) {
