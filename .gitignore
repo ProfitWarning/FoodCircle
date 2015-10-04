@@ -117,4 +117,5 @@ npm-debug.log
 nbproject
 .idea
 .node_history
-
+/frontend/app/styles/bootstrap-superhero.css
+/frontend/app/styles/main.css
