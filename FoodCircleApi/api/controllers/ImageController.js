@@ -17,7 +17,7 @@ module.exports = {
         //TODO move path to config
         var uploadFile = req.file('file'),
             recipeName = req.body.recipename,
-            imagePath = '../../.uploads/images/' + recipeName,
+            imagePath = '../../.uploads/images/recipeimages/' + recipeName,
             recipeId = req.body.recipeId,
             newImages = [],
 
