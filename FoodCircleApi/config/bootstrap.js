@@ -73,22 +73,22 @@ module.exports.bootstrap = function (cb) {
                     notOnDisk.push(itemPath);
                 }
             });
-            sails.log('Found ' + notOnDisk.length + ' images in database but not on disk:');
+            sails.log.error('Found ' + notOnDisk.length + ' images in database but not on disk:');
             notOnDisk.forEach(function (itemPath, idx) {
-                sails.log('  Image: ' + itemPath);
+                sails.log.error('  Image: ' + itemPath);
             });
 
 
             // on disk but not in database
-            sails.log('Checking images on disk but not in database');
+            sails.log.error('Checking images on disk but not in database');
             allPaths.forEach(function (itemPath, idx) {
                 if (usedPaths.indexOf(itemPath) === -1) {
                     unUsedPaths.push(itemPath);
                 }
             });
-            sails.log('Found ' + unUsedPaths.length + ' unused images on disk but not in database:');
+            sails.log.error('Found ' + unUsedPaths.length + ' unused images on disk but not in database:');
             unUsedPaths.forEach(function (itemPath, idx) {
-                sails.log('  Image: ' + itemPath);
+                sails.log.error('  Image: ' + itemPath);
             });
 
             cb();

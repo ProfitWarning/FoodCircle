@@ -96,6 +96,7 @@ module.exports = {
         connection: 'MongodbServer'
     },
     log: {
-        level: 'verbose'
+        //silly, verbose, info, debug, warn, error
+        level: 'debug'
     }
 };
