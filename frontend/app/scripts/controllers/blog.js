@@ -1,0 +1,17 @@
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name foodCircle.controller:BlogCtrl
+ * @description
+ * # BlogCtrl
+ * Controller of the foodCircle
+ */
+angular.module('foodCircle')
+  .controller('BlogCtrl', function () {
+    this.awesomeThings = [
+      'HTML5 Boilerplate',
+      'AngularJS',
+      'Karma'
+    ];
+  });

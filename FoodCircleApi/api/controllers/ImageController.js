@@ -8,6 +8,8 @@
     require, Recipe, module
 */
 
+var SkipperDisk = require('skipper-disk');
+
 module.exports = {
     upload: function (req, res) {
         "use strict";
@@ -27,8 +29,7 @@ module.exports = {
             newImages = [],
 
             createNewArray = function (files, cb) {
-                var SkipperDisk = require('skipper-disk'),
-                    fileAdapter = SkipperDisk();/* optional opts */
+                var fileAdapter = SkipperDisk();/* optional opts */
 
                 files.forEach(function (img) {
                     fileAdapter.read(img.fd, function (err, file) {

@@ -8,19 +8,24 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
+/*global
+    require, Recipe, module, sails, process
+*/
+
+var fs = require('fs'),
+    walk = require('fs-walk'),
+    path = require('path');
 
 module.exports.bootstrap = function (cb) {
+    'use strict';
 
     // It's very important to trigger this callback method when you are finished
     // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
     sails.log('Bootstrap called.');
 
-    var fs = require('fs'),
-        unUsedPaths = [],
+    var unUsedPaths = [],
         usedPaths = [],
-        allPaths = [],
-        walk = require('fs-walk'),
-        path = require('path');
+        allPaths = [];
 
 
     Recipe.find().populate('images').exec(function (err, recipes) {

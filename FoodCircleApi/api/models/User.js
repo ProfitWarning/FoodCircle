@@ -4,6 +4,9 @@
  * @description :: TODO: You might write a short summary of how this model works and what it represents here.
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
+/*global
+    module, require
+*/
 
 // We don't want to store password with out encryption
 var bcrypt = require('bcrypt');
