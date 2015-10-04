@@ -6,6 +6,10 @@
  *
  * Main module of the application.
  */
+/*global
+    angular
+*/
+
 
 (function () {
 

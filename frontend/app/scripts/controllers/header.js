@@ -5,16 +5,19 @@
  * # HeaderCtrl
  * Controller of the foodCircle
  */
+/*global
+    angular
+*/
 
 (function () {
     'use strict';
 
     angular.module('foodCircle').controller('HeaderCtrl', ['$auth', 'jQuery', '$rootScope', '$state', function ($auth, $, $rootScope, $state) {
-        var vm = this, navbarBtn, profileBtn;
+        var vm = this, navbarBtn, profileBtn, setMenuItemActive;
         vm.isAuthenticated = $auth.isAuthenticated;
         vm.recipeActive = false;
 
-        var setMenuItemActive = function (stateName) {
+        setMenuItemActive = function (stateName) {
             vm.recipeActive = stateName.indexOf('recipe.') > -1;
             vm.profileActive = stateName.indexOf('myrecipes.') > -1;
         };

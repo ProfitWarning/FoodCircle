@@ -5,6 +5,9 @@
  * # alert
  * Service in the foodCircle.
  */
+/*global
+    angular
+*/
 
 (function () {
     'use strict';

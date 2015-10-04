@@ -4,9 +4,15 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+/*global
+    require, User, module, jwToken
+*/
+
 
 module.exports = {
     create: function (req, res) {
+        'use strict';
+
         if (req.body.password !== req.body.confirmPassword) {
             return res.json(401, {
                 err: 'Password doesn\'t match!'

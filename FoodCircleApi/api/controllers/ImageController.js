@@ -4,9 +4,14 @@
  * @description :: Server-side logic for managing files
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+/*global
+    require, Recipe, module
+*/
 
 module.exports = {
     upload: function (req, res) {
+        "use strict";
+
         if (req.method === 'GET') {
             return res.json({
                 status: '401',
@@ -92,6 +97,8 @@ module.exports = {
         });
     },
     create: function (req, res) {
+        "use strict";
+
         return res.json({
             status: '401',
             message: 'Simple POST not allowed.'

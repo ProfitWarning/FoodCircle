@@ -1,10 +1,14 @@
  /**
-     * @ngdoc function
-     * @name foodCircle.controller:RecipeCtrl
-     * @description
-     * # RecipeCtrl
-     * Controller of the foodCircle
-     */
+ * @ngdoc function
+ * @name foodCircle.controller:RecipeEditorCtrl
+ * @description
+ * # RecipeEditorCtrl
+ * Controller of the foodCircle
+ */
+/*global
+    angular
+*/
+
 (function () {
     'use strict';
 

@@ -4,12 +4,16 @@
  * @description :: Server-side logic for managing recipes
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+/*global
+    require, Recipe, module, jwToken, User
+*/
 
 module.exports = {
     /**
      * RecipeController.create()
      */
     create: function (req, res) {
+        'use strict';
 
         if (!req.body.recipeowner) {
             return res.json('401', {

@@ -4,11 +4,16 @@
  * @description :: Server-side logic for managing auths
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+/*global
+    require, module, User, jwToken
+*/
 
 module.exports = {
     index: function (req, res) {
-        var email = req.param('email');
-        var password = req.param('password');
+        'use strict';
+
+        var email = req.param('email'),
+            password = req.param('password');
 
         if (!email || !password) {
             return res.json(401, {

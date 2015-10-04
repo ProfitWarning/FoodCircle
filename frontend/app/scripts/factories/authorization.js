@@ -1,4 +1,3 @@
-
 /**
  * @ngdoc service
  * @name foodCircle.authorization
@@ -6,6 +5,10 @@
  * # authorization
  * Factory in the foodCircle.
  */
+/*global
+    angular
+*/
+
 (function () {
     'use strict';
     angular.module('foodCircle').service('authorization', ['$state', '$auth', '$q', 'AUTH_EVENTS', function ($state, $auth, $q, AUTH_EVENTS) {

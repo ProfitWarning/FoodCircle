@@ -1,3 +1,8 @@
+
+/*global
+    angular
+*/
+
 (function () {
     'use strict';
 
@@ -28,10 +33,10 @@
             return sailsResource(sailsResourceName).get(createQueryDto(query));
         };
 
-         userService.getById = function (id) {
-             if (!id) {
-                 return {};
-             }
+        userService.getById = function (id) {
+            if (!id) {
+                return {};
+            }
             return userService.get({where: {id: id}});
         };
 

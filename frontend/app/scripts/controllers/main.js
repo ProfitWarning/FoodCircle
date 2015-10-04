@@ -5,6 +5,9 @@
  * # MainCtrl
  * Controller of the foodCircle
  */
+/*global
+    angular
+*/
 
 (function () {
     'use strict';
