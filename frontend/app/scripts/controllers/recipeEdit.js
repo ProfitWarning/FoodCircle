@@ -34,8 +34,8 @@
             vm.recipe.ingredients.push(new IngredientModel('', 'g', ''));
         };
 
-        vm.removeIngredientInput = function () {
-            vm.recipe.ingredients.pop();
+        vm.onRemoveIngredientInput = function (index) {
+            vm.recipe.ingredients.splice(index, 1);
         };
 
         vm.onUnitClick = function (ingredient, unit, event) {

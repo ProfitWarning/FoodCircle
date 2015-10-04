@@ -52,33 +52,35 @@
                                 <p ng-message="required">Unit is required.</p>
                             </div>
                         </div>
-                        <div class="col-xs-7" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
+                        <div class="col-xs-6" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
                             <input type="text" name="ingrediantName" class="form-control" placeholder="Ingrediant" ng-model="ingredient.name" required>
                             <div class="help-block" ng-messages="innerFormDescription.ingrediantName.$error" ng-show="innerFormDescription.ingrediantName.$touched">
                                 <p ng-message="required">Name is required.</p>
                             </div>
                         </div>
+                        <div class="col-xs-1 text-right" style="padding-top: 4px;">
+                            <a type="button" class="btn btn-danger btn-sm" ng-click="vm.onRemoveIngredientInput($index)">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </div>
                     </ng-form>
                 </div>
             </div>
-
             <div class="col-md-12">
                 <div class="text-right">
-                    <button type="button" class="btn btn-success btn-add" ng-click="vm.addIngredientInput()">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
-                    <button type="button" class="btn btn-danger btn-add" ng-show="vm.ingredientsInputs.length > 1" ng-click="vm.removeIngredientInput()">
-                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    </button>
+                    <a type="button" class="btn btn-success btn-add" ng-click="vm.addIngredientInput()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
+                    </a>
                 </div>
             </div>
         </div>
 
+        <div class="divider">&nbsp;</div>
         <!-- Form actions -->
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-primary btn-default"><span class="glyphicon glyphicon-ok"> Save</button>
-                <a ui-sref="main.myrecipes.imageupload({name: {{'vm.recipe.name'}} })" class="btn btn-primary btn-default"><span class="glyphicon glyphicon-picture"></span> Edit images</a>
+                <a type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>  Save</a>
+                <a ui-sref="main.myrecipes.imageupload({name: {{'vm.recipe.name'}} })" class="btn btn-default"><span class="glyphicon glyphicon-picture"></span> Edit images</a>
             </div>
         </div>
     </fieldset>
