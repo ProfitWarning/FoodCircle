@@ -32,8 +32,11 @@ module.exports = {
         description: {
             type: 'string',
             required: true
-        }
+        },
 
+        event: {
+            model: 'Event'
+        }
     },
 
     beforeCreate: function (values, next) {

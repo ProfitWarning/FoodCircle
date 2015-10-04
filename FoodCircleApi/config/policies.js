@@ -65,5 +65,11 @@ module.exports.policies = {
         'create': ['isAuthorized'],
         'find': true,
         'findOne': true
+    },
+
+    'BlogController': {
+        'create': ['isAuthorized'],
+        'find': true,
+        'findOne': true
     }
 };

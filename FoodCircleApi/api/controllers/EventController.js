@@ -7,6 +7,9 @@
 /*global
     module
 */
+/*global
+    module
+*/
 
 module.exports = {
 

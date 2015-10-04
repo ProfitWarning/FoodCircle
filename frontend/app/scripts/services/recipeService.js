@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', '$auth', function (IngredientModel, sailsResource, $auth) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'sailsResource', 'authService', '$log', '$q', function (IngredientModel, sailsResource, authService, $log, $q) {
 
         var recipeService = {},
 
@@ -23,11 +23,11 @@
                         }
                     });
                     angular.extend(RecipeDto, data);
-                    RecipeDto.token = $auth.getToken();
+                    RecipeDto.token = authService.getToken();
                 } else {
                     RecipeDto = new Resource();
                     angular.extend(RecipeDto, data);
-                    RecipeDto.token = $auth.getToken();
+                    RecipeDto.token = authService.getToken();
                 }
 
                 return RecipeDto;
@@ -35,7 +35,7 @@
 
             createQueryDto = function (query) {
                 var tmpQuery = query || {};
-                tmpQuery.token = $auth.getToken();
+                tmpQuery.token = authService.getToken();
                 return tmpQuery;
             };
 
@@ -57,41 +57,45 @@
         };
 
         recipeService.createOrUpdateRecipe = function (data, userid) {
-            var recipeDto = createDto(data);
-            recipeDto.recipeowner = userid;
-            return recipeDto.$save();
-        };
-
-        recipeService.updateRecipe = function (data, userid) {
+            if (!userid) {
+                $log.warn('Userid missing. Using current user id');
+                userid = authService.currentUser().id;
+            }
             var recipeDto = createDto(data);
             recipeDto.recipeowner = userid;
             return recipeDto.$save();
         };
 
         recipeService.get = function (query) {
-            return sailsResource(sailsResourceName).get(createQueryDto(query));
+            var dfd = $q.defer();
+
+            sailsResource(sailsResourceName).get(createQueryDto(query),
+                function (response) {
+                    dfd.resolve(response);
+                },
+                function (response) {
+                    dfd.resolve({});
+                });
+
+            return dfd.promise;
         };
 
         recipeService.getById = function (id) {
             if (!id) {
+                $log.error('id missing');
                 return [];
             }
-            return recipeService.get({
-                where: {
-                    id: id
-                }
-            });
+
+            return recipeService.get({where: {id: id}});
         };
 
         recipeService.getByName = function (name) {
             if (!name) {
+                $log.error('name missing');
                 return [];
             }
-            return recipeService.get({
-                where: {
-                    name: name
-                }
-            });
+
+            return recipeService.get({where: {name: name}});
         };
 
         return recipeService;

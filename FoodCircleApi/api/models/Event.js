@@ -12,5 +12,8 @@ module.exports = {
 
     attributes: {
 
+        blog : {
+            model: 'Blog'
+        }
     }
 };

@@ -50,7 +50,7 @@
                 return;
             }
 
-            recipeService.createOrUpdateRecipe(vm.recipe, authService.currentUser().id).then(function () {
+            recipeService.createOrUpdateRecipe(vm.recipe).then(function () {
                 $state.go('main.myrecipes.list');
                 alert('info', 'Recipe ' + (!vm.recipe.id ? 'save.' : 'updated.'));
             }, function (error) {

@@ -163,15 +163,47 @@
                     url: '/:name',
                     resolve: {
                         recipeDetail: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                            return recipeService.getByName($stateParams.name).$promise.then(function (recipe) {
-                                return recipe;
-                            });
+                            return recipeService.getByName($stateParams.name);
                         }]
                     },
                     views: {
                         'recipedetail': {
                             controller: 'RecipeDetailCtrl as vm',
                             templateUrl: 'views/myRecipe.detail.html'
+                        }
+                    }
+                })
+                .state('main.blog', {
+                    url: '/blog',
+                    templateUrl: 'views/blog.html',
+                    abstract: true
+                })
+                .state('main.blog.detail', {
+                    url: '/:name',
+                    resolve: {
+                        blog: ['BlogService', '$stateParams', function (BlogService, $stateParams) {
+                            return BlogService.getBlogByName($stateParams.name);
+                        }]
+                    },
+                    views: {
+                        'blog': {
+                            controller: 'BlogCtrl as vm',
+                            templateUrl: 'views/blog.detail.html'
+                        }
+                    }
+                })
+                .state('main.blog.list', {
+                    url: '/list/:query',
+                    resolve: {
+                        blogList: ['BlogService', '$stateParams', 'queryService', function (BlogService, $stateParams, queryService) {
+                            var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
+                            return BlogService.getBlogList(queryService.queryFromUrlParam(defaultQuery, $stateParams.query));
+                        }]
+                    },
+                    views: {
+                        'bloglist': {
+                            controller: 'ListBlogCtrl as vm',
+                            templateUrl: 'views/blog.list.html'
                         }
                     }
                 })

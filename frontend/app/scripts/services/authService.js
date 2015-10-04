@@ -31,6 +31,10 @@
             return deferred.promise;
         };
 
+        authService.getToken = function () {
+          return $auth.getToken();
+        };
+
         return authService;
     }]);
 }());
