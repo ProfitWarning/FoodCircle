@@ -14,7 +14,7 @@
                 abstract: true
             })
             .state('main.event.list', {
-                url: 'list/:query',
+                url: '/list/:query',
                 resolve: {
                     blog: ['EventService', '$stateParams', 'queryService', function (EventService, $stateParams, queryService) {
                         var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
@@ -22,7 +22,7 @@
                     }]
                 },
                 views: {
-                    'event': {
+                    'eventlist': {
                         controller: 'ListEventCtrl as vm',
                         templateUrl: 'views/event.list.html'
                     }
