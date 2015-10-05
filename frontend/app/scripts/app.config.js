@@ -6,10 +6,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').config(['$urlRouterProvider', 'sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
-        function ($urlRouterProvider, sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
-
-            $urlRouterProvider.when('', '/');
+    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
+        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
             sailsResourceProvider.configuration = {
                 verbose: true, // sailsResource will log messages to console
@@ -55,12 +53,18 @@
                 }*/
             });
 
-            /*$rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
-                console.log(unfoundState.to); // "lazy.state"
-                console.log(unfoundState.toParams); // {a:1, b:2}
-                console.log(unfoundState.options); // {inherit:false} + default options
+            /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                console.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
             });*/
 
+            /*$rootScope.$on('$viewContentLoaded', function (event) {
+                console.log('$viewContentLoaded - fired after dom rendered', event);
+            });*/
+
+            $rootScope.$on('$stateNotFound', function (event, unfoundState, fromState, fromParams) {
+                console.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
+                console.log(unfoundState, fromState, fromParams);
+            });
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 if (error.message === AUTH_EVENTS.notAuthorized) {
                     event.preventDefault(); // stop current execution
@@ -68,6 +72,8 @@
                     $state.go('main.login'); // go to login
                     alert('warning', 'Not authorized!');
                 }
+                console.log('$stateChangeError - fired when an error occurs during transition.');
+                console.log(arguments);
             });
 
             $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
