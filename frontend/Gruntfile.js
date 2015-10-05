@@ -19,6 +19,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn'
   });
 
+  grunt.loadNpmTasks('grunt-text-replace');
+
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
@@ -256,6 +258,17 @@ module.exports = function (grunt) {
         }
       }
     },
+    // replace the font file path
+    replace: {
+        dist: {
+            src: ['<%= yeoman.dist %>/styles//*.css'],
+            overwrite: true,                 // overwrite matched source files
+            replacements: [{
+                from: '../bower_components/bootstrap/fonts/',
+                to: '../fonts/'
+            }]
+        }
+    },
 
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -484,7 +497,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'replace:dist'
   ]);
 
   grunt.registerTask('default', [
