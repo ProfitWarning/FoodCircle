@@ -32,7 +32,7 @@ module.exports = function(config) {
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/sails.io.js/dist/sails.io.js',
       'bower_components/angular-resource-sails/src/sailsResource.js',
-      'bower_components/ng-file-upload/dist/ng-file-upload.js',
+      'bower_components/ng-file-upload/ng-file-upload.js',
       'bower_components/angular-sanitize/angular-sanitize.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',

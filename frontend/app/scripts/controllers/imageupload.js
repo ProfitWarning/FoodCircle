@@ -13,10 +13,7 @@
     'use strict';
 
     angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $timeout, alert) {
-        // config services
-        /*Upload.setDefaults({
-            ngfResize: {width: 20, height: 20}
-        });*/
+
         var vm = this, i, getSlides;
 
         vm.recipe = recipeToEdit;
