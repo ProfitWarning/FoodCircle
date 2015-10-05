@@ -86,6 +86,7 @@
             var dfd = $q.defer();
             sailsResource(sailsResourceName).query(createQueryDto(query), function (bloglist) {
                 dfd.resolve(bloglist);
+
             }, function (error) {
                 dfd.resolve([]);
             });

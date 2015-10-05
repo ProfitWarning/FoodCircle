@@ -12,8 +12,9 @@ module.exports = {
 
     attributes: {
 
-        blog : {
-            model: 'Blog'
+        blogs : {
+            collection: 'Blog',
+            via: 'event'
         }
     }
 };

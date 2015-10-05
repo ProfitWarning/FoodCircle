@@ -36,6 +36,10 @@ module.exports = {
 
         event: {
             model: 'Event'
+        },
+
+        blogger: {
+            model: 'User'
         }
     },
 
