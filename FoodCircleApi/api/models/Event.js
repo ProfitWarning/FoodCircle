@@ -12,6 +12,15 @@ module.exports = {
 
     attributes: {
 
+        date: {
+            type: 'date',
+            require: true
+        },
+
+        info: {
+            collection: 'EventInfo'
+        },
+
         blogs : {
             collection: 'Blog',
             via: 'event'
