@@ -39,16 +39,19 @@
         };
 
         recipeService.getRecipeListByUser = function (user, query) {
-            //explicit where to ignore token param
-            var userQuery = {
-                where: {
-                    recipeowner: user.id
-                }
-            };
+            var dfd = $q.defer(),
+                userQuery = {where: {recipeowner: user.id || authService.currentUser().id}};
             if (query) {
                 angular.extend(userQuery, query);
             }
-            return SailsResourceService.getResource(sailsResourceName).query(createQueryDto(userQuery));
+            SailsResourceService.getResource(sailsResourceName).query(createQueryDto(userQuery),
+                function (response) {
+                    dfd.resolve(response);
+                },
+                function (response) {
+                    dfd.resolve({});
+                });
+            return dfd.promise;
         };
 
         recipeService.createOrUpdateRecipe = function (data, userid) {

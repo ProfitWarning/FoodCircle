@@ -19,6 +19,11 @@
             })
             .state('main.myrecipes.list', {
                 url: '/list',
+                resolve: {
+                    recipes: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                        return recipeService.getRecipeListByUser({}, {sort: 'updatedAt DESC'});
+                    }]
+                },
                 views: {
                     'display': {
                         controller: 'MyRecipesCtrl as vm',

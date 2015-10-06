@@ -41,12 +41,13 @@
                 text: 'Are you sure you want to delete?'
             })
                 .then(function () {
-                    angular.forEach(toolsService.selectedRecipes, function (recipe) {
+                    angular.forEach(toolsService.selectedRecipes, function (recipe, idx) {
                         recipeService.deleteById(recipe.id).then(function (delRecipe) {
                             toolsService.prepForBroadcast({
                                 type: toolsService.broadcast.deleteSuccess,
                                 data: delRecipe.id
                             });
+                            toolsService.selectedRecipes.splice(idx, 1);
                         });
                     });
 
