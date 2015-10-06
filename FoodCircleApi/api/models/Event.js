@@ -5,8 +5,10 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 /*global
-    module
+    module, require
 */
+
+var moment = require('moment');
 
 module.exports = {
 
@@ -14,11 +16,16 @@ module.exports = {
 
         date: {
             type: 'date',
-            require: true
+            required: true
         },
 
-        info: {
-            collection: 'EventInfo'
+        title: {
+            type: 'string',
+            required: true
+        },
+
+        description: {
+            type: 'string'
         },
 
         blogs : {

@@ -86,18 +86,5 @@
         };
 
         vm.imagesCollapsed = false;
-
-
-        //TODO remove getSlides, images will be provided by server
-        getSlides = function () {
-            var newWidth = 400 + vm.recipe.images.length + 1;
-            vm.recipe.images.push({
-                image: '//placekitten.com/' + newWidth + '/' + newWidth
-            });
-        };
-        /*jslint plusplus: true */
-        /*for (i = 0; i < 6; i++) {
-            getSlides();
-        }*/
     }]);
 }());

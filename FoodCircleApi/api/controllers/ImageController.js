@@ -5,10 +5,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 /*global
-    require, Recipe, module
+    require, Recipe, module, sails
 */
 
-var SkipperDisk = require('skipper-disk');
+var SkipperDisk = require('skipper-disk'),
+    path = require('path');
 
 module.exports = {
     upload: function (req, res) {
@@ -21,10 +22,9 @@ module.exports = {
             });
         }
 
-        //TODO move path to config
         var uploadFile = req.file('file'),
             recipeName = req.body.recipename,
-            imagePath = '../../.uploads/images/recipeimages/' + recipeName,
+            imagePath = path.join(sails.config.circle.imageupload.storagepath, recipeName),
             recipeId = req.body.recipeId,
             newImages = [],
 

@@ -71,5 +71,10 @@ module.exports.policies = {
         'create': ['isAuthorized'],
         'find': true,
         'findOne': true
+    },
+    'EventController': {
+        'create': ['isAuthorized'],
+        'find': true,
+        'findOne': true
     }
 };

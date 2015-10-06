@@ -4,15 +4,20 @@
  * @description :: Policy to check if user is authorized with JSON web token
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Policies
  */
+/*global
+    module, jwToken
+*/
 
 module.exports = function (req, res, next) {
-    var token;
+    'use strict';
+
+    var token, parts, scheme, credentials;
 
     if (req.headers && req.headers.authorization) {
-        var parts = req.headers.authorization.split(' ');
+        parts = req.headers.authorization.split(' ');
         if (parts.length === 2) {
-            var scheme = parts[0],
-                credentials = parts[1];
+            scheme = parts[0];
+            credentials = parts[1];
 
             if (/^Bearer$/i.test(scheme)) {
                 token = credentials;
@@ -26,6 +31,9 @@ module.exports = function (req, res, next) {
         token = req.param('token');
         // We delete the token from param to not mess with blueprints
         delete req.query.token;
+        if (req.body.token) {
+            delete req.body.token;
+        }
     } else {
         return res.json(401, {
             err: 'No Authorization header was found'

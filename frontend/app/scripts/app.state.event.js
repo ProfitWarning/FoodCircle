@@ -23,8 +23,31 @@
                 },
                 views: {
                     'eventlist': {
-                        controller: 'ListEventCtrl as vm',
+                        controller: 'EventListCtrl as vm',
                         templateUrl: 'views/event.list.html'
+                    }
+                }
+            })
+            .state('main.event.edit', {
+                url: '/edit/:id',
+                resolve: {
+                    event: ['EventService', '$stateParams', 'queryService', function (EventService, $stateParams, queryService) {
+                        return EventService.getEventById($stateParams.id);
+                    }]
+                },
+                views: {
+                    'eventlist': {
+                        controller: 'EventEditCtrl as vm',
+                        templateUrl: 'views/event.edit.html'
+                    }
+                }
+            })
+            .state('main.event.create', {
+                url: '/create/',
+                views: {
+                    'eventlist': {
+                        controller: 'EventEditCtrl as vm',
+                        templateUrl: 'views/event.edit.html'
                     }
                 }
             });

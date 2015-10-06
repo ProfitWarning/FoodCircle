@@ -1,0 +1,51 @@
+<form id="recipe-form" class="form-horizontal" ng-submit="vm.submit(eventform.$valid, $event)" name="eventform" novalidate>
+    <fieldset>
+        <legend class="text-center">New event</legend>
+
+        <!-- Title input-->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="title">Titel</label>
+            <div class="col-md-9" ng-class="{ 'has-error': eventform.title.$touched && eventform.title.$invalid }">
+                <input id="title" name="title" type="text" placeholder="Titel" class="form-control" ng-model="vm.event.title" required>
+                <div class="help-block" ng-messages="eventform.title.$error" ng-show="eventform.title.$touched">
+                    <p ng-message="required">Title is required.</p>
+                </div>
+            </div>
+        </div>
+         <!--Description body-->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Your event description</label>
+            <div class="col-md-9" ng-class="{ 'has-error': eventform.description.$touched && eventform.description.$invalid }">
+                <textarea class="form-control" id="description" name="description" placeholder="Please enter your description here..." rows="5" ng-model="vm.event.description" required></textarea>
+                <div class="help-block" ng-messages="eventform.description.$error" ng-show="eventform.description.$touched">
+                    <p ng-message="required">Description is required.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Date -->
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Your event date</label>
+            <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control"
+                     datepicker-popup="dd-MMMM-yyyy"
+                     ng-model="vm.event.date"
+                     is-open="vm.datepicker.status.opened"
+                     min-date="vm.datepicker.minDate" max-date="vm.datepicker.maxDate"
+                     datepicker-options="vm.datepicker.dateOptions"
+                     close-text="Close"
+                     required>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="vm.datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+        </div>
+        <!-- Form actions -->
+        <div class="form-group">
+            <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>  Save</button>
+            </div>
+        </div>
+    </fieldset>
+</form>

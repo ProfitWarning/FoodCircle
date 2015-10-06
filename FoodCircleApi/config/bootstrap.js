@@ -25,8 +25,8 @@ module.exports.bootstrap = function (cb) {
 
     var unUsedPaths = [],
         usedPaths = [],
-        allPaths = [];
-
+        allPaths = [],
+        storagepath = path.join(process.cwd(), sails.config.circle.imageupload.storagepath);
 
     Recipe.find().populate('images').exec(function (err, recipes) {
         if (err) {
@@ -49,18 +49,18 @@ module.exports.bootstrap = function (cb) {
         });
 
         sails.log('Checking image directory');
-        sails.log('Directory: ' + process.cwd() + '/.uploads/images/recipeimages');
+        sails.log('Directory: ' + storagepath);
 
-        fs.stat(process.cwd() + '/.uploads/images/recipeimages', function (err, stats) {
+        fs.stat(storagepath, function (err, stats) {
             if (err) {
                 sails.log.error(err);
 
                 return cb();
             }
 
-            walk.dirsSync(process.cwd() + '/.uploads/images/recipeimages', function (basedir, filename, stat) {
+            walk.dirsSync(storagepath, function (basedir, filename, stat) {
 
-                walk.filesSync(path.join(basedir, filename), function (subbasedir, subfilename, substat) {
+                walk.filesSync(storagepath, function (subbasedir, subfilename, substat) {
                     allPaths.push(path.join(subbasedir, subfilename));
                 });
             });
