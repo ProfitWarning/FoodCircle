@@ -19,6 +19,14 @@ module.exports = {
             required: true
         },
 
+        startDate: {
+            type: 'date'
+        },
+
+        endDate: {
+            type: 'date'
+        },
+
         title: {
             type: 'string',
             required: true

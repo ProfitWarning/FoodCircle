@@ -16,7 +16,7 @@
             .state('main.event.list', {
                 url: '/list/:query',
                 resolve: {
-                    blog: ['EventService', '$stateParams', 'queryService', function (EventService, $stateParams, queryService) {
+                    events: ['EventService', '$stateParams', 'queryService', function (EventService, $stateParams, queryService) {
                         var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
                         return EventService.getEventList(queryService.queryFromUrlParam(defaultQuery, $stateParams.query));
                     }]

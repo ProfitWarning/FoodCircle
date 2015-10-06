@@ -12,7 +12,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventListCtrl', [function () {
+    angular.module('foodCircle').controller('EventListCtrl', ['events', function (events) {
         var vm = this;
+        vm.events = events;
     }]);
 }());
