@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('RecipesToolsCtrl', ['jQuery', 'toolsService', 'alert', '$confirm', function ($, toolsService, alert, $confirm) {
+    angular.module('foodCircle').controller('RecipesToolsCtrl', ['jQuery', 'toolsService', 'alert', '$confirm', 'recipeService', function ($, toolsService, alert, $confirm, recipeService) {
         var vm = this;
         vm.listActive = false;
 
@@ -41,7 +41,15 @@
                 text: 'Are you sure you want to delete?'
             })
                 .then(function () {
-                    alert('info', 'Deleted.');
+                    angular.forEach(toolsService.selectedRecipes, function (recipe) {
+                        recipeService.deleteById(recipe.id).then(function (delRecipe) {
+                            toolsService.prepForBroadcast({
+                                type: toolsService.broadcast.deleteSuccess,
+                                data: delRecipe.id
+                            });
+                        });
+                    });
+
                 });
         };
 

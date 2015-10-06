@@ -12,9 +12,12 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('toolsService', ['jQuery', function ($) {
+    angular.module('foodCircle').service('toolsService', ['jQuery', '$rootScope', function ($, $rootScope) {
         var toolsService = {};
         toolsService.selectedRecipes = [];
+        toolsService.broadcast = {
+            deleteSuccess: 'DELETE_SUCCESS'
+        };
 
         /*jslint plusplus: true */
         toolsService.removeSelectedRecipe = function (recipeId) {
@@ -45,6 +48,18 @@
         toolsService.getSelectedRecipesCnt = function () {
             return toolsService.selectedRecipes.length;
         };
+
+
+        toolsService.message = '';
+        toolsService.prepForBroadcast = function (msg) {
+            this.message = msg;
+            this.broadcastItem();
+        };
+
+        toolsService.broadcastItem = function () {
+            $rootScope.$broadcast('handleBroadcast');
+        };
+
 
         return toolsService;
     }]);

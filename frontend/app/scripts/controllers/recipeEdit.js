@@ -57,7 +57,5 @@
                 alert('error', error.message);
             });
         };
-
-
     }]);
 }());

@@ -12,18 +12,17 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('EventService', ['$auth', 'sailsResource', '$log', '$q', function ($auth, sailsResource, $log, $q) {
+    angular.module('foodCircle').service('EventService', ['$auth', 'SailsResourceService', '$log', '$q', 'authService', function ($auth, SailsResourceService, $log, $q, authService) {
 
         var EventService = {},
             sailsResourceName = 'Event',
-
 
             createQueryDto = function (query) {
                 return query || {};
             },
 
             createDto = function (data) {
-                var Resource = sailsResource(sailsResourceName),
+                var Resource = SailsResourceService.getResource(sailsResourceName),
                     EventDto;
                 if (data.id) {
                     EventDto = EventService.getEventById(data.id);
@@ -41,7 +40,7 @@
         EventService.getEvent = function (query) {
             var dfd = $q.defer(),
                 blog;
-            sailsResource(sailsResourceName).get(createQueryDto(query),
+            SailsResourceService.getResource(sailsResourceName).get(createQueryDto(query),
                 function (blog) {
                     dfd.resolve(blog);
                 },
@@ -67,12 +66,26 @@
 
         EventService.getEventList = function (query) {
             var dfd = $q.defer();
-            sailsResource(sailsResourceName).query(createQueryDto(query), function (eventlist) {
+            SailsResourceService.getResource(sailsResourceName).query(createQueryDto(query), function (eventlist) {
                 dfd.resolve(eventlist);
 
             }, function (error) {
                 dfd.resolve([]);
             });
+
+            return dfd.promise;
+        };
+
+        EventService.deleteById = function (id) {
+            var dfd = $q.defer(),
+                recipe = EventService.getEventById(id).then(function (event) {
+                    recipe.$delete({token: authService.getToken()}, function (response) {
+                        $log.log(response);
+                    }, function (response) {
+                        $log.error(response);
+                        dfd.reject({});
+                    });
+                });
 
             return dfd.promise;
         };
