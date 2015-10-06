@@ -24,7 +24,7 @@ module.exports = {
 
         var uploadFile = req.file('file'),
             recipeName = req.body.recipename,
-            imagePath = path.join(sails.config.circle.imageupload.storagepath, recipeName),
+            imagePath = '../../' + path.join(sails.config.circle.imageupload.storagepath, req.body.recipename),
             recipeId = req.body.recipeId,
             newImages = [],
 
@@ -55,7 +55,7 @@ module.exports = {
 
             };
 
-
+        sails.log.error(imagePath);
         uploadFile.on('progress', function (event) {
             return event;
 

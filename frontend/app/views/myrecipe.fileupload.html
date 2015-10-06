@@ -32,16 +32,19 @@
         <!-- Progress Bar -->
         <!--<h5>Processed files</h3>-->
         <div class="col-xs-12">
-            <div class="col-xs-2" ng-repeat="imagesUp in vm.imagesToUpload">
-                <img ngf-thumbnail="imagesUp" ngf-size="{height:75, width:75}">
-                <div>
-                    <label class="control-label">{{imagesUp.name}}</label>
+            <div class="row">
+                <div class="col-xs-2" ng-repeat="imagesUp in vm.imagesToUpload">
+                    <img ngf-thumbnail="imagesUp" ngf-size="{height:75, width:75}">
+                    <div>
+                        <label class="control-label">{{imagesUp.name}}</label>
+                    </div>
                 </div>
             </div>
-
-            <div class="progress" ng-show="vm.uploadImage.progress > 0">
-                <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.uploadImage.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.uploadImage.progress}}%;">
-                    <span class="sr-only">{{vm.uploadImage.progress}}%;</span>
+            <div class="row">
+                <div class="progress col-xs-12" ng-show="vm.uploadImage.progress > 0">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{vm.uploadImage.progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{vm.uploadImage.progress}}%;">
+                        <span class="sr-only">{{vm.uploadImage.progress}}%</span>
+                    </div>
                 </div>
             </div>
         </div>
