@@ -31,6 +31,7 @@
                 },
                 'remove': {
                     method: 'DELETE'
+                    /*url: '/recipe/:id/images/:imageid'*/
                 },
                 'delete': {
                     method: 'DELETE'

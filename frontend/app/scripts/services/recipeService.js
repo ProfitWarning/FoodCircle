@@ -118,6 +118,25 @@
             return dfd.promise;
         };
 
+        recipeService.removeImage = function (recipe, image) {
+            var dfd = $q.defer();
+
+            SailsResourceService.getResource('Image').get({id: image.id}, function (img) {
+                img.$delete({token: authService.getToken()}, function (response) {
+                    dfd.resolve(response);
+                },
+                    function (response) {
+                        dfd.reject({});
+                    });
+
+            }, function (response) {
+                $log.error(response);
+
+            });
+
+            return dfd.promise;
+        };
+
         return recipeService;
     }]);
 }());

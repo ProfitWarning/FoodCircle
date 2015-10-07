@@ -12,9 +12,17 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', function (recipeToEdit, Upload, API_URL, $timeout, alert) {
+    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', '$filter', 'recipeService', '$confirm', function (recipeToEdit, Upload, API_URL, $timeout, alert, $filter, recipeService, $confirm) {
 
-        var vm = this, i, getSlides;
+        var vm = this, i, getSlides,
+            removeImage = function (image) {
+                var found = $filter('filter')(vm.recipe.images, {id: image.id}, false),
+                    pos;
+                if (found && found.length > 0) {
+                    pos = vm.recipe.images.map(function (e) {return e.id; }).indexOf(found[0].id);
+                    vm.recipe.images.splice(pos, 1);
+                }
+            };
 
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
@@ -26,7 +34,7 @@
             if (images) {
                 vm.imagesToUpload = images;
             }
-            if (angular.isArray(vm.imagesToUpload)) {
+           /* if (angular.isArray(vm.imagesToUpload)) {
                 //TODO set error in image progressbar
                 //show why error e.g. image too big
                 angular.forEach(vm.imagesToUpload, function (image) {
@@ -35,7 +43,7 @@
                     }
                 });
 
-            }
+            }*/
         };
         vm.uploadImage = function (images) {
             if (!images) {
@@ -86,5 +94,34 @@
         };
 
         vm.imagesCollapsed = false;
+
+        vm.onSelectImage = function (image, event) {
+            event.preventDefault();
+
+            if (image.selected) {
+                image.selected = false;
+                return;
+            }
+            //unselect all other
+            $filter('filter')(vm.recipe.images, {selected: true}, false).forEach(function (img) {
+                img.selected = false;
+            });
+            //select image
+            image.selected = !image.selected;
+        };
+
+        vm.onDeleteImage = function (image, event) {
+            event.preventDefault();
+
+            $confirm({
+                text: 'Delete image?'
+            })
+                .then(function () {
+                    recipeService.removeImage(vm.recipe, image).then(function (deltedImage) {
+                        removeImage(deltedImage);
+                    });
+                });
+        };
+
     }]);
 }());
