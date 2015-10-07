@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'authService', 'AUTH_EVENTS', '$rootScope', 'toolsService', '$scope', '$filter', 'recipes', function (recipeService, authService, AUTH_EVENTS, $rootScope, toolsService, $scope, $filter, recipes) {
+    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'toolsService', '$scope', '$filter', 'recipes', function (recipeService, toolsService, $scope, $filter, recipes) {
 
         var vm = this,
             removeRecipe = function (recipeid) {

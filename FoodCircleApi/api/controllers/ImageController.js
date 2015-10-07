@@ -55,7 +55,7 @@ module.exports = {
 
             };
 
-        sails.log.error(imagePath);
+
         uploadFile.on('progress', function (event) {
             return event;
 
