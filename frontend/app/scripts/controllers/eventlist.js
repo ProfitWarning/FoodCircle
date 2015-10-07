@@ -12,8 +12,14 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventListCtrl', ['events', function (events) {
-        var vm = this;
-        vm.events = events;
+    angular.module('foodCircle').controller('EventListCtrl', ['eventquery', 'EventService', function (eventquery, EventService) {
+        var vm = this,
+            initEvents = function () {
+                EventService.getEventList(eventquery).then(function (list) {
+                    vm.events = list;
+                });
+            };
+
+        initEvents();
     }]);
 }());

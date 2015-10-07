@@ -15,6 +15,16 @@
             <div class="collapse " id="js-profile-collapse">
                 <ul class="nav navbar-nav" style="width:100%">
                     <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+                        <a ui-sref="main.profile.index">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"> Profile</span>
+                        </a>
+                    </li>
+                    <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+                        <a ui-sref="main.myrecipes.list">
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"> Recipes</span>
+                        </a>
+                    </li>
+                    <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
                         <a ui-sref="main.myrecipes.create">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"> Recipe</span>
                         </a>
@@ -22,11 +32,6 @@
                     <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
                         <a ui-sref="main.event.create">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"> Event</span>
-                        </a>
-                    </li>
-                    <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
-                        <a ui-sref="main.myrecipes.list">
-                            <span class="glyphicon glyphicon-th-list" aria-hidden="true"> Recipes</span>
                         </a>
                     </li>
                     <li ui-sref-active="active" ng-hide="vm.isAuthenticated()">
@@ -64,6 +69,16 @@
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+                                <a ui-sref="main.profile.index">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"> Profile</span>
+                                </a>
+                            </li>
+                            <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+                                <a ui-sref="main.myrecipes.list">
+                                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"> My&nbsp;Recipes</span>
+                                </a>
+                            </li>
+                            <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
                                 <a ui-sref="main.myrecipes.create">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"> Recipe</span>
                                 </a>
@@ -71,11 +86,6 @@
                             <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
                                 <a ui-sref="main.event.create">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"> Event</span>
-                                </a>
-                            </li>
-                            <li ng-show="vm.isAuthenticated()" ui-sref-active="active">
-                                <a ui-sref="main.myrecipes.list">
-                                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"> My&nbsp;Recipes</span>
                                 </a>
                             </li>
                             <li ui-sref-active="active" ng-hide="vm.isAuthenticated()">

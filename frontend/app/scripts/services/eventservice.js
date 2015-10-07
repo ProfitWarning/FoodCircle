@@ -40,6 +40,7 @@
         EventService.getEvent = function (query) {
             var dfd = $q.defer(),
                 blog;
+
             SailsResourceService.getResource(sailsResourceName).get(createQueryDto(query),
                 function (blog) {
                     dfd.resolve(blog);
@@ -66,6 +67,7 @@
 
         EventService.getEventList = function (query) {
             var dfd = $q.defer();
+
             SailsResourceService.getResource(sailsResourceName).query(createQueryDto(query), function (eventlist) {
                 dfd.resolve(eventlist);
 
