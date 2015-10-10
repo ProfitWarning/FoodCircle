@@ -35,7 +35,7 @@
                 clickEvent: '&',
                 eventQuery: '='
             },
-            templateUrl: 'views/partials/profile.event.list.html',
+            templateUrl: 'views/partials/directive.event.list.html',
             controller: controller,
             controllerAs: 'vm',
             bindToController: {
