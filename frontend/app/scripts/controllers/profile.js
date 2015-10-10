@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * @ngdoc function
  * @name foodCircle.controller:ProfileCtrl
@@ -7,11 +5,21 @@
  * # ProfileCtrl
  * Controller of the foodCircle
  */
-angular.module('foodCircle')
-  .controller('ProfileCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+/*global
+    angular
+*/
+
+(function () {
+    'use strict';
+
+    angular.module('foodCircle').controller('ProfileCtrl', ['$log', function ($log) {
+        var vm = this;
+        vm.eventListQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
+        vm.onEventItemClick = function (event) {
+            debugger;
+        };
+
+
+        $log.error('created ctrl');
+    }]);
+}());

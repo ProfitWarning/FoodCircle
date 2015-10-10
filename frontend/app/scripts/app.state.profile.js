@@ -15,26 +15,16 @@
                     authorize: ['authorization', function (authorization) {
                         return authorization.authorize();
                     }]
-                }
+                },
+                abstract: true
             })
             .state('main.profile.index', {
                 url: '/:id',
-                resolve: {
-                    recipes: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
-                        return recipeService.getRecipeListByUser({}, {sort: 'updatedAt DESC'});
-                    }],
-                    eventquery: function () {
-                        return {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
-                    }
-                },
                 views: {
-                    'recipes': {
-                        controller: 'MyRecipesCtrl as vm',
-                        templateUrl: 'views/listRecipes.html'
-                    },
+
                     'events': {
-                        controller: 'EventListCtrl as vm',
-                        templateUrl: 'views/event.list.html'
+                        controller: 'ProfileCtrl as vm',
+                        template: '<profile-event-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-event-list>'
                     }
                 }
             });

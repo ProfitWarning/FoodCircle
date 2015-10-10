@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-8">
+        <ul class="event-list">
+            <li ng-repeat="event in vm.events" class="">
+                <time datetime="{{event.date}}">
+                    <span class="day">{{event.date | date:'dd'}}</span>
+                    <span class="month">{{event.date | date:'MMMM'}}</span>
+                    <span class="year">{{event.date | date:'yyyy'}}</span>
+                    <span class="time">{{event.date | date:'H:mm'}}</span>
+                </time>
+                <!--<img alt="Independence Day" src="https://farm4.staticflickr.com/3100/2693171833_3545fb852c_q.jpg" />-->
+                <div class="info">
+                    <h2 class="title">{{event.title}}</h2>
+                    <p class="desc">{{event.description}}</p>
+                </div>
+                <!--<div class="social">
+                        <ul>
+                            <li class="facebook" style="width:33%;"><a href="#facebook"><span class="fa fa-facebook"></span></a></li>
+                            <li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+                            <li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>
+                        </ul>
+                    </div>-->
+                <div class="social">
+                    <ul>
+                        <li class="facebook" style="width:33%;">
+                            <a class="" ng-click="vm.onEventItemClick(event)">
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

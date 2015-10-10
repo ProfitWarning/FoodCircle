@@ -19,7 +19,7 @@
 
         setMenuItemActive = function (stateName) {
             vm.recipeActive = stateName.indexOf('recipe.') > -1;
-            vm.profileActive = stateName.indexOf('myrecipes.') > -1;
+            vm.profileActive = stateName.indexOf('myrecipes.') > -1 || stateName.indexOf('profile.') > -1;
         };
 
         setMenuItemActive($state.current.name);

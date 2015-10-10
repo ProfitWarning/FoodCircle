@@ -10,7 +10,7 @@
         function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
             sailsResourceProvider.configuration = {
-                verbose: true, // sailsResource will log messages to console
+                verbose: false, // sailsResource will log messages to console
                 //prefix: 'myapi', // apply a prefix to all routes
                 //socket: io.connect('http://localhost:1337'), // provide your own socket instance,
                 origin: 'http://localhost:1337' // change the socket origin
