@@ -1,4 +1,4 @@
-<form id="recipe-form" class="form-horizontal" ng-submit="vm.submit(eventform.$valid, $event)" name="eventform" novalidate>
+<form id="recipe-form" class="form-horizontal" ng-submit="vm.submit(eventform.$valid, eventform, $event)" name="eventform" novalidate>
     <fieldset>
         <legend class="text-center">{{vm.event.title ? "Edit " + vm.event.title : "New event"}}</legend>
 
@@ -27,7 +27,7 @@
             <label class="col-md-3 control-label" for="description">Your event date</label>
             <div class="col-md-6">
             <p class="input-group">
-              <input type="text" class="form-control"
+              <input type="text" class="form-control" name="eventdate" id="eventdate"
                      datepicker-popup="dd-MMMM-yyyy"
                      ng-model="vm.event.date"
                      is-open="vm.datepicker.status.opened"
@@ -38,6 +38,9 @@
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="vm.datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
+                <div class="help-block" ng-messages="eventform.eventdate.$error" ng-show="eventform.eventdate.$touched">
+                    <p ng-message="required">Event date is required.</p>
+                </div>
             </p>
         </div>
         </div>

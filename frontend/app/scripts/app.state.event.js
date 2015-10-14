@@ -44,6 +44,9 @@
             })
             .state('main.event.create', {
                 url: '/create/',
+                resolve: {
+                    event: function () {}
+                },
                 views: {
                     'eventlist': {
                         controller: 'EventEditCtrl as vm',

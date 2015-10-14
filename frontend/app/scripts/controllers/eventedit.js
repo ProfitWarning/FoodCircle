@@ -12,27 +12,30 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', function (EventService, EventModel, alert, event) {
-        var vm = this;
-        vm.event = event || EventModel.create();
+    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', function (EventService, EventModel, alert, event, $moment) {
+        var vm = this
+
+        vm.event = EventModel.create(event);
         vm.datepicker = {};
 
-        vm.submit = function (isValidForm, event) {
+        vm.submit = function (isValidForm, eventform, event) {
             event.preventDefault();
 
             if (!isValidForm) {
                 return;
             }
 
-            EventService.createOrUpdate(EventModel.create(vm.event)).then(function () {
-                alert('info', vm.event.title, 'saved');
-            }, function (error) {
-                alert('error', error.message);
-            });
+            EventService.createOrUpdate(EventModel.create(vm.event)).then(function (event) {
+                alert('info', event.title, 'saved');
+            })
+                .catch(function (error) {
+                debugger;
+                    alert('warning', 'Error','Saving event');
+                });
         };
 
         vm.datepicker.today = function () {
-            vm.event.date = event.date || new Date();
+            vm.event.date = (event && event.date) || new Date();
         };
         vm.datepicker.today();
 
@@ -46,10 +49,10 @@
         };
 
         vm.datepicker.toggleMin = function () {
-            vm.datepicker.minDate = vm.datepicker.minDate ? null : new Date();
+            vm.datepicker.minDate = $moment().startOf('year');
         };
         vm.datepicker.toggleMin();
-        vm.datepicker.maxDate = new Date(2020, 5, 22);
+        vm.datepicker.maxDate = new Date(2025, 5, 30);
 
         vm.datepicker.open = function ($event) {
             vm.datepicker.status.opened = true;

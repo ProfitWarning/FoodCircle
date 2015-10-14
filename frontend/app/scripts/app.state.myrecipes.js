@@ -40,7 +40,7 @@
                 views: {
                     'display': {
                         controller: 'RecipeEditorCtrl as vm',
-                        templateUrl: 'views/myrecipe.create.html'
+                        templateUrl: 'views/myrecipe.edit.html'
                     }
                 },
                 resolve: {

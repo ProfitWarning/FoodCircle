@@ -5,11 +5,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 /*global
-    module, require
+    module
 */
-
-var moment = require('moment');
-
 module.exports = {
 
     attributes: {
@@ -36,9 +33,23 @@ module.exports = {
             type: 'string'
         },
 
-        blogs : {
+        blogs: {
             collection: 'Blog',
             via: 'event'
+        },
+
+        eventowner: {
+            model: 'User',
+            required: true
+        },
+
+        // We don't wan't to send back encrypted password either
+        toJSON: function () {
+            'use strict';
+
+            var obj = this.toObject();
+
+            return obj;
         }
     }
 };

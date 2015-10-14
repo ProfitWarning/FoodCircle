@@ -41,6 +41,11 @@ module.exports = {
             via: 'blogger'
         },
 
+        events: {
+            collection: 'Event',
+            via: 'eventowner'
+        },
+
         // We don't wan't to send back encrypted password either
         toJSON: function () {
             var obj = this.toObject();

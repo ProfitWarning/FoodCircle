@@ -33,7 +33,7 @@
             notAuthenticated: 'auth-not-authenticated',
             notAuthorized: 'auth-not-authorized'
         })
-        .run(['$rootScope', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', '$log', function ($rootScope, $state, $auth, AUTH_EVENTS, authorization, alert, $log) {
+        .run(['$rootScope', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', '$log', function ($rootScope, $state, $auth, AUTH_EVENTS, authorization, alert, $log, amMoment) {
                                                         /*event, toState, toParams, fromState, fromParams*/
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 /*if (toState.name === 'home' ||

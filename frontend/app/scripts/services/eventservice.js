@@ -24,17 +24,16 @@
             createDto = function (data) {
                 var Resource = SailsResourceService.getResource(sailsResourceName),
                     EventDto;
+
                 if (data.id) {
-                    EventDto = EventService.getEventById(data.id);
-                    angular.extend(EventDto, data);
-                    EventDto.token = $auth.getToken();
+                    return EventService.getEventById(data.id);
+
                 } else {
                     EventDto = new Resource();
                     angular.extend(EventDto, data);
                     EventDto.token = $auth.getToken();
+                    return EventDto;
                 }
-
-                return EventDto;
             };
 
         EventService.getEvent = function (query) {
@@ -61,8 +60,31 @@
         };
 
         EventService.createOrUpdate = function (data) {
-            var recipeDto = createDto(data);
-            return recipeDto.$save();
+
+            var dfd = $q.defer(), blog,
+                eventDto = createDto(data);
+
+            if (!eventDto.then) {
+                eventDto.$save(function (event) {
+                    dfd.resolve(event);
+                }, function (error) {
+                    dfd.reject(error);
+                });
+            } else if (data.id && data.eventowner) {
+                eventDto.then(function (eventToUpdate) {
+                    angular.extend(eventToUpdate, data);
+                    eventToUpdate.token = $auth.getToken();
+
+                    eventToUpdate.$save(function (event) {
+                        dfd.resolve(event);
+                    }, function (error) {
+                        dfd.reject(error);
+                    });
+                });
+            } else {
+                dfd.reject({message: 'nothing found to do in data'});
+            }
+            return dfd.promise;
         };
 
         EventService.getEventList = function (query) {
