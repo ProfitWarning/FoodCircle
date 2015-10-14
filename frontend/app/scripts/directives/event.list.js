@@ -16,7 +16,6 @@
 
         var controller = function () {
                 var vm = this, initEvents;
-                $log.error('event directive ctrl');
                 vm.onEventItemClick = function (event) {
                     vm.eventItemClick({event: event});
                 };
@@ -24,7 +23,6 @@
                 initEvents = function () {
                     var query = vm.eventListQuery;
                     EventService.getEventList(query).then(function (list) {
-                        $log.error('event directive list fetsched');
                         vm.events = list;
                     });
                 };

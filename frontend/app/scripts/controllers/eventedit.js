@@ -32,7 +32,7 @@
         };
 
         vm.datepicker.today = function () {
-            vm.event.date = new Date();
+            vm.event.date = event.date || new Date();
         };
         vm.datepicker.today();
 

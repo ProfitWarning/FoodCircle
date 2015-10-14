@@ -15,11 +15,13 @@
     angular.module('foodCircle').controller('ProfileCtrl', ['$log', '$state', function ($log, $state) {
         var vm = this;
         vm.eventListQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
+
         vm.onEventItemClick = function (event) {
             $state.go('main.event.edit', {id: event.id});
         };
 
-
-        $log.error('created ctrl');
+        vm.onRecipeItemClick = function (recipe) {
+            $state.go('main.myrecipes.edit', {name: recipe.name});
+        };
     }]);
 }());

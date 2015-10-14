@@ -15,15 +15,14 @@
         //<profile-recipe-list recipe-item-click="vm.onRecipeItemClick(event)" recipe-list-query="{}"></profile-recipe-list>
         var controller = function () {
                 var vm = this, initRecipes;
-                $log.error('recipe directive ctrl');
                 vm.onRecipeItemClick = function (recipe) {
-                    vm.eventItemClick({recipe: recipe});
+                    debugger;
+                    vm.recipeItemClick({recipe: recipe});
                 };
 
                 initRecipes = function () {
                     var query = vm.recipeListQuery;
                     recipeService.getRecipeListByUser({}, {sort: 'updatedAt DESC'}).then(function (list) {
-                        $log.error('recipe directive list fetsched');
                         vm.recipes = list;
                     });
                 };

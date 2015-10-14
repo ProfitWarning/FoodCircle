@@ -1,6 +1,6 @@
 <form id="recipe-form" class="form-horizontal" ng-submit="vm.submit(eventform.$valid, $event)" name="eventform" novalidate>
     <fieldset>
-        <legend class="text-center">New event</legend>
+        <legend class="text-center">{{vm.event.title ? "Edit " + vm.event.title : "New event"}}</legend>
 
         <!-- Title input-->
         <div class="form-group">

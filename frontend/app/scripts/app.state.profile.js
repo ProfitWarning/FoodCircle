@@ -28,7 +28,7 @@
                     },
                     'recipes': {
                         controller: 'ProfileCtrl as vm',
-                        template: '<profile-recipe-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-recipe-list>'
+                        template: '<profile-recipe-list recipe-item-click="vm.onRecipeItemClick(recipe)" event-list-query="vm.eventListQuery"></profile-recipe-list>'
                     }
                 }
             });
