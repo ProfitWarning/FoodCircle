@@ -1,5 +1,5 @@
 <div class="row">
-    <h1>{{vm.recipe.name}}</h4>
+    <h2>{{vm.recipe.name}}</h2>
 </div>
 <div class="row">
     <div class="col-xs-12 col-sm-8" ng-controller="CarouselCtrl as vm">
@@ -14,17 +14,14 @@
         </carousel>
     </div>
 </div>
-<hr/>
 <div class="">
-    <h2>Description</h2>
+    <legend>Description</legend>
     <div class="container ingrediants-list-container">
         <p>{{vm.recipe.description}}</p>
     </div>
 </div>
-
-<hr/>
 <div class="">
-    <h2>Ingrediants</h2>
+    <legend>Ingrediants</legend>
     <div class="container ingrediants-list-container">
         <!--<div class="row" ng-repeat="ingredient in vm.recipe.ingredients">
             <div class="col-xs-2 text-right">Amount</div>
