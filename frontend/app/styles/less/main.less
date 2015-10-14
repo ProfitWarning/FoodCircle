@@ -21,7 +21,6 @@ input::-webkit-calendar-picker-indicator {
 input[type="date"]::-webkit-input-placeholder {
     visibility: hidden !important;
 }
-
 .no-margin {
     margin: 0 !important;
 }
@@ -662,4 +661,71 @@ form .form-group {
         width: 40px;
         padding: 10px 0px 9px;
     }
+}
+
+/* calandar */
+
+.cal-day-today {
+    background-color: @brand-primary;
+}
+.cal-day-tick,
+#cal-week-box {
+    background-color: transparent;
+}
+.cal-day-today span[data-cal-date] {
+    color: @gray-lighter;
+}
+#cal-week-box {
+    background-color: @gray-dark;
+}
+.day-highlight:hover,
+.day-highlight {
+    background-color: @gray-darker;
+}
+.day-highlight.dh-event-important:hover,
+.day-highlight.dh-event-important {
+    background-color: @gray-darker;
+}
+.day-highlight.dh-event-warning:hover,
+.day-highlight.dh-event-warning {
+    background-color: @gray-darker;
+}
+.day-highlight.dh-event-info:hover,
+.day-highlight.dh-event-info {
+    background-color: @gray-darker;
+}
+.day-highlight.dh-event-inverse:hover,
+.day-highlight.dh-event-inverse {
+    background-color: @gray-darker;
+}
+.day-highlight.dh-event-success:hover,
+.day-highlight.dh-event-success {
+    background-color: @brand-primary;
+}
+.day-highlight.dh-event-special:hover,
+.day-highlight.dh-event-special {
+    background-color: @gray-dark;
+}
+cal-year-box .row:hover,
+.cal-row-fluid:hover {
+    background-color: @gray-dark;
+}
+
+[class*="cal-cell"]:hover,
+.cell-focus,
+[class*="cal-cell"] .drop-active,
+.cal-cell.drop-active {
+    background-color: @gray-darker;
+}
+.cal-day-weekend span[data-cal-date] {
+    color: @brand-warning;
+}
+.cal-slide-content {
+    background-color: @gray;
+    /* -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);*/
+    box-shadow: none;
+}
+span[data-cal-date] {
+    opacity: 0.8;
 }
