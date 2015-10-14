@@ -20,7 +20,7 @@
             .state('main.myrecipes.list', {
                 url: '/list',
                 resolve: {
-                    recipes: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                    recipes: ['recipeService', function (recipeService) {
                         return recipeService.getRecipeListByUser({}, {sort: 'updatedAt DESC'});
                     }]
                 },

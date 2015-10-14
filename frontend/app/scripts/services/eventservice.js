@@ -37,14 +37,14 @@
             };
 
         EventService.getEvent = function (query) {
-            var dfd = $q.defer(),
-                blog;
+            var dfd = $q.defer();
 
             SailsResourceService.getResource(sailsResourceName).get(createQueryDto(query),
                 function (blog) {
                     dfd.resolve(blog);
                 },
                 function (response) {
+                    $log.error(response);
                     dfd.resolve({});
                 });
 
@@ -61,7 +61,7 @@
 
         EventService.createOrUpdate = function (data) {
 
-            var dfd = $q.defer(), blog,
+            var dfd = $q.defer(),
                 eventDto = createDto(data);
 
             if (!eventDto.then) {
@@ -96,6 +96,7 @@
                 dfd.resolve(eventlist);
 
             }, function (error) {
+                $log.error(error);
                 dfd.resolve([]);
             });
 
@@ -103,15 +104,15 @@
         };
 
         EventService.deleteById = function (id) {
-            var dfd = $q.defer(),
-                recipe = EventService.getEventById(id).then(function (event) {
-                    recipe.$delete({token: authService.getToken()}, function (response) {
-                        $log.log(response);
-                    }, function (response) {
-                        $log.error(response);
-                        dfd.reject({});
-                    });
+            var dfd = $q.defer();
+            EventService.getEventById(id).then(function (event) {
+                event.$delete({token: authService.getToken()}, function (response) {
+                    $log.log(response);
+                }, function (response) {
+                    $log.error(response);
+                    dfd.reject({});
                 });
+            });
 
             return dfd.promise;
         };

@@ -45,6 +45,7 @@
                     dfd.resolve(response);
                 },
                 function (response) {
+                    $log.error(response);
                     dfd.resolve({});
                 });
             return dfd.promise;
@@ -56,7 +57,7 @@
                 userid = authService.currentUser().id;
             }
 
-            var dfd = $q.defer(), blog,
+            var dfd = $q.defer(),
                 recipeDto = createDto(data);
 
             if (!recipeDto.then) {
@@ -95,6 +96,7 @@
                     dfd.resolve(response);
                 },
                 function (response) {
+                    $log.error(response);
                     dfd.resolve({});
                 });
 
@@ -128,15 +130,15 @@
         };
 
         recipeService.deleteById = function (id) {
-            var dfd = $q.defer(),
-                recipe = recipeService.getById(id).then(function (recipe) {
-                    recipe.$delete({token: authService.getToken()}, function (response) {
-                        dfd.resolve(response);
-                    }, function (response) {
-                        $log.error(response);
-                        dfd.reject({});
-                    });
+            var dfd = $q.defer();
+            recipeService.getById(id).then(function (recipe) {
+                recipe.$delete({token: authService.getToken()}, function (response) {
+                    dfd.resolve(response);
+                }, function (response) {
+                    $log.error(response);
+                    dfd.reject({});
                 });
+            });
 
             return dfd.promise;
         };
@@ -149,12 +151,12 @@
                     dfd.resolve(response);
                 },
                     function (response) {
+                        $log.error(response);
                         dfd.reject({});
                     });
 
             }, function (response) {
                 $log.error(response);
-
             });
 
             return dfd.promise;

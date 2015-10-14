@@ -14,7 +14,7 @@
 
     angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', '$filter', 'recipeService', '$confirm', function (recipeToEdit, Upload, API_URL, $timeout, alert, $filter, recipeService, $confirm) {
 
-        var vm = this, i, getSlides,
+        var vm = this,
             removeImage = function (image) {
                 var found = $filter('filter')(vm.recipe.images, {id: image.id}, false),
                     pos;

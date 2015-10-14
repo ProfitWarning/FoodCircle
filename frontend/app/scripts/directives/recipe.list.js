@@ -10,18 +10,17 @@
 
 (function () {
     'use strict';
-    angular.module('foodCircle').directive('profileRecipeList', ['recipeService', '$log', 'authService', function (recipeService, $log, authService) {
+    angular.module('foodCircle').directive('profileRecipeList', ['recipeService', function (recipeService) {
 
         //<profile-recipe-list recipe-item-click="vm.onRecipeItemClick(event)" recipe-list-query="{}"></profile-recipe-list>
         var controller = function () {
                 var vm = this, initRecipes;
                 vm.onRecipeItemClick = function (recipe) {
-                    debugger;
                     vm.recipeItemClick({recipe: recipe});
                 };
 
                 initRecipes = function () {
-                    var query = vm.recipeListQuery;
+                    /*var query = vm.recipeListQuery;*/
                     recipeService.getRecipeListByUser({}, {sort: 'updatedAt DESC'}).then(function (list) {
                         vm.recipes = list;
                     });

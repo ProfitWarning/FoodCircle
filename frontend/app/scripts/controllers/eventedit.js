@@ -27,7 +27,7 @@
 
             EventService.createOrUpdate(EventModel.create(vm.event)).then(function (event) {
                 alert('info', event.title, 'saved');
-            })['catch'](function (error) {
+            })['catch'](function () {
                 alert('warning', 'Error', 'Saving event');
             });
         };
@@ -56,7 +56,8 @@
         vm.datepicker.toggleMin();
         vm.datepicker.maxDate = new Date(2025, 5, 30);
 
-        vm.datepicker.open = function ($event) {
+        vm.datepicker.open = function (event) {
+            event.preventDefault();
             vm.datepicker.status.opened = true;
         };
 

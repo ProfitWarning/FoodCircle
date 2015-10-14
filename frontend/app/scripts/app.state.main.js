@@ -27,7 +27,7 @@
                 controller: 'HomeCtrl as vm',
                 templateUrl: 'views/home.html',
                 resolve: {
-                    recipeList: ['recipeService', '$stateParams', function (recipeService, $stateParams) {
+                    recipeList: ['recipeService', function (recipeService) {
                         return recipeService.getRecipeList({where: {id: {'!': ''}}, mit: 6, sort: 'updatedAt DESC'}).$promise.then(function (recipeList) {
                             return recipeList;
                         });

@@ -31,7 +31,7 @@
             .state('main.event.edit', {
                 url: '/edit/:id',
                 resolve: {
-                    event: ['EventService', '$stateParams', 'queryService', function (EventService, $stateParams, queryService) {
+                    event: ['EventService', '$stateParams', function (EventService, $stateParams) {
                         return EventService.getEventById($stateParams.id);
                     }]
                 },

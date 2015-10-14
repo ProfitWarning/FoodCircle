@@ -10,7 +10,7 @@
 
 (function () {
     'use strict';
-    angular.module('foodCircle').directive('profileEventList', ['EventService', '$log', function (EventService, $log) {
+    angular.module('foodCircle').directive('profileEventList', ['EventService', function (EventService) {
 
         //<profile-event-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-event-list>
 
