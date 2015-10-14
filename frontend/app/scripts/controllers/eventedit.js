@@ -12,9 +12,9 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', function (EventService, EventModel, alert) {
+    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', function (EventService, EventModel, alert, event) {
         var vm = this;
-        vm.event = EventModel.create();
+        vm.event = event || EventModel.create();
         vm.datepicker = {};
 
         vm.submit = function (isValidForm, event) {

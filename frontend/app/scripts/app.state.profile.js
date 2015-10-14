@@ -25,6 +25,10 @@
                     'events': {
                         controller: 'ProfileCtrl as vm',
                         template: '<profile-event-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-event-list>'
+                    },
+                    'recipes': {
+                        controller: 'ProfileCtrl as vm',
+                        template: '<profile-recipe-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-recipe-list>'
                     }
                 }
             });

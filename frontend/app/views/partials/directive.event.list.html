@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-xs-12 col-sm-8">
+    <div class="col-xs-12 col-sm-12">
         <ul class="event-list">
-            <li ng-repeat="event in vm.events" class="">
+            <li ng-repeat="event in vm.events" class="" ng-class="{'no-margin': $last }">
                 <time datetime="{{event.date}}">
                     <span class="day">{{event.date | date:'dd'}}</span>
                     <span class="month">{{event.date | date:'MMMM'}}</span>
@@ -27,6 +27,8 @@
                                 <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </a>
                         </li>
+                        <!--<li class="twitter" style="width:34%;"><a href="#twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li class="google-plus" style="width:33%;"><a href="#google-plus"><span class="fa fa-google-plus"></span></a></li>-->
                     </ul>
                 </div>
             </li>

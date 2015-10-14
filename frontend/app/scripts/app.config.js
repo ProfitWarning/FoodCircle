@@ -9,12 +9,12 @@
     angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
         function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
 
-            sailsResourceProvider.configuration = {
+            /*sailsResourceProvider.configuration = {
                 verbose: false, // sailsResource will log messages to console
                 //prefix: 'myapi', // apply a prefix to all routes
                 //socket: io.connect('http://localhost:1337'), // provide your own socket instance,
                 origin: 'http://localhost:1337' // change the socket origin
-            };
+            };*/
 
             $authProvider.loginUrl = API_URL + 'auth/';
             $authProvider.signupUrl = API_URL + 'auth/register';

@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('SailsResourceService', ['sailsResource', 'authService', function (sailsResource, authService) {
+    angular.module('foodCircle').service('SailsResourceService', ['sailsResource', 'authService', '$window', function (sailsResource, authService, $window) {
 
         var DEFAULT_ACTIONS = {
                 'get': {
@@ -37,12 +37,24 @@
                     method: 'DELETE'
                 }
             },
+            resourceConfig = {
+                verbose: true, // sailsResource will log messages to console
+                //prefix: 'myapi', // apply a prefix to all routes
+                socket: null, // provide your own socket instance,
+                origin: 'http://localhost:1337' // change the socket origin
+            },
 
             SailsResourceService = {};
 
-        SailsResourceService.getResource = function (name, actions) {
+        SailsResourceService.getResource = function (name, actions, rsConfig) {
+            if (!rsConfig) {
+                rsConfig = resourceConfig;
+            }
+            if (!rsConfig.socket) {
+                rsConfig.socket = $window.io.sails.connect(rsConfig.origin);
+            }
             var a = angular.extend({}, actions, DEFAULT_ACTIONS);
-            return sailsResource(name, a);
+            return sailsResource(name, a, rsConfig);
         };
 
         return SailsResourceService;

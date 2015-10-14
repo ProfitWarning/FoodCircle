@@ -12,11 +12,11 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ProfileCtrl', ['$log', function ($log) {
+    angular.module('foodCircle').controller('ProfileCtrl', ['$log', '$state', function ($log, $state) {
         var vm = this;
         vm.eventListQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
         vm.onEventItemClick = function (event) {
-            debugger;
+            $state.go('main.event.edit', {id: event.id});
         };
 
 
