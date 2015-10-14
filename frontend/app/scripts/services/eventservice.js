@@ -70,6 +70,7 @@
                 }, function (error) {
                     dfd.reject(error);
                 });
+
             } else if (data.id && data.eventowner) {
                 eventDto.then(function (eventToUpdate) {
                     angular.extend(eventToUpdate, data);
@@ -84,6 +85,7 @@
             } else {
                 dfd.reject({message: 'nothing found to do in data'});
             }
+
             return dfd.promise;
         };
 

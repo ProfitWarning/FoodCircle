@@ -13,7 +13,7 @@
     'use strict';
 
     angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', function (EventService, EventModel, alert, event, $moment) {
-        var vm = this
+        var vm = this;
 
         vm.event = EventModel.create(event);
         vm.datepicker = {};
@@ -27,17 +27,19 @@
 
             EventService.createOrUpdate(EventModel.create(vm.event)).then(function (event) {
                 alert('info', event.title, 'saved');
-            })
-                .catch(function (error) {
-                debugger;
-                    alert('warning', 'Error','Saving event');
-                });
+            })['catch'](function (error) {
+                alert('warning', 'Error', 'Saving event');
+            });
         };
 
-        vm.datepicker.today = function () {
-            vm.event.date = (event && event.date) || new Date();
+        vm.datepicker.createEventDate = function () {
+            if (event && event.date) {
+                vm.event.date = $moment(event.date).toDate();
+            } else {
+                vm.event.date = new Date();
+            }
         };
-        vm.datepicker.today();
+        vm.datepicker.createEventDate();
 
         vm.datepicker.clear = function () {
             vm.event.date = null;

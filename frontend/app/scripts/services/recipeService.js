@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', function (IngredientModel, SailsResourceService, authService, $log, $q) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', '$auth', function (IngredientModel, SailsResourceService, authService, $log, $q, $auth) {
 
         var recipeService = {},
 
@@ -15,12 +15,8 @@
                 var Resource = SailsResourceService.getResource(sailsResourceName),
                     RecipeDto;
                 if (data.id) {
-                    RecipeDto = recipeService.get({
-                        where: {
-                            id: data.id
-                        }
-                    });
-                    angular.extend(RecipeDto, data);
+                    return recipeService.get({where: {id: data.id}});
+
                 } else {
                     RecipeDto = new Resource();
                     angular.extend(RecipeDto, data);
@@ -59,9 +55,36 @@
                 $log.warn('Userid missing. Using current user id');
                 userid = authService.currentUser().id;
             }
-            var recipeDto = createDto(data);
-            recipeDto.recipeowner = userid;
-            return recipeDto.$save();
+
+            var dfd = $q.defer(), blog,
+                recipeDto = createDto(data);
+
+            if (!recipeDto.then) {
+                recipeDto.recipeowner = userid;
+
+                recipeDto.$save(function (event) {
+                    dfd.resolve(event);
+                }, function (error) {
+                    dfd.reject(error);
+                });
+
+            } else if (data.id) {
+                recipeDto.then(function (recipeToUpdate) {
+                    angular.extend(recipeToUpdate, data);
+                    recipeToUpdate.recipeowner = userid;
+                    recipeToUpdate.token = $auth.getToken();
+
+                    recipeToUpdate.$save(function (event) {
+                        dfd.resolve(event);
+                    }, function (error) {
+                        dfd.reject(error);
+                    });
+                });
+            } else {
+                dfd.reject({message: 'nothing found to do in data'});
+            }
+
+            return dfd.promise;
         };
 
         recipeService.get = function (query) {
