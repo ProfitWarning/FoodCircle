@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('userService', ['sailsResource', '$auth', '$q', '$log', function (sailsResource, $auth, $q, $log) {
+    angular.module('foodCircle').service('userService', ['SailsResourceService', '$auth', '$q', '$log', function (SailsResourceService, $auth, $q, $log) {
 
         var userService = {},
 
@@ -31,7 +31,7 @@
 
         userService.get = function (query) {
             var dfd = $q.defer();
-            sailsResource(sailsResourceName).get(createQueryDto(query), function (user) {
+            SailsResourceService.getResource(sailsResourceName).get(createQueryDto(query), function (user) {
                 dfd.resolve(user);
 
             }, function (error) {
