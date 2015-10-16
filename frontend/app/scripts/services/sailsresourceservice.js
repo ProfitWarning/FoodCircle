@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('SailsResourceService', ['sailsResource', 'authService', '$window', function (sailsResource, authService, $window) {
+    angular.module('foodCircle').service('SailsResourceService', ['sailsResource', 'authService', '$window', 'API_URL', function (sailsResource, authService, $window, API_URL) {
 
         var DEFAULT_ACTIONS = {
                 'get': {
@@ -41,7 +41,7 @@
                 verbose: true, // sailsResource will log messages to console
                 //prefix: 'myapi', // apply a prefix to all routes
                 socket: null, // provide your own socket instance,
-                origin: 'http://localhost:1337' // change the socket origin
+                origin: API_URL // change the socket origin
             },
 
             SailsResourceService = {};

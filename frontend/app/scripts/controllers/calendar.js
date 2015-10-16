@@ -24,6 +24,11 @@
                 $state.go('main.event.edit', {id: event.id});
             }
         };
+        vm.eventEdited = function (calendarEvent) {
+            if (calendarEvent && calendarEvent.id) {
+                $state.go('main.event.edit', {id: calendarEvent.id});
+            }
+        };
 
         defaultEvent = {
             title: null, // The title of the event
@@ -55,7 +60,5 @@
         };
 
         initEvents();
-
-
     }]);
 }());
