@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', function (EventService, $moment, $state) {
+    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', 'authService', function (EventService, $moment, $state, authService) {
 
         var vm = this, initEvents, defaultEvent;
         vm.events = [];
@@ -20,7 +20,7 @@
         vm.calendarDay = new Date();
 
         vm.eventClicked = function (event) {
-            if (event) {
+            if (event && event.id) {
                 $state.go('main.event.edit', {id: event.id});
             }
         };
@@ -30,8 +30,8 @@
             type: 'info', // The type of the event (determines its color). Can be important, warning, info, inverse, success or special
             startsAt: null, // A javascript date object for when the event starts
             endsAt: null, // Optional - a javascript date object for when the event ends
-            editable: false, // If edit-event-html is set and this field is explicitly set to false then dont make it editable.
-            deletable: false, // If delete-event-html is set and this field is explicitly set to false then dont make it deleteable
+            editable: true, // If edit-event-html is set and this field is explicitly set to false then dont make it editable.
+            deletable: true, // If delete-event-html is set and this field is explicitly set to false then dont make it deleteable
             draggable: true, //Allow an event to be dragged and dropped
             resizable: true, //Allow an event to be resizable
             incrementsBadgeTotal: true, //If set to false then will not count towards the badge total amount on the month and year view
@@ -41,10 +41,15 @@
         initEvents = function () {
             EventService.getEventList().then(function (events) {
                 events.forEach(function (event) {
-                    event = angular.extend({}, defaultEvent, event);
                     event.startsAt = event.startsAt || $moment(event.date).toDate();
                     event.endsAt = event.endsAt || $moment(event.date).toDate();
-                    vm.events.push(event);
+                    event.isOwned = authService.currentUser().id === event.eventowner.id;
+                    event.editable = event.isOwned;
+                    event.deletable = event.isOwned;
+
+                    var eventDisplay = angular.extend({}, defaultEvent, event);
+
+                    vm.events.push(eventDisplay);
                 });
             });
         };

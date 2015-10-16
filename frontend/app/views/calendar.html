@@ -6,8 +6,8 @@
     view-title="vm.calendarTitle"
     on-event-click="vm.eventClicked(calendarEvent)"
     on-event-times-changed="vm.calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
-    edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
-    delete-event-html="'<i class=\'glyphicon glyphicon-remove\'></i>'"
+              edit-event-html="'<i class=\'glyphicon glyphicon-pencil\'></i>'"
+    delete-event-html="'<i class=\'glyphicon glyphicon-remove\' ng-show=\'calendarEvent.isOwned\'></i>'"
     on-edit-event-click="vm.eventEdited(calendarEvent)"
     on-delete-event-click="vm.eventDeleted(calendarEvent)"
     auto-open="true">

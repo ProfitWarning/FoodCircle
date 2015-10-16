@@ -32,6 +32,9 @@
                 url: '/edit/:id',
                 resolve: {
                     event: ['EventService', '$stateParams', function (EventService, $stateParams) {
+                        if (!$stateParams.id) {
+                            return null;
+                        }
                         return EventService.getEventById($stateParams.id);
                     }]
                 },
@@ -42,10 +45,15 @@
                     }
                 }
             })
-            .state('main.event.create', {
-                url: '/create/',
+            .state('main.event.detail', {
+                url: '/:id',
                 resolve: {
-                    event: function () {}
+                    event: ['EventService', '$stateParams', function (EventService, $stateParams) {
+                        if (!$stateParams.id) {
+                            return null;
+                        }
+                        return EventService.getEventById($stateParams.id);
+                    }]
                 },
                 views: {
                     'eventlist': {

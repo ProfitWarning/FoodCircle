@@ -6,8 +6,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider',
-        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider) {
+    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider', 'calendarConfigProvider',
+        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider, calendarConfigProvider) {
 
             /*sailsResourceProvider.configuration = {
                 verbose: false, // sailsResource will log messages to console
@@ -22,6 +22,8 @@
             $httpProvider.interceptors.push('authInterceptor');
 
             localStorageServiceProvider.setPrefix('ls');
+
+            calendarConfigProvider.setDateFormatter('moment');
 
         }])
         .constant('API_URL', 'http://localhost:1337/')
