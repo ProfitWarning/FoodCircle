@@ -63,31 +63,35 @@ module.exports.policies = {
 
     'RecipeController': {
         'create': ['isAuthorized'],
-        'delete': ['isAuthorized'],
-        'remove': ['isAuthorized'],
+        'delete': ['isAuthorized', 'ownModel'],
+        'remove': ['isAuthorized', 'ownModel'],
+        'update': ['isAuthorized', 'ownModel'],
         'find': true,
         'findOne': true
     },
 
     'ImageController': {
         'create': ['isAuthorized'],
-        'delete': ['isAuthorized'],
-        'remove': ['isAuthorized'],
+        'delete': ['isAuthorized', 'ownModel'],
+        'remove': ['isAuthorized', 'ownModel'],
+        'update': ['isAuthorized', 'ownModel'],
         'find': true,
         'findOne': true
     },
 
     'BlogController': {
         'create': ['isAuthorized'],
-        'delete': ['isAuthorized'],
-        'remove': ['isAuthorized'],
+        'delete': ['isAuthorized', 'ownModel'],
+        'remove': ['isAuthorized', 'ownModel'],
+        'update': ['isAuthorized', 'ownModel'],
         'find': true,
         'findOne': true
     },
     'EventController': {
         'create': ['isAuthorized'],
-        'delete': ['isAuthorized'],
-        'remove': ['isAuthorized'],
+        'delete': ['isAuthorized', 'ownModel'],
+        'remove': ['isAuthorized', 'ownModel'],
+        'update': ['isAuthorized', 'ownModel'],
         'find': true,
         'findOne': true
     }
