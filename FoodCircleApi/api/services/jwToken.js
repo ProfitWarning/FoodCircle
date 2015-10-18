@@ -20,7 +20,7 @@ module.exports.issue = function (payload) {
         payload,
         tokenSecret, // Token Secret that we sign it with
         {
-            expiresIn: '1h' // Token Expire time
+            expiresIn: '3h' // Token Expire time
         }
     );
 };

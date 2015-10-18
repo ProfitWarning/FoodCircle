@@ -27,9 +27,9 @@
 
             EventService.createOrUpdate(EventModel.create(vm.event)).then(function (event) {
                 alert('info', event.title, 'saved');
-            })['catch'](function () {
+            })/*['catch'](function () {
                 alert('warning', 'Error', 'Saving event');
-            });
+            })*/;
         };
 
         vm.datepicker.createEventDate = function () {

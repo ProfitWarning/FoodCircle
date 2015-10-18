@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('EventService', ['$auth', 'SailsResourceService', '$log', '$q', 'authService', function ($auth, SailsResourceService, $log, $q, authService) {
+    angular.module('foodCircle').service('EventService', ['$auth', 'SailsResourceService', '$q', 'authService', '$exceptionHandler', function ($auth, SailsResourceService, $q, authService, $exceptionHandler) {
 
         var EventService = {},
             sailsResourceName = 'Event',
@@ -44,7 +44,7 @@
                     dfd.resolve(blog);
                 },
                 function (response) {
-                    $log.error(response);
+                    $exceptionHandler(response);
                     dfd.resolve({});
                 });
 
@@ -53,7 +53,8 @@
 
         EventService.getEventById = function (id) {
             if (!id) {
-                $log.error('Id missing');
+                $exceptionHandler({message: 'Id missingta'});
+
                 return [];
             }
             return EventService.getEvent({where: {id: id}});
@@ -79,11 +80,13 @@
                     eventToUpdate.$save(function (event) {
                         dfd.resolve(event);
                     }, function (error) {
+                        $exceptionHandler(error);
                         dfd.reject(error);
                     });
                 });
             } else {
                 dfd.reject({message: 'nothing found to do in data'});
+                $exceptionHandler({message: 'nothing found to do in data'});
             }
 
             return dfd.promise;
@@ -96,7 +99,7 @@
                 dfd.resolve(eventlist);
 
             }, function (error) {
-                $log.error(error);
+                $exceptionHandler(error);
                 dfd.resolve([]);
             });
 
@@ -107,10 +110,11 @@
             var dfd = $q.defer();
             EventService.getEventById(id).then(function (event) {
                 event.$delete({token: authService.getToken()}, function (response) {
-                    $log.log(response);
+                    dfd.resolve(response);
+
                 }, function (response) {
-                    $log.error(response);
                     dfd.reject({});
+                    $exceptionHandler(response);
                 });
             });
 

@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('userService', ['SailsResourceService', '$auth', '$q', '$log', function (SailsResourceService, $auth, $q, $log) {
+    angular.module('foodCircle').service('userService', ['SailsResourceService', '$auth', '$q', '$exceptionHandler', function (SailsResourceService, $auth, $q, $exceptionHandler) {
 
         var userService = {},
 
@@ -35,7 +35,7 @@
                 dfd.resolve(user);
 
             }, function (error) {
-                $log.error(error);
+                $exceptionHandler(error);
                 dfd.resolve({});
             });
         };

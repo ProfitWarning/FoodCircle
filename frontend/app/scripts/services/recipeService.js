@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', '$auth', function (IngredientModel, SailsResourceService, authService, $log, $q, $auth) {
+    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', '$auth', '$exceptionHandler', function (IngredientModel, SailsResourceService, authService, $log, $q, $auth, $exceptionHandler) {
 
         var recipeService = {},
 
@@ -45,7 +45,7 @@
                     dfd.resolve(response);
                 },
                 function (response) {
-                    $log.error(response);
+                    $exceptionHandler(response);
                     dfd.resolve({});
                 });
             return dfd.promise;
@@ -67,6 +67,7 @@
                     dfd.resolve(event);
                 }, function (error) {
                     dfd.reject(error);
+                    $exceptionHandler(error);
                 });
 
             } else if (data.id) {
@@ -79,6 +80,7 @@
                         dfd.resolve(event);
                     }, function (error) {
                         dfd.reject(error);
+                        $exceptionHandler(error);
                     });
                 });
             } else {
@@ -96,7 +98,7 @@
                     dfd.resolve(response);
                 },
                 function (response) {
-                    $log.error(response);
+                    $exceptionHandler(response);
                     dfd.resolve({});
                 });
 
@@ -135,7 +137,7 @@
                 recipe.$delete({token: authService.getToken()}, function (response) {
                     dfd.resolve(response);
                 }, function (response) {
-                    $log.error(response);
+                    $exceptionHandler(response);
                     dfd.reject({});
                 });
             });
@@ -151,12 +153,12 @@
                     dfd.resolve(response);
                 },
                     function (response) {
-                        $log.error(response);
+                        $exceptionHandler(response);
                         dfd.reject({});
                     });
 
             }, function (response) {
-                $log.error(response);
+                $exceptionHandler(response);
             });
 
             return dfd.promise;

@@ -35,6 +35,30 @@
                 return $delegate;
             });
 
+            $provide.decorator('$exceptionHandler', ['$delegate', '$injector', 'AUTH_EVENTS', function ($delegate, $injector, AUTH_EVENTS) {
+
+                var $rootScope;
+
+                return function (exception, cause) {
+                    $rootScope = $rootScope || $injector.get('$rootScope');
+debugger;
+                    //handle JWR
+                    if(exception.body && exception.error && exception.headers) { //is jwr
+                        if(exception.statusCode && exception.statusCode > 400) {
+                            $rootScope.$broadcast({
+                                401: AUTH_EVENTS.notAuthenticated,
+                                403: AUTH_EVENTS.notAuthorized,
+                                419: AUTH_EVENTS.sessionTimeout,
+                                440: AUTH_EVENTS.sessionTimeout
+                            }[exception.statusCode], exception);
+                        }
+
+                    }
+
+                    $delegate(exception, cause);
+                };
+            }]);
+
         }])
         .constant('API_URL', 'http://localhost:1337/')
         .constant('AUTH_EVENTS', {
@@ -43,7 +67,8 @@
             logoutSuccess: 'auth-logout-success',
             sessionTimeout: 'auth-session-timeout',
             notAuthenticated: 'auth-not-authenticated',
-            notAuthorized: 'auth-not-authorized'
+            notAuthorized: 'auth-not-authorized',
+            tokenExpired: 'auth-token-expired'
         })
         .run(['$rootScope', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', '$log', function ($rootScope, $state, $auth, AUTH_EVENTS, authorization, alert, $log) {
                                                         /*event, toState, toParams, fromState, fromParams*/
@@ -82,21 +107,24 @@
                     event.preventDefault(); // stop current execution
                     $auth.logout();
                     $state.go('main.login'); // go to login
-                    alert('warning', 'Not authorized!');
+                    alert('warning', 'Error', 'You are not authorized!');
                 }
                 $log.log('$stateChangeError - fired when an error occurs during transition.');
                 $log.log(arguments);
             });
 
-            $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
-                event.preventDefault();
+            $rootScope.$on(AUTH_EVENTS.notAuthenticated, function () {
                 $auth.logout();
                 $state.go('main.login'); // go to login
-                alert('warning', 'Not authorized!');
+                alert('warning', 'Error', 'Not authenticated!');
             });
 
-            $rootScope.$on('$sailsSocketError', function () {
+            $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
+                alert('warning', 'Error', 'You are not authorized!');
+            });
 
+            $rootScope.$on('$sailsSocketError', function (error) {
+                $log.log(error);
             });
         }]);
 }());

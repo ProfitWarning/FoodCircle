@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', '$filter', 'recipeService', '$confirm', function (recipeToEdit, Upload, API_URL, $timeout, alert, $filter, recipeService, $confirm) {
+    angular.module('foodCircle').controller('ImageuploadCtrl', ['recipeToEdit', 'Upload', 'API_URL', '$timeout', 'alert', '$filter', 'recipeService', '$confirm', '$exceptionHandler', function (recipeToEdit, Upload, API_URL, $timeout, alert, $filter, recipeService, $confirm, $exceptionHandler) {
 
         var vm = this,
             removeImage = function (image) {
@@ -73,6 +73,7 @@
                 if (response.status > 0) {
                     vm.errorMsg = response.status + ': ' + response.data;
                 }
+                $exceptionHandler(response);
             });
 
             vm.upload.progress(function (evt) {

@@ -10,7 +10,8 @@ function parseModel(req) {
 module.exports = function (req, res, next) {
     'use strict';
 
-    if(req.method !== 'PUT' && req.method !== 'DELETE') {
+
+    if (req.method !== 'PUT' && req.method !== 'DELETE') {
         return next();
     }
 
