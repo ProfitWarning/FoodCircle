@@ -28,7 +28,7 @@
             <div class="col-md-6">
             <p class="input-group">
               <input type="text" class="form-control" name="eventdate" id="eventdate"
-                     datepicker-popup="dd-MMMM-yyyy"
+                     uib-datepicker-popup="{{vm.datepicker.format}}"
                      ng-model="vm.event.date"
                      is-open="vm.datepicker.status.opened"
                      min-date="vm.datepicker.minDate" max-date="vm.datepicker.maxDate"

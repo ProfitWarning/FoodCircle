@@ -19,7 +19,9 @@
                 </div>-->
                 <div class="row">
                     <div class="col-xs-2 col-md-2">
-                        <a class="btn btn-success btn-sm" ui-sref="main.recipe.detail({name:'{{recipe.name}}'})">Detail</a>
+                        <a class="btn btn-success btn-sm"
+                           ui-sref="main.recipe.detail({name:'{{recipe.name}}'})"
+                           ng-click="$event.stopPropagation()">Detail</a>
                     </div>
                     <div class="col-xs-5 col-md-5">
                         <a class="btn btn-success btn-sm" style="margin-left:10px;"
