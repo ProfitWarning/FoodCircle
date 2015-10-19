@@ -15,7 +15,10 @@
                             </div>
                         </div>
                     </div>
-                    <button ng-click="vm.uploadImage(vm.imagesToUpload)" ng-disabled="!fileuploadForm.$valid" class="btn btn-sm btn-primary" id="js-upload-submit">Upload file</button>
+                    <button ng-click="vm.uploadImage(vm.imagesToUpload)"
+                            ng-disabled="!fileuploadForm.$valid"
+                            class="btn btn-sm btn-primary"
+                            id="js-upload-submit">Upload file</button>
                 </div>
             </form>
         </div>
@@ -64,13 +67,13 @@
         <strong>Images:</strong> <small>{{vm.recipe.name}}</small>
         <span ng-click="vm.imagesCollapsed = !vm.imagesCollapsed" class="chevron glyphicon" ng-class="{'glyphicon-chevron-up': !vm.imagesCollapsed,'glyphicon-chevron-down': vm.imagesCollapsed}"></span>
     </div>
-    <div class="row" collapse="vm.imagesCollapsed" >
+    <div class="row" uib-collapse="vm.imagesCollapsed" >
         <div class="col-xs-6 col-sm-4 col-md-4 text-left image-container"
              ng-class="{'text-center': $index % 3 == 1,'text-right': $index % 3 == 2,'mbottom': $index < vm.recipe.images.length - 3, 'toScale': image.selected }"
              ng-repeat="image in vm.recipe.images"
              ng-click="vm.onSelectImage(image, $event)">
             <i ng-show="image.selected" class="fa fa-times" ng-click="vm.onDeleteImage(image, $event); $event.stopPropagation();"></i>
-            <img src="data:{{image.type}};base64,{{image.base64}}" style="max-width:99.0%">
+            <img ng-src="data:{{image.type}};base64,{{image.base64}}" style="max-width:99.0%">
         </div>
     </div>
 </div>

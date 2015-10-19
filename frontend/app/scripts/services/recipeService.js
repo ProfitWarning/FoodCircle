@@ -63,8 +63,8 @@
             if (!recipeDto.then) {
                 recipeDto.recipeowner = userid;
 
-                recipeDto.$save(function (event) {
-                    dfd.resolve(event);
+                recipeDto.$save(function (recipe) {
+                    dfd.resolve(recipe);
                 }, function (error) {
                     dfd.reject(error);
                     $exceptionHandler(error);
@@ -76,8 +76,8 @@
                     recipeToUpdate.recipeowner = userid;
                     recipeToUpdate.token = $auth.getToken();
 
-                    recipeToUpdate.$save(function (event) {
-                        dfd.resolve(event);
+                    recipeToUpdate.$save(function (recipe) {
+                        dfd.resolve(recipe);
                     }, function (error) {
                         dfd.reject(error);
                         $exceptionHandler(error);

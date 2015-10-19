@@ -22,7 +22,14 @@
                     pos = vm.recipe.images.map(function (e) {return e.id; }).indexOf(found[0].id);
                     vm.recipe.images.splice(pos, 1);
                 }
+            },
+
+            calculateAspectRatioFit = function (srcWidth, srcHeight, maxWidth, maxHeight) {
+                var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+
+                return { width: srcWidth * ratio, height: srcHeight * ratio };
             };
+        //function({ maxWidth: someWidth, srcWidth: someOtherWith, maxHeight: someHeight, srcHeight: someOtherHeight });;
 
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
