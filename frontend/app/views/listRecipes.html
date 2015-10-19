@@ -1,7 +1,9 @@
 <div id="recipes" class="row list-group">
     <div id="recipe_{{recipe.id}}" class="item col-xs-4 col-lg-4" ng-repeat="recipe in vm.recipeList" ng-click="vm.onSelectRecipe(recipe, $event)">
         <div class="thumbnail">
-            <img class="group list-group-image" src="images/placeholder_recipe.png" alt="" />
+            <!--<img class="group list-group-image" src="images/placeholder_recipe.png" alt="" />-->
+            <img class="group list-group-image" style="max-height: 191px;" alt="{{recipe.name}}" ng-if="recipe.images[0]" ng-src="data:{{recipe.images[0].type}};base64,{{recipe.images[0].base64}}" />
+            <img title="{{recipe.name}}" ng-src="images/placeholder_recipe.png" ng-if="!recipe.images[0]" style="min-height: 190px;width:100%"/>
             <div class="caption">
                 <h4 class="group inner list-group-item-heading">
                         {{recipe.name}}
@@ -16,13 +18,16 @@
                     </div>
                 </div>-->
                 <div class="row">
-                    <div class="col-xs-6 col-md-6" ng-hide="vm.showEditBtn">
+                    <div class="col-xs-2 col-md-2">
                         <a class="btn btn-success btn-sm" ui-sref="main.recipe.detail({name:'{{recipe.name}}'})">Detail</a>
                     </div>
-                    <div class="col-xs-6 col-md-6" ng-show="vm.showEditBtn">
-                        <a class="btn btn-success btn-sm" ui-sref="main.myrecipes.edit({name:'{{recipe.name}}'})" ng-click="$event.stopPropagation()">Edit</a>
+                    <div class="col-xs-5 col-md-5">
+                        <a class="btn btn-success btn-sm" style="margin-left:10px;"
+                           ui-sref="main.myrecipes.edit({name:'{{recipe.name}}'})"
+                           ng-click="$event.stopPropagation()"
+                           ng-if="vm.showEditBtn">Edit</a>
                     </div>
-                    <div class="col-xs-6 col-md-6">
+                    <div class="col-xs-4 col-md-4">
                         <p class="small text-right user-detail-link">
                             by: <a class="small" ui-sref="main.user.detail({id:'{{recipe.recipeowner.id}}'})"> {{recipe.recipeowner.name}}</a>
                         </p>
