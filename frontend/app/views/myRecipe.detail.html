@@ -2,16 +2,16 @@
     <h2>{{vm.recipe.name}}</h2>
 </div>
 <div class="row">
-    <div class="col-xs-12 col-sm-8" ng-controller="CarouselCtrl as vm">
-        <carousel interval="vm.carousel.interval" no-wrap="vm.carousel.noWrapSlides" template-url="views/partials/carousel.template.html">
-            <slide ng-repeat="slide in vm.carousel.slides" active="slide.active">
-                <img ng-src="{{slide.image}}" style="margin:auto">
+    <div class="col-xs-12 col-sm-8" ng-controller="CarouselCtrl as vmCarousel">
+        <uib-carousel interval="vmCarousel.carousel.interval" no-wrap="vmCarousel.carousel.noWrapSlides" template-url="views/partials/carousel.template.html">
+            <uib-slide ng-repeat="slide in vm.recipe.images" active="slide.active">
+                <img ng-src="data:{{slide.type}};base64,{{slide.base64}}" style="margin:auto">
                 <!--<div class="carousel-caption">
                     <h4>Slide {{$index}}</h4>
                     <p>{{vm.carousel.slide.text}}</p>
                 </div>-->
-            </slide>
-        </carousel>
+            </uib-slide>
+        </uib-carousel>
     </div>
 </div>
 <div class="">

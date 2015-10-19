@@ -9,7 +9,8 @@
 */
 
 var SkipperDisk = require('skipper-disk'),
-    path = require('path');
+    path = require('path'),
+    slugger = require('slugger');
 
 module.exports = {
     upload: function (req, res) {
@@ -38,7 +39,7 @@ module.exports = {
 
                         } else {
                             newImages.push({
-                                filename: img.filename,
+                                filename: slugger(recipeName + '_' + img.filename),
                                 size: img.size,
                                 type: img.type,
                                 fd: img.fd,
@@ -78,8 +79,8 @@ module.exports = {
                     }
                     recipe.save(function (err, updatedRecipe) {
                         if (err) {
-                            return res.json('401', {
-                                err: err.details
+                            return res.json('400', {
+                                error: err.details
                             });
                         }
 

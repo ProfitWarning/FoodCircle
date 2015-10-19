@@ -13,17 +13,17 @@
     'use strict';
 
     angular.module('foodCircle').controller('CarouselCtrl', function () {
-        var vm = this, i,
+        var vmCarousel = this, i,
 
             getSlides = function () {
-                var newWidth = 600 + vm.carousel.slides.length + 1;
-                vm.carousel.slides.push({
+                var newWidth = 600 + vmCarousel.carousel.slides.length + 1;
+                vmCarousel.carousel.slides.push({
                     image: '//placekitten.com/' + newWidth + '/300',
-                    text: ['More', 'Extra', 'Lots of', 'Surplus'][vm.carousel.slides.length % 4] + ' ' + ['Cats', 'Kittys', 'Felines', 'Cutes'][vm.carousel.slides.length % 4]
+                    text: ['More', 'Extra', 'Lots of', 'Surplus'][vmCarousel.carousel.slides.length % 4] + ' ' + ['Cats', 'Kittys', 'Felines', 'Cutes'][vmCarousel.carousel.slides.length % 4]
                 });
             };
 
-        vm.carousel = {
+        vmCarousel.carousel = {
             interval: 5000,
             noWrapSlides: false,
             slides: []

@@ -43,7 +43,7 @@ module.exports = function (req, res, next) {
     jwToken.verify(token, function (err, token) {
         if (err) {
 
-            if (error.name === 'TokenExpiredError') {
+            if (err.name && err.name === 'TokenExpiredError') {
                 return res.json(401, {
                     error: err
                 });
