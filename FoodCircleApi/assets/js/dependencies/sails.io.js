@@ -70,7 +70,7 @@ var parts=["source","protocol","authority","userInfo","user","password","host","
   // Current version of this SDK (sailsDK?!?!) and other metadata
   // that will be sent along w/ the initial connection request.
   var SDK_INFO = {
-    version: '0.11.0', // TODO: pull this automatically from package.json during build.
+    version: '0.11.2', // TODO: pull this automatically from package.json during build.
     platform: typeof module === 'undefined' ? 'browser' : 'node',
     language: 'javascript'
   };
