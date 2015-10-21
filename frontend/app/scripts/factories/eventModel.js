@@ -5,12 +5,14 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').factory('EventModel', ['authService', function (authService) {
+    angular.module('foodCircle').factory('EventModel', ['authService', '$moment', function (authService, $moment) {
 
-        var Eventmodel = function (title, description, date, blog, eventOwnerId) {
+        var Eventmodel = function (title, description, date, blog, eventOwnerId, startDate, endDate) {
             this.title = title;
             this.description = description;
-            this.date = date;
+            this.date = $moment(date).toISOString();
+            this.startDate = startDate ? $moment(startDate).toISOString() : date;
+            this.endDate = endDate ? $moment(endDate).toISOString() : date;
             this.blog = blog;
             this.eventowner = eventOwnerId || authService.currentUser().id;
         };
@@ -22,7 +24,7 @@
                 data = {
                     title: null,
                     description: null,
-                    date: new Date(),
+                    date: new Date().toISOString(),
                     blog: null,
                     eventowner: authService.currentUser().id
                 };
@@ -30,7 +32,7 @@
                 data.eventowner = data.eventowner.id || authService.currentUser().id;
             }
 
-            var newEvent = new Eventmodel(data.title, data.description, data.date.toString(), data.blog, data.eventowner);
+            var newEvent = new Eventmodel(data.title, data.description, data.date, data.blog, data.eventowner, data.startDate, data.endDate);
 
             if (data.id) {
                 newEvent.id = data.id;

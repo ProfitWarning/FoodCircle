@@ -24,6 +24,11 @@ module.exports = {
             type: 'date'
         },
 
+        allday: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+
         title: {
             type: 'string',
             required: true
@@ -43,7 +48,6 @@ module.exports = {
             required: true
         },
 
-        // We don't wan't to send back encrypted password either
         toJSON: function () {
             'use strict';
 

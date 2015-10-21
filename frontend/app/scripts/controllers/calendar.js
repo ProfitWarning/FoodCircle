@@ -46,8 +46,8 @@
         initEvents = function () {
             EventService.getEventList().then(function (events) {
                 events.forEach(function (event) {
-                    event.startsAt = event.startsAt || $moment(event.date).toDate();
-                    event.endsAt = event.endsAt || $moment(event.date).toDate();
+                    event.startsAt = event.startsAt || $moment(event.startDate).toDate();
+                    event.endsAt = event.endsAt || $moment(event.endDate).toDate();
                     event.isOwned = authService.currentUser().id === event.eventowner.id;
                     event.editable = event.isOwned;
                     event.deletable = event.isOwned;

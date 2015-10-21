@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-         <!--Description body-->
+        <!--Description body-->
         <div class="form-group">
             <label class="col-md-3 control-label" for="description">Your event description</label>
             <div class="col-md-9" ng-class="{ 'has-error': eventform.description.$touched && eventform.description.$invalid }">
@@ -23,31 +23,77 @@
             </div>
         </div>
         <!-- Date -->
+
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description">Your event date</label>
-            <div class="col-md-6">
-            <p class="input-group">
-              <input type="text" class="form-control" name="eventdate" id="eventdate"
-                     uib-datepicker-popup="{{vm.datepicker.format}}"
-                     ng-model="vm.event.date"
-                     is-open="vm.datepicker.status.opened"
-                     min-date="vm.datepicker.minDate" max-date="vm.datepicker.maxDate"
-                     datepicker-options="vm.datepicker.dateOptions"
-                     close-text="Close"
-                     required>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="vm.datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                <div class="help-block" ng-messages="eventform.eventdate.$error" ng-show="eventform.eventdate.$touched">
-                    <p ng-message="required">Event date is required.</p>
-                </div>
-            </p>
+            <label class="col-md-3 control-label" for="description">Your event start date</label>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="eventstartdate" id="eventstartdate"
+                           uib-datepicker-popup="{{vm.datepicker.format}}"
+                           ng-model="vm.event.startDate"
+                           is-open="vm.datepicker.status.openedstart"
+                           min-date="vm.datepicker.minDate"
+                           max-date="vm.datepicker.maxDate"
+                           datepicker-options="vm.datepicker.dateOptions"
+                           ng-change="vm.datepicker.onChanged('start', vm.event.startDate)"
+                           close-text="Close"
+                           required>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.datepicker.open('start', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    <div class="help-block" ng-messages="eventform.eventstartdate.$error" ng-show="eventform.eventstartdate.$touched">
+                        <p ng-message="required">Event date is required.</p>
+                    </div>
+                </p>
+            </div>
+            <div class="col-md-3">
+                <label class="col-md-2 control-label" for="description">Start</label>
+                <uib-timepicker class="datetimepicker" ng-model="vm.event.startDate"
+                                ng-change="vm.timepicker.onChanged('start')"
+                                hour-step="vm.timepicker.hstep"
+                                minute-step="vm.timepicker.mstep"
+                                show-meridian="vm.timepicker.ismeridian"
+                                show-spinners="false">
+                </uib-timepicker>
+            </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Your event end date</label>
+            <div class="col-md-4">
+                <p class="input-group">
+                    <input type="text" class="form-control" name="eventenddate" id="eventenddate"
+                           uib-datepicker-popup="{{vm.datepicker.format}}"
+                           ng-model="vm.event.endDate"
+                           is-open="vm.datepicker.status.openedend"
+                           min-date="vm.datepicker.endDate.minDate"
+                           max-date="vm.datepicker.maxDate"
+                           datepicker-options="vm.datepicker.dateOptions"
+                           ng-change="vm.datepicker.onChanged('end', vm.event.endDate)"
+                           close-text="Close"
+                           required>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.datepicker.open('end', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    <div class="help-block" ng-messages="eventform.eventenddate.$error" ng-show="eventform.eventenddate.$touched">
+                        <p ng-message="required">Event date is required.</p>
+                    </div>
+                </p>
+            </div>
+            <div class="col-md-3">
+                <label class="col-md-2 control-label" for="description">End</label>
+                <uib-timepicker class="datetimepicker" ng-model="vm.event.endDate"
+                                ng-change="vm.timepicker.onChanged('end')"
+                                hour-step="vm.timepicker.hstep"
+                                minute-step="vm.timepicker.mstep"
+                                show-meridian="vm.timepicker.ismeridian"
+                                show-spinners="false">
+                </uib-timepicker>
+            </div>
         </div>
         <!-- Form actions -->
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>  Save</button>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Save</button>
             </div>
         </div>
     </fieldset>

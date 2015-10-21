@@ -17,6 +17,8 @@
 
         vm.event = EventModel.create(event);
         vm.datepicker = {};
+        vm.datepicker.endDate = vm.datepicker.endDate || {};
+        vm.datepicker.endDate.minDate = vm.datepicker.endDate.minDate || {};
 
         vm.submit = function (isValidForm, eventform, event) {
             event.preventDefault();
@@ -33,10 +35,12 @@
         };
 
         vm.datepicker.createEventDate = function () {
-            if (event && event.date) {
-                vm.event.date = $moment(event.date).toDate();
+            if (event && event.startDate) {
+                vm.event.date = vm.event.startDate = $moment(event.startDate).toDate();
+            } else if (event && event.endDate) {
+                vm.event.date = vm.event.endDate = $moment(event.endDate).toDate();
             } else {
-                vm.event.date = new Date();
+                vm.event.date = vm.event.startDate = $moment().toDate();
             }
         };
         vm.datepicker.createEventDate();
@@ -50,15 +54,14 @@
             return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
         };
 
-        vm.datepicker.toggleMin = function () {
-            vm.datepicker.minDate = $moment().startOf('year');
-        };
-        vm.datepicker.toggleMin();
-        vm.datepicker.maxDate = new Date(2025, 5, 30);
 
-        vm.datepicker.open = function (event) {
+        vm.datepicker.maxDate = new Date(2025, 5, 30);
+        vm.datepicker.endDate.minDate = vm.event.date;
+
+        vm.datepicker.open = function (mode, event) {
             event.preventDefault();
-            vm.datepicker.status.opened = true;
+
+            vm.datepicker.status['opened' + mode] = true;
         };
 
         vm.datepicker.dateOptions = {
@@ -71,6 +74,52 @@
 
         vm.datepicker.status = {
             opened: false
+        };
+
+
+        vm.datepicker.onChanged = function (mode, date) {
+
+            switch (mode) {
+
+            case 'start':
+                if ($moment(date.toISOString()).isAfter(vm.event.endDate.toISOString())) {
+                    vm.datepicker.endDate = date;
+                    vm.event.endDate = date;
+                    vm.datepicker.endDate.minDate = date;
+                } else {
+                    vm.datepicker.endDate.minDate = date;
+                }
+                break;
+            case 'end':
+                if ($moment(date.toISOString()).isBefore(vm.event.startDate.toISOString())) {
+                    vm.datepicker.endDate = vm.event.startDate;
+                    vm.event.endDate = vm.event.startDate;
+                    vm.datepicker.endDate.minDate = vm.event.startDate;
+                }
+                break;
+            }
+
+        };
+
+        vm.timepicker = {};
+        vm.timepicker.startTime = vm.event.startDate = new $moment(vm.event.startDate).startOf('hour').toDate();
+        vm.timepicker.endTime = vm.event.endDate = new $moment(vm.event.endDate).add(1, 'h').startOf('hour').toDate();
+        vm.timepicker.hstep = 1;
+        vm.timepicker.mstep = 15;
+
+        vm.timepicker.options = {
+            hstep: [1, 2, 3],
+            mstep: [1, 5, 10, 15, 25, 30]
+        };
+
+        vm.timepicker.ismeridian = false;
+
+        vm.timepicker.update = function () {
+
+        };
+
+        vm.timepicker.clear = function (mode) {
+
         };
     }]);
 }());
