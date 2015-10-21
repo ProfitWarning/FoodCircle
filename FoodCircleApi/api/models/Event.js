@@ -48,6 +48,10 @@ module.exports = {
             required: true
         },
 
+        recipeowner: {
+            model: 'Recipe'
+        },
+
         toJSON: function () {
             'use strict';
 

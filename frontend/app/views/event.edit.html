@@ -90,6 +90,30 @@
                 </uib-timepicker>
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="description">Add recipe</label>
+            <div class="col-md-1">
+                <p class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default " ng-click="vm.onAddRecipe()"><i class="glyphicon glyphicon-th-list"></i></button>
+                    </span>
+                </p>
+            </div>
+            <ul class="list-group col-md-5" ng-repeat="recipe in vm.recipeList" >
+                <li class="list-group-item" style="position:relative">
+                    <span>{{recipe.name}}</span>
+                    <div class="list-item-btn-list">
+                        <ul>
+                            <li style="">
+                                <a ng-click="vm.onRecipeSelected(recipe, $event)">
+                                    <span class="glyphicon" ng-class="{'glyphicon-ok':recipe.selectedToAdd, 'glyphicon-remove':!recipe.selectedToAdd}"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
         <!-- Form actions -->
         <div class="form-group">
             <div class="col-md-12 text-right">

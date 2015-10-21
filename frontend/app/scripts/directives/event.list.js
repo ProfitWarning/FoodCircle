@@ -26,14 +26,10 @@
                     var query = vm.eventListQuery;
                     EventService.getEventList(query).then(function (list) {
                         list.forEach(function (eventItem) {
-                            debugger;
-                            eventItem.isOwner = eventItem.eventowner.id == vm.eventOwnerId;
+                            eventItem.isOwner = eventItem.eventowner.id === vm.eventOwnerId;
                             vm.events.push(eventItem);
                         });
                     });
-
-                    vm.eve
-
                 };
 
                 initEvents();

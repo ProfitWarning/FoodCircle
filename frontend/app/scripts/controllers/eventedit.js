@@ -12,10 +12,11 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', function (EventService, EventModel, alert, event, $moment) {
+    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', 'recipeService', function (EventService, EventModel, alert, event, $moment, recipeService) {
         var vm = this;
 
         vm.event = EventModel.create(event);
+        vm.recipeList = [];
         vm.datepicker = {};
         vm.datepicker.endDate = vm.datepicker.endDate || {};
         vm.datepicker.endDate.minDate = vm.datepicker.endDate.minDate || {};
@@ -121,5 +122,27 @@
         vm.timepicker.clear = function (mode) {
 
         };
+
+
+        vm.onAddRecipe = function () {
+            if (vm.recipeList && vm.recipeList.length > 0) {
+                vm.recipeList = null;
+                return;
+            }
+            recipeService.getRecipeListByUser({}, {sort: name}).then(function (list) {
+                vm.recipeList = list;
+            });
+        };
+
+        vm.onRecipeSelected = function (recipe, event) {
+            event.preventDefault();
+
+            vm.recipeList.forEach(function (item) {
+                item.selectedToAdd = false;
+            });
+            debugger;
+            recipe.selectedToAdd = true;
+        };
+
     }]);
 }());
