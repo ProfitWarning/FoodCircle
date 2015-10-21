@@ -21,6 +21,13 @@ module.exports = function (req, res, next) {
         Model = req._sails.models[model],
         modelId = req.params.id;
 
+
+    if (model.toLocaleLowerCase() === 'user') {
+        if (modelId !== currentUserId) {
+            return res.json(403, {error: 'You are not allowed to do that'});
+        }
+    }
+
     Model.findOne({id: modelId}).then(function (foundModel) {
         if (!_.isObject(foundModel)) {
             req.options.unknownModel = true;
@@ -34,6 +41,5 @@ module.exports = function (req, res, next) {
         }
 
         next();
-    })
-        .catch(next);
+    })['catch'](next);
 };

@@ -24,7 +24,7 @@
 
                     'events': {
                         controller: 'ProfileCtrl as vm',
-                        template: '<profile-event-list event-item-click="vm.onEventItemClick(event)" event-list-query="vm.eventListQuery"></profile-event-list>'
+                        template: '<profile-event-list event-item-click="vm.onEventItemClick(event)" event-owner-id="vm.eventOwnerId" event-list-query="vm.eventListQuery"></profile-event-list>'
                     },
                     'recipes': {
                         controller: 'ProfileCtrl as vm',

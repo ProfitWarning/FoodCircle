@@ -53,6 +53,9 @@ module.exports.policies = {
 
     'UserController': {
         'create': true,
+        'delete': ['isAuthorized', 'ownModel'],
+        'remove': ['isAuthorized', 'ownModel'],
+        'update': ['isAuthorized', 'ownModel'],
         'find': true,
         'findOne': true
     },
@@ -92,7 +95,7 @@ module.exports.policies = {
         'delete': ['isAuthorized', 'ownModel'],
         'remove': ['isAuthorized', 'ownModel'],
         'update': ['isAuthorized', 'ownModel'],
-        'find': true,
-        'findOne': true
+        'find': ['isAuthorized'],
+        'findOne': ['isAuthorized']
     }
 };

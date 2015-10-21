@@ -16,6 +16,8 @@
 
         var controller = function () {
                 var vm = this, initEvents;
+                vm.events = [];
+
                 vm.onEventItemClick = function (event) {
                     vm.eventItemClick({event: event});
                 };
@@ -23,8 +25,15 @@
                 initEvents = function () {
                     var query = vm.eventListQuery;
                     EventService.getEventList(query).then(function (list) {
-                        vm.events = list;
+                        list.forEach(function (eventItem) {
+                            debugger;
+                            eventItem.isOwner = eventItem.eventowner.id == vm.eventOwnerId;
+                            vm.events.push(eventItem);
+                        });
                     });
+
+                    vm.eve
+
                 };
 
                 initEvents();
@@ -41,7 +50,8 @@
             controllerAs: 'vm',
             bindToController: {
                 eventItemClick: '&',
-                eventListQuery: '='
+                eventListQuery: '=',
+                eventOwnerId: '='
             }/*,
             link: function postLink(scope, element, attrs) {
 
