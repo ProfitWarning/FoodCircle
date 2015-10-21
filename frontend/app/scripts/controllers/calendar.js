@@ -51,6 +51,9 @@
                     event.isOwned = authService.currentUser().id === event.eventowner.id;
                     event.editable = event.isOwned;
                     event.deletable = event.isOwned;
+                    event.titleHtml = ['<span style="padding-right:15px;">',
+                                  event.title,
+                                   '</span>'].join("\n");
 
                     var eventDisplay = angular.extend({}, defaultEvent, event);
 

@@ -9,27 +9,30 @@
                 <a class="event-item"  href="javascript:;"
                    uib-popover="{{event.description}}"
                    popover-title="{{event.title}}"
-                   popover-trigger="click">
-
-                    <span ng-bind-html="vm.$sce.trustAsHtml(event.title)"></span> (
+                   popover-trigger="mouseenter">
+                    <span ng-bind-html="vm.$sce.trustAsHtml(event.titleHtml)"></span>
+                </a>
+                <p>
+                    Start:
                     <span ng-bind="event.startsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
-                    <span ng-if="vm.calendarConfig.displayEventEndTimes && event.endsAt"> -
+                    <span ng-if="vm.calendarConfig.displayEventEndTimes && event.endsAt"> End:
                         <span ng-bind="event.endsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
-                    </span>)
+                    </span>
+                    <span><em> {{event.eventowner.name}}</em></span>
+                    <a href="javascript:;" class="event-item-edit"
+                       ng-if="vm.editEventHtml && event.editable !== false"
+                       ng-bind-html="vm.$sce.trustAsHtml(vm.editEventHtml)"
+                       ng-click="vm.onEditEventClick({calendarEvent: event})">
+                    </a>
 
-                </a>
+                    <a href="javascript:;" class="event-item-delete"
+                       ng-if="vm.deleteEventHtml && event.deletable !== false"
+                       ng-bind-html="vm.$sce.trustAsHtml(vm.deleteEventHtml)"
+                       ng-click="vm.onDeleteEventClick({calendarEvent: event})">
+                    </a>
+                </p>
 
-                <a href="javascript:;" class="event-item-edit"
-                   ng-if="vm.editEventHtml && event.editable !== false"
-                   ng-bind-html="vm.$sce.trustAsHtml(vm.editEventHtml)"
-                   ng-click="vm.onEditEventClick({calendarEvent: event})">
-                </a>
 
-                <a href="javascript:;" class="event-item-delete"
-                   ng-if="vm.deleteEventHtml && event.deletable !== false"
-                   ng-bind-html="vm.$sce.trustAsHtml(vm.deleteEventHtml)"
-                   ng-click="vm.onDeleteEventClick({calendarEvent: event})">
-                </a>
             </li>
         </ul>
     </div>

@@ -41,10 +41,9 @@
 
                 return function (exception, cause) {
                     $rootScope = $rootScope || $injector.get('$rootScope');
-debugger;
                     //handle JWR
-                    if(exception.body && exception.error && exception.headers) { //is jwr
-                        if(exception.statusCode && exception.statusCode > 400) {
+                    if (exception.body && exception.error && exception.headers) { //is jwr
+                        if (exception.statusCode && exception.statusCode > 400) {
                             $rootScope.$broadcast({
                                 401: AUTH_EVENTS.notAuthenticated,
                                 403: AUTH_EVENTS.notAuthorized,
