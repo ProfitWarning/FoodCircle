@@ -34,7 +34,7 @@ module.exports = {
 
         events: {
             collection: 'Event',
-            via: 'recipeowner'
+            via: 'recipes'
         },
 
         recipeowner : {

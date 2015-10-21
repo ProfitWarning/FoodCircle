@@ -18,7 +18,16 @@
             sailsResourceName = 'Event',
 
             createQueryDto = function (query) {
-                return query || {};
+                var tkn = authService.getToken();
+
+                if (!angular.isObject(query)) {
+                    query = {};
+                }
+
+                if (tkn) {
+                    query.token = tkn;
+                }
+                return query;
             },
 
             createDto = function (data) {

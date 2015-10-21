@@ -28,7 +28,9 @@
                 return;
             }
 
-            EventService.createOrUpdate(EventModel.create(vm.event)).then(function (event) {
+            var tmpModel = EventModel.create(vm.event);
+            debugger;
+            EventService.createOrUpdate(tmpModel).then(function (event) {
                 alert('info', event.title, 'saved');
             })['catch'](function () {
                 alert('warning', 'Error', 'Saving event');
@@ -138,10 +140,14 @@
             event.preventDefault();
 
             vm.recipeList.forEach(function (item) {
-                item.selectedToAdd = false;
+                if (item.id !== recipe.id) {
+                    item.selectedToAdd = false;
+                }
             });
-            debugger;
-            recipe.selectedToAdd = true;
+
+            recipe.selectedToAdd = !recipe.selectedToAdd;
+            vm.event.recipes = [];
+            vm.event.recipes.push(recipe.id);
         };
 
     }]);

@@ -48,8 +48,9 @@ module.exports = {
             required: true
         },
 
-        recipeowner: {
-            model: 'Recipe'
+        recipes: {
+            collection: 'Recipe',
+            via: 'events'
         },
 
         toJSON: function () {

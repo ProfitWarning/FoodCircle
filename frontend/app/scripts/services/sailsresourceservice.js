@@ -54,6 +54,7 @@
                 rsConfig.socket = $window.io.sails.connect(rsConfig.origin);
             }
             var a = angular.extend({}, actions, DEFAULT_ACTIONS);
+
             return sailsResource(name, a, rsConfig);
         };
 
