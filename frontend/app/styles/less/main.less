@@ -743,6 +743,12 @@ cal-year-box .row:hover,
     /* -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
     box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);*/
     box-shadow: none;
+
+    ul {
+        columns: 2;
+        -webkit-columns: 2;
+        -moz-columns: 2;
+    }
 }
 span[data-cal-date] {
     opacity: 0.8;
@@ -771,6 +777,7 @@ span[data-cal-date] {
         padding: 0;
         width: 100%;
         text-align: center;
+        columns: 2;
 
         > li {
             display: block;
@@ -784,6 +791,4 @@ span[data-cal-date] {
             }
         }
     }
-
-
 }
