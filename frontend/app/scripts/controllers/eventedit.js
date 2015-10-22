@@ -12,30 +12,23 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', 'recipeService', function (EventService, EventModel, alert, event, $moment, recipeService) {
-        var vm = this;
+    angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', 'recipeService', '$filter', function (EventService, EventModel, alert, event, $moment, recipeService, $filter) {
+        var vm = this,
+
+            removeRecipe = function (array, id) {
+                var found = $filter('filter')(array, {id: id}, false),
+                    pos;
+                if (found && found.length > 0) {
+                    pos = array.map(function (e) {return e.id; }).indexOf(found[0].id);
+                    array.splice(pos, 1);
+                }
+            };
 
         vm.event = EventModel.create(event);
-        vm.recipeList = [];
+        vm.recipeList = vm.event.recipes || [];
         vm.datepicker = {};
         vm.datepicker.endDate = vm.datepicker.endDate || {};
         vm.datepicker.endDate.minDate = vm.datepicker.endDate.minDate || {};
-
-        vm.submit = function (isValidForm, eventform, event) {
-            event.preventDefault();
-
-            if (!isValidForm) {
-                return;
-            }
-
-            var tmpModel = EventModel.create(vm.event);
-            debugger;
-            EventService.createOrUpdate(tmpModel).then(function (event) {
-                alert('info', event.title, 'saved');
-            })['catch'](function () {
-                alert('warning', 'Error', 'Saving event');
-            });
-        };
 
         vm.datepicker.createEventDate = function () {
             if (event && event.startDate) {
@@ -126,28 +119,46 @@
         };
 
 
-        vm.onAddRecipe = function () {
-            if (vm.recipeList && vm.recipeList.length > 0) {
-                vm.recipeList = null;
+        vm.submit = function (isValidForm, eventform, event) {
+            event.preventDefault();
+
+            if (!isValidForm) {
                 return;
             }
+
+            var tmpModel = EventModel.create(vm.event),
+                foundSelected = $filter('filter')(vm.recipeList, {selectedToAdd: true}, false);
+            if (foundSelected.length > 0) {
+                tmpModel.recipes = foundSelected;
+            }
+
+            EventService.createOrUpdate(tmpModel).then(function (event) {
+                alert('info', event.title, 'saved');
+            })['catch'](function () {
+                alert('warning', 'Error', 'Saving event');
+            });
+        };
+
+
+        vm.onAddRecipe = function (index) {
+            /*if (vm.recipeList && vm.recipeList.length > 0) {
+                vm.recipeList = null;
+                return;
+            }*/
             recipeService.getRecipeListByUser({}, {sort: name}).then(function (list) {
-                vm.recipeList = list;
+                var found = $filter('filter')(vm.recipeList, {selectedToAdd: true}, false);
+                found.forEach(function (item) {
+                    removeRecipe(list, item.id);
+                });
+                vm.recipeList = found.concat(list);
             });
         };
 
         vm.onRecipeSelected = function (recipe, event) {
             event.preventDefault();
 
-            vm.recipeList.forEach(function (item) {
-                if (item.id !== recipe.id) {
-                    item.selectedToAdd = false;
-                }
-            });
-
             recipe.selectedToAdd = !recipe.selectedToAdd;
-            vm.event.recipes = [];
-            vm.event.recipes.push(recipe.id);
+            removeRecipe(vm.event.recipes, recipe.id);
         };
 
     }]);

@@ -27,10 +27,17 @@
                     description: null,
                     date: new Date().toISOString(),
                     blog: null,
-                    eventowner: authService.currentUser().id
+                    eventowner: authService.currentUser().id,
+                    recipes: []
                 };
             } else {
                 data.eventowner = data.eventowner.id || authService.currentUser().id;
+            }
+
+            if (data.recipes.length > 0) {
+                data.recipes.forEach(function (recipe) {
+                    recipe.selectedToAdd = true;
+                });
             }
 
             var newEvent = new Eventmodel(data.title, data.description, data.date, data.blog, data.eventowner, data.startDate, data.endDate, data.recipes);
