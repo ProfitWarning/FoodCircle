@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('EventService', ['$auth', 'SailsResourceService', '$q', 'authService', '$exceptionHandler', function ($auth, SailsResourceService, $q, authService, $exceptionHandler) {
+    angular.module('foodCircle').service('EventService', ['BaseService', '$auth', 'SailsResourceService', '$q', 'authService', '$exceptionHandler', function (BaseService, $auth, SailsResourceService, $q, authService, $exceptionHandler) {
 
         var EventService = {},
             sailsResourceName = 'Event',
@@ -130,6 +130,7 @@
             return dfd.promise;
         };
 
+        BaseService.setPrototypeOf(EventService, BaseService);
 
         return EventService;
 

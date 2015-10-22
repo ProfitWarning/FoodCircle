@@ -13,16 +13,7 @@
     'use strict';
 
     angular.module('foodCircle').controller('EventEditCtrl', ['EventService', 'EventModel', 'alert', 'event', '$moment', 'recipeService', '$filter', function (EventService, EventModel, alert, event, $moment, recipeService, $filter) {
-        var vm = this,
-
-            removeRecipe = function (array, id) {
-                var found = $filter('filter')(array, {id: id}, false),
-                    pos;
-                if (found && found.length > 0) {
-                    pos = array.map(function (e) {return e.id; }).indexOf(found[0].id);
-                    array.splice(pos, 1);
-                }
-            };
+        var vm = this;
 
         vm.event = EventModel.create(event);
         vm.recipeList = vm.event.recipes || [];
@@ -148,7 +139,7 @@
             recipeService.getRecipeListByUser({}, {sort: name}).then(function (list) {
                 var found = $filter('filter')(vm.recipeList, {selectedToAdd: true}, false);
                 found.forEach(function (item) {
-                    removeRecipe(list, item.id);
+                    EventService.removeArrayItem(list, {id: item.id});
                 });
                 vm.recipeList = found.concat(list);
             });
@@ -158,7 +149,7 @@
             event.preventDefault();
 
             recipe.selectedToAdd = !recipe.selectedToAdd;
-            removeRecipe(vm.event.recipes, recipe.id);
+            EventService.removeArrayItem(vm.event.recipes, {id: recipe.id});
         };
 
     }]);

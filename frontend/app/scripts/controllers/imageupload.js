@@ -126,7 +126,7 @@
             })
                 .then(function () {
                     recipeService.removeImage(vm.recipe, image).then(function (deltedImage) {
-                        removeImage(deltedImage);
+                        recipeService.removeArrayItem(vm.recipe.images, {id: deltedImage.id});
                     });
                 });
         };

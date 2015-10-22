@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').factory('EventModel', ['authService', '$moment', function (authService, $moment) {
+    angular.module('foodCircle').factory('EventModel', ['authService', '$moment', '$filter', function (authService, $moment, $filter) {
 
         var Eventmodel = function (title, description, date, blog, eventOwnerId, startDate, endDate, recipes) {
             this.title = title;

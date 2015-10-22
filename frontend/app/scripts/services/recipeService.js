@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').service('recipeService', ['IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', '$auth', '$exceptionHandler', function (IngredientModel, SailsResourceService, authService, $log, $q, $auth, $exceptionHandler) {
+    angular.module('foodCircle').service('recipeService', ['BaseService', 'IngredientModel', 'SailsResourceService', 'authService', '$log', '$q', '$auth', '$exceptionHandler', function (BaseService, IngredientModel, SailsResourceService, authService, $log, $q, $auth, $exceptionHandler) {
 
         var recipeService = {},
 
@@ -163,6 +163,8 @@
 
             return dfd.promise;
         };
+
+        BaseService.setPrototypeOf(recipeService, BaseService);
 
         return recipeService;
     }]);
