@@ -6,8 +6,8 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider', 'calendarConfigProvider', '$provide',
-        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider, calendarConfigProvider, $provide) {
+    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider', '$provide',
+        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider, $provide) {
 
             /*sailsResourceProvider.configuration = {
                 verbose: false, // sailsResource will log messages to console
@@ -22,18 +22,6 @@
             $httpProvider.interceptors.push('authInterceptor');
 
             localStorageServiceProvider.setPrefix('ls');
-
-            calendarConfigProvider.setDateFormatter('moment');
-            //This will display all events on a month view even if they're not in the current month. Default false.
-            calendarConfigProvider.setDisplayAllMonthEvents(true);
-            //This will display event end times on the month and year views. Default false.
-            calendarConfigProvider.setDisplayEventEndTimes(true);
-            $provide.decorator('mwlCalendarSlideBoxDirective', function ($delegate) {
-                var directive = $delegate[0];
-                delete directive.template; //the calendar uses template instead of template-url so you need to delete this
-                directive.templateUrl = 'views/partials/calendar.slidebox.template.html';
-                return $delegate;
-            });
 
             $provide.decorator('$exceptionHandler', ['$delegate', '$injector', 'AUTH_EVENTS', function ($delegate, $injector, AUTH_EVENTS) {
 

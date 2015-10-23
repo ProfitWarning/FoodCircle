@@ -12,14 +12,7 @@
                    popover-trigger="mouseenter">
                     <span ng-bind-html="vm.$sce.trustAsHtml(event.titleHtml)"></span>
                 </a>
-                <p>
-                    Start:
-                    <span ng-bind="event.startsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
-                    <span ng-if="vm.calendarConfig.displayEventEndTimes && event.endsAt"> End:
-                        <span ng-bind="event.endsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
-                    </span>
-                    <span><em> {{event.eventowner.name}}</em></span>
-                    <a href="javascript:;" class="event-item-edit"
+                <a href="javascript:;" class="event-item-edit"
                        ng-if="vm.editEventHtml && event.editable !== false"
                        ng-bind-html="vm.$sce.trustAsHtml(vm.editEventHtml)"
                        ng-click="vm.onEditEventClick({calendarEvent: event})">
@@ -30,9 +23,17 @@
                        ng-bind-html="vm.$sce.trustAsHtml(vm.deleteEventHtml)"
                        ng-click="vm.onDeleteEventClick({calendarEvent: event})">
                     </a>
-                </p>
-
-
+                <div>
+                    Start:
+                    <span ng-bind="event.startsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
+                    <span ng-if="vm.calendarConfig.displayEventEndTimes && event.endsAt"> End:
+                        <span ng-bind="event.endsAt | calendarDate:(isMonthView ? 'time' : 'datetime'):true"></span>
+                    </span>
+                    <span><em> {{event.eventowner.name}}</em></span>
+                </div>
+                <div>
+                    <a ng-if="event.recipes.length > 0" ui-sref="main.recipe.list({query:'{{event.recipeQuery}}'})" class="label label-info">Recipes {{event.recipes.length}}</a>
+                </div>
             </li>
         </ul>
     </div>

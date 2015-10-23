@@ -12,9 +12,21 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', 'authService', function (EventService, $moment, $state, authService) {
+    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', 'authService', '$filter', function (EventService, $moment, $state, authService, $filter) {
 
-        var vm = this, initEvents, defaultEvent;
+        var vm = this, initEvents, defaultEvent, getRecipeIdArray;
+
+        getRecipeIdArray = function (recipes) {
+            var t =  [];
+            recipes.forEach(function (r) {
+                t.push(r.id);
+            });
+
+            return t;
+        };
+
+
+
         vm.events = [];
         vm.calendarView = 'month';
         vm.calendarDay = new Date();
@@ -55,6 +67,7 @@
                                   event.title,
                                    '</span>'].join("\n");
 
+                    event.recipeQuery = angular.toJson({id: getRecipeIdArray(event.recipes)});
                     var eventDisplay = angular.extend({}, defaultEvent, event);
 
                     vm.events.push(eventDisplay);

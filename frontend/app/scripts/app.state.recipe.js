@@ -18,6 +18,7 @@
                 resolve: {
                     recipes: ['recipeService', '$stateParams', 'queryService', function (recipeService, $stateParams, queryService) {
                         var defaultQuery = {where: {id: {'!': ''}}, sort: 'updatedAt DESC'};
+
                         return recipeService.getRecipeList(queryService.queryFromUrlParam(defaultQuery, $stateParams.query)).$promise.then(function (recipes) {
                             return recipes;
                         });

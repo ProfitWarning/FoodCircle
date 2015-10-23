@@ -28,7 +28,8 @@
             };
 
         queryService.queryFromUrlParam = function (oldQueryObj, queryString) {
-            var newQueryObj = parseParamerter(queryString);
+
+            var newQueryObj = angular.fromJson(queryString);
 
             if (oldQueryObj.where) {
                 angular.extend(oldQueryObj.where, newQueryObj);
