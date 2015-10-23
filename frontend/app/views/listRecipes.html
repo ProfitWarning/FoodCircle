@@ -2,8 +2,8 @@
     <div id="recipe_{{recipe.id}}" class="item col-xs-4 col-lg-4" ng-repeat="recipe in vm.recipeList" ng-click="vm.onSelectRecipe(recipe, $event)">
         <div class="thumbnail">
             <!--<img class="group list-group-image" src="images/placeholder_recipe.png" alt="" />-->
-            <img class="group list-group-image" style="max-height: 191px;" alt="{{recipe.name}}" ng-if="recipe.images[0]" ng-src="data:{{recipe.images[0].type}};base64,{{recipe.images[0].base64}}" />
-            <img title="{{recipe.name}}" ng-src="images/placeholder_recipe.png" ng-if="!recipe.images[0]" style="min-height: 190px;width:100%"/>
+            <img class="group list-group-image" style="" alt="{{recipe.name}}" ng-if="recipe.images[0]" ng-src="data:{{recipe.images[0].type}};base64,{{recipe.images[0].base64}}" />
+            <img title="{{recipe.name}}" ng-src="images/placeholder_recipe.png" ng-if="!recipe.images[0]" style=""/>
             <div class="caption">
                 <h4 class="group inner list-group-item-heading">
                         {{recipe.name}}

@@ -53,6 +53,11 @@ module.exports = {
             via: 'events'
         },
 
+        ismeeting: {
+            type: 'boolean',
+            defaultsTo: false
+        },
+
         toJSON: function () {
             'use strict';
 

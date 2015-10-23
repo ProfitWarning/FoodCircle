@@ -7,6 +7,7 @@
 
     angular.module('foodCircle').factory('EventModel', ['authService', '$moment', '$filter', function (authService, $moment, $filter) {
 
+        // TODO itegrate 'ismeeting' property
         var Eventmodel = function (title, description, date, blog, eventOwnerId, startDate, endDate, recipes) {
             this.title = title;
             this.description = description;
@@ -16,6 +17,7 @@
             this.blog = blog;
             this.eventowner = eventOwnerId || authService.currentUser().id;
             this.recipes = recipes || [];
+            this.ismeeting = false;
         };
 
 
