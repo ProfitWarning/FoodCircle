@@ -33,24 +33,32 @@
 
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
+        vm.invalidFilesArray = [];
+        vm.uploadMaxSize = '1.3MB'
 
 
         vm.createProgressbar = function (images) {
-
             //multiple images html5 create progressbars
             if (images) {
                 vm.imagesToUpload = images;
             }
-           /* if (angular.isArray(vm.imagesToUpload)) {
+
+            if (angular.isArray(vm.imagesToUpload)) {
                 //TODO set error in image progressbar
                 //show why error e.g. image too big
                 angular.forEach(vm.imagesToUpload, function (image) {
                     if (image.$error) {
+                        image.errorObj = {};
+                        image.errorObj[image.$error] = true;
+                        return;
+                    }
 
+                    if (image.errorObj) {
+                        delete image.errorObj;
                     }
                 });
 
-            }*/
+            }
         };
         vm.uploadImage = function (images) {
             if (!images) {
