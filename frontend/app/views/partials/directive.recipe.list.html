@@ -8,7 +8,7 @@
                     <span class="year">{{recipe.createdAt | date:'yyyy'}}</span>
                     <span class="time">{{recipe.createdAt | date:'H:mm'}}</span>
                 </time>-->
-                <img alt="{{recipe.name}}" ng-if="recipe.images[0]" ng-src="data:{{recipe.images[0].type}};base64,{{recipe.images[0].base64}}" />
+                <img alt="{{recipe.name}}" ng-if="recipe.images[0]" ng-src="{{vm.API_URL}}{{recipe.images[0].url}}" />
                 <img alt="{{recipe.name}}" ng-if="!recipe.images[0]" />
                 <div class="info">
                     <h3 class="title">{{recipe.name}}</h3>

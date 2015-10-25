@@ -35,6 +35,7 @@
         vm.imagesToUpload = [];
         vm.invalidFilesArray = [];
         vm.uploadMaxSize = '1.3MB'
+        vm.API_URL = API_URL;
 
 
         vm.createProgressbar = function (images) {

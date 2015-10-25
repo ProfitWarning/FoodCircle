@@ -46,9 +46,7 @@ module.exports = {
                                 base64: file.toString('base64'),
                                 forrecipe: recipeId,
                                 skipperFilename: img.fd.substring(img.fd.lastIndexOf('/') + 1),
-                                url: 'image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1),
-                                baseUrl: req.baseUrl,
-                                absoluteUrl: req.baseUrl + '/image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1)
+                                url: 'image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1)
                             });
                         }
                         if (newImages.length === files.length) {

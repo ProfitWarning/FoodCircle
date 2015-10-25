@@ -10,11 +10,13 @@
 
 (function () {
     'use strict';
-    angular.module('foodCircle').directive('profileRecipeList', ['recipeService', function (recipeService) {
+    angular.module('foodCircle').directive('profileRecipeList', ['recipeService', 'API_URL', function (recipeService, API_URL) {
 
         //<profile-recipe-list recipe-item-click="vm.onRecipeItemClick(event)" recipe-list-query="{}"></profile-recipe-list>
         var controller = function () {
                 var vm = this, initRecipes;
+                vm.API_URL = API_URL;
+
                 vm.onRecipeItemClick = function (recipe) {
                     vm.recipeItemClick({recipe: recipe});
                 };

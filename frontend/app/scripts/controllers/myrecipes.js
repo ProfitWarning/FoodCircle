@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'toolsService', '$scope', '$filter', 'recipes', function (recipeService, toolsService, $scope, $filter, recipes) {
+    angular.module('foodCircle').controller('MyRecipesCtrl', ['recipeService', 'toolsService', '$scope', '$filter', 'recipes', 'API_URL', function (recipeService, toolsService, $scope, $filter, recipes, API_URL) {
 
         var vm = this,
             removeRecipe = function (recipeid) {
@@ -27,6 +27,7 @@
         vm.selectedRecipes = [];
         vm.recipeList = recipes;
         vm.showEditBtn = true;
+        vm.API_URL = API_URL;
 
         vm.onSelectRecipe = function (recipe) {
             if (!recipe.selected) {
