@@ -94,7 +94,7 @@
              ng-repeat="image in vm.recipe.images"
              ng-click="vm.onSelectImage(image, $event)">
             <i ng-show="image.selected" class="fa fa-times" ng-click="vm.onDeleteImage(image, $event); $event.stopPropagation();"></i>
-            <img ng-src="data:{{image.type}};base64,{{image.base64}}" style="max-width:99.0%">
+            <img ng-src="{{image.absoluteUrl}}" style="max-width:99.0%">
         </div>
     </div>
 </div>

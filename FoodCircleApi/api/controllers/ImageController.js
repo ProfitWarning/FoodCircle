@@ -39,12 +39,16 @@ module.exports = {
 
                         } else {
                             newImages.push({
-                                filename: slugger(recipeName + '_' + img.filename),
+                                filename: slugger(recipeName + '_' + img.filename, {alsoAllow: "."}),
                                 size: img.size,
                                 type: img.type,
                                 fd: img.fd,
                                 base64: file.toString('base64'),
-                                forrecipe: recipeId
+                                forrecipe: recipeId,
+                                skipperFilename: img.fd.substring(img.fd.lastIndexOf('/') + 1),
+                                url: 'image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1),
+                                baseUrl: req.baseUrl,
+                                absoluteUrl: req.baseUrl + '/image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1)
                             });
                         }
                         if (newImages.length === files.length) {
@@ -105,8 +109,26 @@ module.exports = {
             status: '401',
             message: 'Simple POST not allowed.'
         });
-    }
+    },
 
-    //TODO create GET for retrieving uploaded images
-    //no authorization reqired
+    findOne: function (req, res) {
+        'use strict';
+
+        Image.findOne({skipperFilename: req.params.id}).exec(function (err, image) {
+            if (err) {
+                return res.json('404', {
+                    err: 'Image not found.'
+                });
+            }
+
+            if (!err && !image) {
+                return res.json('500', {
+                    err: 'Image look up failed.'
+                });
+            }
+
+            return res.sendfile(image.fd);
+        });
+
+    }
 };
