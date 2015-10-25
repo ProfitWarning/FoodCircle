@@ -8,8 +8,13 @@
 
     angular.module('config.translate', ['pascalprecht.translate']).config(['$translateProvider', function ($translateProvider) {
 
-        $translateProvider.preferredLanguage('de');
-        $translateProvider.useSanitizeValueStrategy('sanitizeParameters');
+        $translateProvider.useSanitizeValueStrategy('sanitizeParameters')
+            .registerAvailableLanguageKeys(['en', 'de'], {
+                'en_*': 'en',
+                'de_*': 'de'
+            })
+            .fallbackLanguage('de')
+            .determinePreferredLanguage();
 
         $translateProvider.translations('de', {
             nav: {
@@ -107,6 +112,106 @@
             home: {
                 headline: {
                     latestrecipes: 'Neuste Rezepte'
+                }
+            }
+        });
+
+        $translateProvider.translations('en', {
+            nav: {
+                link: {
+                    home: 'Home',
+                    recipes: 'Recipes',
+                    about: 'About',
+                    impressum: 'Impressum'
+                },
+                dropdown: {
+                    signout: ' Sign out',
+                    signin: ' Sign in',
+                    profile: ' Profile',
+                    addrecipe: ' Recipe',
+                    calendar: ' Calendar',
+                    addevent: ' Event',
+                    myrecipes: ' My Recipes'
+                }
+            },
+            login: {
+                headline: 'Sign in'
+            },
+            recipe: {
+                name: '',
+                description: 'Preparation',
+                ingrediants: 'Ingredients',
+                units: {
+                    g: 'g',
+                    kg: 'kg',
+                    litre: 'Liter',
+                    pinch: 'Priese(n)',
+                    small: 'kleine',
+                    big: 'große',
+                    tin: 'Dose',
+                    squirt: 'Spritzer'
+                }
+
+            },
+            edit: {
+                action: {
+                    recipe: {
+                        editimage: ' Edit images',
+                        addingrediant: ' add',
+                        addrecipe: ''
+                    },
+                    save: ' Save'
+
+                },
+                label: {
+                    recipe: {
+                        name: 'Name',
+                        description: 'Preperation',
+                        ingredients: 'Ingredients',
+                        addrecipe: 'Add recipe'
+                    },
+                    event: {
+                        title: 'Titel',
+                        description: 'Description',
+                        eventstart: 'Event start',
+                        eventend: 'Event end',
+                        timestart: 'Start',
+                        timeend: 'End'
+                    }
+                },
+                placeholder: {
+                    name: 'Name',
+                    description: 'Preperation',
+                    amount: 'Amount',
+                    ingredient: 'Ingredient'
+                },
+                validation: {
+                    required: {
+                        recipe: {
+                            amount: 'Amount is required',
+                            name: 'Name is required',
+                            description: 'Description is required',
+                            unit: 'Unit is required'
+                        },
+
+                        event: {
+                            description: 'Description is required',
+                            title : 'Title is required',
+                            date: 'Date is required'
+                        }
+                    }
+                }
+            },
+            profile: {
+                label: {
+                    headline: 'Your profile',
+                    myrecipes: 'My recipes',
+                    myevents: 'My events'
+                }
+            },
+            home: {
+                headline: {
+                    latestrecipes: 'Latest recipes'
                 }
             }
         });
