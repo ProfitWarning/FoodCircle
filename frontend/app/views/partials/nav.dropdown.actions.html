@@ -1,0 +1,35 @@
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.profile.index">
+        <span class="glyphicon glyphicon-user" aria-hidden="true" translate="nav.dropdown.profile"></span>
+    </a>
+</li>
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.myrecipes.list">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true" translate="nav.dropdown.myrecipes"> </span>
+    </a>
+</li>
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.myrecipes.create">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" translate="nav.dropdown.addrecipe"></span>
+    </a>
+</li>
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.calendar">
+        <span class="glyphicon glyphicon-calendar" aria-hidden="true" translate="nav.dropdown.calendar"> </span>
+    </a>
+</li>
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.event.edit">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true" translate="nav.dropdown.addevent"></span>
+    </a>
+</li>
+<li ui-sref-active="active" ng-hide="vm.isAuthenticated()">
+    <a ui-sref="main.login">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" translate="nav.dropdown.signin"></span>
+    </a>
+</li>
+<li ng-show="vm.isAuthenticated()" ui-sref-active="active">
+    <a ui-sref="main.logout">
+        <span class="glyphicon glyphicon-off" aria-hidden="true" translate="nav.dropdown.signout"></span>
+    </a>
+</li>

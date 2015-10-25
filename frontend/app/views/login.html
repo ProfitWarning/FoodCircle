@@ -1,6 +1,6 @@
 <div ng-controller="LoginCtrl as vm">
   <form ng-submit="vm.submit()" name="register" class="form-signin" novalidate>
-  	<h1 class="form-signin-heading text-muted">Login</h1>
+  	<h1 class="form-signin-heading text-muted" translate="login.headline"></h1>
   	<input name="email" ng-model="vm.email" type="email" class="form-control" placeholder="Email address" required>
 
   	<p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">Please enter a proper email.</p>

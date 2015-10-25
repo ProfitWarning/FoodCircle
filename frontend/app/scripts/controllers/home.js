@@ -12,8 +12,9 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('HomeCtrl', ['recipeService', 'recipeList', function (recipeService, recipeList) {
+    angular.module('foodCircle').controller('HomeCtrl', ['recipeService', 'recipeList', 'API_URL', function (recipeService, recipeList, API_URL) {
         var vm = this;
         vm.recipeList = recipeList;
+        vm.API_URL = API_URL;
     }]);
 }());
