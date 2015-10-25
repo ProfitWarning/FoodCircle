@@ -65,7 +65,6 @@
                         ingredients: 'Zutaten',
                         addrecipe: 'Rezept hinzufügen'
                     },
-
                     event: {
                         title: 'Titel',
                         description: 'Beschreibung',
@@ -96,6 +95,18 @@
                             date: 'Datum wird benötigt'
                         }
                     }
+                }
+            },
+            profile: {
+                label: {
+                    headline: 'Dein Profil',
+                    myrecipes: 'Meine Rezepte',
+                    myevents: 'Meine Zirkeltermine'
+                }
+            },
+            home: {
+                headline: {
+                    latestrecipes: 'Neuste Rezepte'
                 }
             }
         });
