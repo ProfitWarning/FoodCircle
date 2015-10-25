@@ -12,7 +12,7 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', 'authService', '$filter', function (EventService, $moment, $state, authService, $filter) {
+    angular.module('foodCircle').controller('CalendarCtrl', ['EventService', '$moment', '$state', 'authService', '$filter', '$confirm', function (EventService, $moment, $state, authService, $filter, $confirm) {
 
         var vm = this, initEvents, defaultEvent, getRecipeIdArray;
 
@@ -31,14 +31,22 @@
         vm.calendarView = 'month';
         vm.calendarDay = new Date();
 
-        vm.eventClicked = function (event) {
-            if (event && event.id) {
-                $state.go('main.event.edit', {id: event.id});
-            }
-        };
+
         vm.eventEdited = function (calendarEvent) {
             if (calendarEvent && calendarEvent.id) {
                 $state.go('main.event.edit', {id: calendarEvent.id});
+            }
+        };
+        vm.eventDeleted = function (calendarEvent) {
+            if (calendarEvent && calendarEvent.id) {
+
+                $confirm({
+                    text: 'Do you really want to delte this Event?'
+                }).then(function () {
+                    EventService.deleteById(calendarEvent.id).then(function () {
+                        EventService.removeArrayItem(vm.events, {id: calendarEvent.id});
+                    });
+                });
             }
         };
 

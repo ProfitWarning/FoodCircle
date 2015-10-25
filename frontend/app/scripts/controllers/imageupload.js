@@ -45,7 +45,6 @@
             }
 
             if (angular.isArray(vm.imagesToUpload)) {
-                //TODO set error in image progressbar
                 //show why error e.g. image too big
                 angular.forEach(vm.imagesToUpload, function (image) {
                     if (image.$error) {

@@ -21,7 +21,6 @@
                 password: password
             })
                 .then(function (response) {
-                debugger;
                     localStorageService.set('currentUser', response.data.user);
                     localStorageService.set('satellizer_token', response.data.token);
                     deferred.resolve(response.data.user);

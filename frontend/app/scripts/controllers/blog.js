@@ -14,6 +14,5 @@
 
     angular.module('foodCircle').controller('BlogCtrl', ['blog', function (blog) {
         var vm = this;
-        debugger;
     }]);
 }());
