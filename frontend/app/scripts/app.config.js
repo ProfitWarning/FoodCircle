@@ -92,8 +92,8 @@
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
                 if (error.message === AUTH_EVENTS.notAuthorized) {
                     event.preventDefault(); // stop current execution
-                    $auth.logout();
-                    $state.go('main.login'); // go to login
+                    /*$auth.logout();
+                    $state.go('main.login'); // go to login*/
                     alert('warning', 'Error', 'You are not authorized!');
                 }
                 $log.log('$stateChangeError - fired when an error occurs during transition.');
