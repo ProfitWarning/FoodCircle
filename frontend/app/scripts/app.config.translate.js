@@ -50,14 +50,30 @@
             },
             edit: {
                 action: {
-                    save: ' Speichern',
-                    editimage: ' Bilder bearbeiten',
-                    addingrediant: ' hinzufügen'
+                    recipe: {
+                        editimage: ' Bilder bearbeiten',
+                        addingrediant: ' hinzufügen',
+                        addrecipe: ''
+                    },
+                    save: ' Speichern'
+
                 },
                 label: {
-                    name: 'Name',
-                    description: 'Zubereitung',
-                    ingredients: 'Zutaten'
+                    recipe: {
+                        name: 'Name',
+                        description: 'Zubereitung',
+                        ingredients: 'Zutaten',
+                        addrecipe: 'Rezept hinzufügen'
+                    },
+
+                    event: {
+                        title: 'Titel',
+                        description: 'Beschreibung',
+                        eventstart: 'Terminbeginn',
+                        eventend: 'Terminende',
+                        timestart: 'Beginn',
+                        timeend: 'Ende'
+                    }
                 },
                 placeholder: {
                     name: 'Name',
@@ -67,10 +83,18 @@
                 },
                 validation: {
                     required: {
-                        amount: 'Menge wird benötigt',
-                        name: 'Name wird benötigt',
-                        description: 'Zubereitung wird benötigt',
-                        unit: 'Einheit wird benötigt'
+                        recipe: {
+                            amount: 'Menge wird benötigt',
+                            name: 'Name wird benötigt',
+                            description: 'Zubereitung wird benötigt',
+                            unit: 'Einheit wird benötigt'
+                        },
+
+                        event: {
+                            description: 'Beschreibung wird benötigt',
+                            title : 'Titel wird benötigt',
+                            date: 'Datum wird benötigt'
+                        }
                     }
                 }
             }

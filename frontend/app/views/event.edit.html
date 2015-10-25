@@ -4,28 +4,28 @@
 
         <!-- Title input-->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="title">Titel</label>
+            <label class="col-md-3 control-label" for="title" translate="edit.label.event.title"></label>
             <div class="col-md-9" ng-class="{ 'has-error': eventform.title.$touched && eventform.title.$invalid }">
                 <input id="title" name="title" type="text" placeholder="Titel" class="form-control" ng-model="vm.event.title" required>
                 <div class="help-block" ng-messages="eventform.title.$error" ng-show="eventform.title.$touched">
-                    <p ng-message="required">Title is required.</p>
+                    <p ng-message="required">{'edit.validation.required.event.title' | translate}}</p>
                 </div>
             </div>
         </div>
         <!--Description body-->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description">Your event description</label>
+            <label class="col-md-3 control-label" for="description" translate="edit.label.event.description"></label>
             <div class="col-md-9" ng-class="{ 'has-error': eventform.description.$touched && eventform.description.$invalid }">
                 <textarea class="form-control" id="description" name="description" placeholder="Please enter your description here..." rows="5" ng-model="vm.event.description" required></textarea>
                 <div class="help-block" ng-messages="eventform.description.$error" ng-show="eventform.description.$touched">
-                    <p ng-message="required">Description is required.</p>
+                    <p ng-message="required">{{'edit.validation.required.event.description' | translate}}</p>
                 </div>
             </div>
         </div>
         <!-- Date -->
 
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description">Your event start date</label>
+            <label class="col-md-3 control-label" for="description" translate="edit.label.event.eventstart"></label>
             <div class="col-md-4">
                 <p class="input-group">
                     <input type="text" class="form-control" name="eventstartdate" id="eventstartdate"
@@ -42,12 +42,12 @@
                         <button type="button" class="btn btn-default" ng-click="vm.datepicker.open('start', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     <div class="help-block" ng-messages="eventform.eventstartdate.$error" ng-show="eventform.eventstartdate.$touched">
-                        <p ng-message="required">Event date is required.</p>
+                        <p ng-message="required">{{'edit.validation.required.event.date' | translate}}</p>
                     </div>
                 </p>
             </div>
             <div class="col-md-3">
-                <label class="col-md-2 control-label" for="description">Start</label>
+                <label class="col-md-2 control-label" for="description" translate="edit.label.event.timestart"></label>
                 <uib-timepicker class="datetimepicker" ng-model="vm.event.startDate"
                                 ng-change="vm.timepicker.onChanged('start')"
                                 hour-step="vm.timepicker.hstep"
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description">Your event end date</label>
+            <label class="col-md-3 control-label" for="description" translate="edit.label.event.eventend"></label>
             <div class="col-md-4">
                 <p class="input-group">
                     <input type="text" class="form-control" name="eventenddate" id="eventenddate"
@@ -75,12 +75,12 @@
                         <button type="button" class="btn btn-default" ng-click="vm.datepicker.open('end', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     <div class="help-block" ng-messages="eventform.eventenddate.$error" ng-show="eventform.eventenddate.$touched">
-                        <p ng-message="required">Event date is required.</p>
+                        <p ng-message="required">{{'edit.validation.required.event.date' | translate}}</p>
                     </div>
                 </p>
             </div>
             <div class="col-md-3">
-                <label class="col-md-2 control-label" for="description">End</label>
+                <label class="col-md-2 control-label" for="description" translate="edit.label.event.timeend"></label>
                 <uib-timepicker class="datetimepicker" ng-model="vm.event.endDate"
                                 ng-change="vm.timepicker.onChanged('end')"
                                 hour-step="vm.timepicker.hstep"
@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description">Add recipe</label>
+            <label class="col-md-3 control-label" for="description" translate="edit.label.addrecipe"></label>
             <div class="col-md-1">
                 <p class="input-group">
                     <span class="input-group-btn">
@@ -117,7 +117,7 @@
         <!-- Form actions -->
         <div class="form-group">
             <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-default" ng-disabled="!eventform.$valid"><span class="glyphicon glyphicon-ok"></span> Save</button>
+                <button type="submit" class="btn btn-default" ng-disabled="!eventform.$valid"><span class="glyphicon glyphicon-ok" translate="edit.action.save"></span></button>
             </div>
         </div>
     </fieldset>

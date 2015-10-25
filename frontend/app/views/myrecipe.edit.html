@@ -3,36 +3,36 @@
         <legend class="text-center">{{vm.recipe.name ? "Edit " + vm.recipe.name : "New recipe"}}</legend>
         <!-- Name input-->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="name" translate="edit.label.name"></label>
+            <label class="col-md-3 control-label" for="name" translate="edit.label.recipe.name"></label>
             <div class="col-md-9" ng-class="{ 'has-error': recipeForm.name.$touched && recipeForm.name.$invalid }">
                 <input id="name" name="name" type="text" placeholder="{{'edit.placeholder.name' | translate}}" class="form-control" ng-model="vm.recipe.name" required>
                 <div class="help-block" ng-messages="recipeForm.name.$error" ng-show="recipeForm.name.$touched">
-                    <p ng-message="required">{{'edit.validation.required.name' | translate}}</p>
+                    <p ng-message="required">{{'edit.validation.required.recipe.name' | translate}}</p>
                 </div>
             </div>
         </div>
 
         <!-- Message body -->
         <div class="form-group">
-            <label class="col-md-3 control-label" for="description" translate="edit.label.description"></label>
+            <label class="col-md-3 control-label" for="description" translate="edit.label.recipe.description"></label>
             <div class="col-md-9" ng-class="{ 'has-error': recipeForm.description.$touched && recipeForm.description.$invalid }">
                 <textarea class="form-control" id="description" name="description" placeholder="{{'edit.placeholder.description' | translate}}" rows="5" ng-model="vm.recipe.description" required></textarea>
                 <div class="help-block" ng-messages="recipeForm.description.$error" ng-show="recipeForm.description.$touched">
-                    <p ng-message="required">{{'edit.validation.required.description' | translate}}</p>
+                    <p ng-message="required">{{'edit.validation.required.recipe.description' | translate}}</p>
                 </div>
             </div>
         </div>
 
 
         <div class="form-group">
-            <label class="col-md-3 control-label" for="message" translate="edit.label.ingredients"></label>
+            <label class="col-md-3 control-label" for="message" translate="edit.label.recipe.ingredients"></label>
             <div class="col-md-9">
                 <div class="form-group row" ng-repeat="ingredient in vm.recipe.ingredients">
                     <ng-form name="innerFormDescription">
                         <div class="col-xs-2" ng-class="{ 'has-error': innerFormDescription.amount.$touched && innerFormDescription.amount.$invalid }">
                             <input type="text" class="form-control" name="amount" placeholder="{{'edit.placeholder.amount' | translate}}" ng-model="ingredient.amount" required>
                             <div class="help-block" ng-messages="innerFormDescription.amount.$error" ng-show="innerFormDescription.amount.$touched">
-                                <p ng-message="required">{{'edit.validation.required.amount' | translate}}</p>
+                                <p ng-message="required">{{'edit.validation.required.recipe.amount' | translate}}</p>
                             </div>
                         </div>
                         <div class="col-xs-3" ng-class="{ 'has-error': innerFormDescription.unit.$touched && innerFormDescription.unit.$invalid }">
@@ -48,13 +48,13 @@
                                 </ul>
                             </div>
                              <div class="help-block" ng-messages="innerFormDescription.unit.$error" ng-show="innerFormDescription.unit.$touched">
-                                <p ng-message="required">{{'edit.validation.required.unit' | translate}}</p>
+                                <p ng-message="required">{{'edit.validation.required.recipe.unit' | translate}}</p>
                             </div>
                         </div>
                         <div class="col-xs-6" ng-class="{ 'has-error': innerFormDescription.ingrediantName.$touched && innerFormDescription.ingrediantName.$invalid }">
                             <input type="text" name="ingrediantName" class="form-control" placeholder="{{'edit.placeholder.ingredient' | translate}}" ng-model="ingredient.name" required>
                             <div class="help-block" ng-messages="innerFormDescription.ingrediantName.$error" ng-show="innerFormDescription.ingrediantName.$touched">
-                                <p ng-message="required">{{'edit.validation.required.name' | translate}}</p>
+                                <p ng-message="required">{{'edit.validation.required.recipe.name' | translate}}</p>
                             </div>
                         </div>
                         <div class="col-xs-1 text-right" style="padding-top: 4px;">
@@ -68,7 +68,7 @@
             <div class="col-md-12">
                 <div class="text-right">
                     <a type="button" class="btn btn-success btn-add" ng-click="vm.addIngredientInput()">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true" translate="edit.action.addingrediant"></span>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true" translate="edit.action.recipe.addingrediant"></span>
                     </a>
                 </div>
             </div>
@@ -80,7 +80,7 @@
             <div class="col-md-12 text-right">
                 <button type="submit" class="btn btn-default" ng-disabled="!recipeForm.$valid"><span class="glyphicon glyphicon-ok" translate="edit.action.save"></span></button>
                 <a ui-sref="main.myrecipes.imageupload({name: {{'vm.recipe.name'}} })" class="btn btn-default" ng-disabled="!recipeForm.$valid">
-                    <span class="glyphicon glyphicon-picture" translate="edit.action.editimage"></span>
+                    <span class="glyphicon glyphicon-picture" translate="edit.action.recipe.editimage"></span>
                 </a>
             </div>
         </div>
