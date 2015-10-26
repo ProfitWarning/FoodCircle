@@ -23,12 +23,13 @@
 
             localStorageServiceProvider.setPrefix('ls');
 
-            $provide.decorator('$exceptionHandler', ['$delegate', '$injector', 'AUTH_EVENTS', function ($delegate, $injector, AUTH_EVENTS) {
+            $provide.decorator('$exceptionHandler', ['$delegate', '$injector', 'AUTH_EVENTS', 'FETCH_EVENTS', function ($delegate, $injector, AUTH_EVENTS, FETCH_EVENTS) {
 
                 var $rootScope;
 
                 return function (exception, cause) {
                     $rootScope = $rootScope || $injector.get('$rootScope');
+
                     //handle JWR
                     if (exception.body && exception.error && exception.headers) { //is jwr
                         if (exception.statusCode && exception.statusCode > 400) {
@@ -40,6 +41,11 @@
                             }[exception.statusCode], exception);
                         }
 
+                    }
+
+                    //handle 'No items found while performing GET on a singular'
+                    if (exception.indexOf && exception.indexOf('No items found while performing GET on a singular') > -1) {
+                        $rootScope.$broadcast(FETCH_EVENTS.notItemOnSingleGet, exception);
                     }
 
                     $delegate(exception, cause);
@@ -57,7 +63,10 @@
             notAuthorized: 'auth-not-authorized',
             tokenExpired: 'auth-token-expired'
         })
-        .run(['$rootScope', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', '$log', function ($rootScope, $state, $auth, AUTH_EVENTS, authorization, alert, $log) {
+        .constant('FETCH_EVENTS', {
+            notItemOnSingleGet: 'no-item-on-single-get'
+        })
+        .run(['$rootScope', '$state', '$auth', 'AUTH_EVENTS', 'authorization', 'alert', '$log', 'FETCH_EVENTS', function ($rootScope, $state, $auth, AUTH_EVENTS, authorization, alert, $log, FETCH_EVENTS) {
                                                         /*event, toState, toParams, fromState, fromParams*/
             $rootScope.$on('$stateChangeStart', function (event, toState) {
                 /*if (toState.name === 'home' ||
@@ -81,6 +90,14 @@
                 $log.log('$stateChangeStart to ' + toState.to + '- fired when the transition begins. toState,toParams : \n', toState, toParams);
             });*/
 
+            $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+                if (fromState.name !== 'main.error') {
+                    $rootScope.previousState = fromState.name;
+                    $rootScope.previousStateParams = fromParams;
+                    $rootScope.currentState = toState.name;
+                }
+            });
+
             /*$rootScope.$on('$viewContentLoaded', function (event) {
                 $log.log('$viewContentLoaded - fired after dom rendered', event);
             });*/
@@ -89,14 +106,15 @@
                 $log.log('$stateNotFound ' + unfoundState.to + '  - fired when a state cannot be found by its name.');
                 $log.log(unfoundState, fromState, fromParams);
             });
+
             $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-                if (error.message === AUTH_EVENTS.notAuthorized) {
+                if (error && error.messagerror.messag && error.message === AUTH_EVENTS.notAuthorized) {
                     event.preventDefault(); // stop current execution
                     /*$auth.logout();
                     $state.go('main.login'); // go to login*/
                     alert('warning', 'Error', 'You are not authorized!');
                 }
-                $log.log('$stateChangeError - fired when an error occurs during transition.');
+                /*$log.log('$stateChangeError - fired when an error occurs during transition.');*/
                 $log.log(arguments);
             });
 
@@ -108,6 +126,15 @@
 
             $rootScope.$on(AUTH_EVENTS.notAuthorized, function () {
                 alert('warning', 'Error', 'You are not authorized!');
+            });
+
+            $rootScope.$on(FETCH_EVENTS.notItemOnSingleGet, function (event, message) {
+                $state.go('main.error', {
+                    error: {
+                        message: message
+                    }
+                });
+                //alert('warning', 'Error', message);
             });
 
             $rootScope.$on('$sailsSocketError', function (error) {

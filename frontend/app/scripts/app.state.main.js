@@ -54,6 +54,14 @@
             })
             .state('404', {
                 templateUrl: '/404.html'
+            })
+            .state('main.error', {
+                url: '/error',
+                templateUrl: '/error.html',
+                controller: 'ErrorpageCtrl as vm',
+                params: {
+                    error: {}
+                }
             });
     }]);
 }());
