@@ -43,7 +43,7 @@
             ingredient.unit = unit;
         };
 
-        vm.submit = function (isValidForm, event) {
+        vm.submit = function (isValidForm, event, toStateName) {
             event.preventDefault();
 
             if (!isValidForm) {
@@ -51,7 +51,26 @@
             }
 
             recipeService.createOrUpdateRecipe(vm.recipe).then(function () {
+
                 $state.go('main.myrecipes.list');
+
+                alert('info', 'Recipe ' + (!vm.recipe.id ? 'save.' : 'updated.'));
+            }, function (error) {
+                alert('error', error.message);
+            });
+        };
+
+        vm.saveAndEditImage = function (isValidForm, event) {
+            event.preventDefault();
+
+            if (!isValidForm) {
+                return;
+            }
+
+            recipeService.createOrUpdateRecipe(vm.recipe).then(function (recipe) {
+
+                $state.go('main.myrecipes.imageupload', {name: recipe.name});
+
                 alert('info', 'Recipe ' + (!vm.recipe.id ? 'save.' : 'updated.'));
             }, function (error) {
                 alert('error', error.message);

@@ -58,7 +58,8 @@
                     recipe: {
                         editimage: ' Bilder bearbeiten',
                         addingrediant: ' hinzufügen',
-                        addrecipe: ''
+                        addrecipe: '',
+                        saveeditimage: ' Speichern / Bilder bearbeiten'
                     },
                     save: ' Speichern'
 
