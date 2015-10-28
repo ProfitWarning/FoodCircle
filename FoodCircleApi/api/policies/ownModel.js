@@ -12,7 +12,8 @@ module.exports = function (req, res, next) {
 
 
     if (req.method !== 'PUT' && req.method !== 'DELETE') {
-        return next();
+        next();
+        return;
     }
 
 

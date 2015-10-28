@@ -82,7 +82,7 @@
                 <a ui-sref="main.myrecipes.imageupload({name: {{'vm.recipe.name'}} })" class="btn btn-default" ng-disabled="!recipeForm.$valid" ng-if="vm.recipe.id">
                     <span class="glyphicon glyphicon-picture" translate="edit.action.recipe.editimage"></span>
                 </a>
-                <a ng-click="vm.saveAndEditImage(recipeForm.$valid, $event)" class="btn btn-default" ng-disabled="!recipeForm.$valid">
+                <a ng-click="vm.saveAndEditImage(recipeForm.$valid, $event)" class="btn btn-default" ng-if="!vm.recipe.id" ng-disabled="!recipeForm.$valid">
                     <span class="glyphicon glyphicon-picture"></span><span translate="edit.action.recipe.saveeditimage"></span>
                 </a>
             </div>

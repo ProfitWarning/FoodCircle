@@ -153,6 +153,7 @@
                     dfd.resolve(response);
                 },
                     function (response) {
+                    debugger;
                         $exceptionHandler(response);
                         dfd.reject({});
                     });

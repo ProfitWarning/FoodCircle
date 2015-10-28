@@ -9,8 +9,15 @@ module.exports = {
 
     attributes: {
         filename: {
-            type: 'string',
-            unique: true
+            type: 'string'
+        },
+
+        skipperFilename: {
+            type: 'string'
+        },
+
+        url: {
+            type: 'string'
         },
 
         size: {

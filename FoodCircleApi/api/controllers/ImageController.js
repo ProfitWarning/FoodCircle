@@ -46,7 +46,7 @@ module.exports = {
                                 base64: file.toString('base64'),
                                 forrecipe: recipeId,
                                 skipperFilename: img.fd.substring(img.fd.lastIndexOf('/') + 1),
-                                url: 'image/' + img.fd.substring(img.fd.lastIndexOf('/') + 1)
+                                url: 'image/serve/' + img.fd.substring(img.fd.lastIndexOf('/') + 1)
                             });
                         }
                         if (newImages.length === files.length) {
@@ -82,13 +82,13 @@ module.exports = {
                     recipe.save(function (err, updatedRecipe) {
                         if (err) {
                             return res.json('400', {
-                                error: err.details
+                                error: err
                             });
                         }
 
                         res.json({
                             status: 200,
-                            file: newImages
+                            file: updatedRecipe.images
                         });
 
                     });
@@ -109,7 +109,7 @@ module.exports = {
         });
     },
 
-    findOne: function (req, res) {
+    serve: function (req, res) {
         'use strict';
 
         Image.findOne({skipperFilename: req.params.id}).exec(function (err, image) {

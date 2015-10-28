@@ -82,7 +82,8 @@ module.exports.policies = {
         'remove': ['isAuthorized', 'ownModel'],
         'update': ['isAuthorized', 'ownModel'],
         'find': true,
-        'findOne': true
+        'findOne': true,
+        'serve': true
     },
 
     'BlogController': {
