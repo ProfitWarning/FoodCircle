@@ -62,10 +62,10 @@ module.exports = {
         uploadFile.on('progress', function (event) {
             return event;
 
-        }).upload({dirname: imagePath}, function onUploadComplete(err, files) {
+        }).upload({dirname: imagePath, maxBytes: 5000000}, function onUploadComplete(err, files) {
             //    IF ERROR Return and send 500 error with error
             if (err) {
-                return res.serverError(err);
+                return res.negotiate(err);
             }
 
             createNewArray(files, function (newImages) {
@@ -81,9 +81,7 @@ module.exports = {
                     }
                     recipe.save(function (err, updatedRecipe) {
                         if (err) {
-                            return res.json('400', {
-                                error: err
-                            });
+                            return res.negotiate(err);
                         }
 
                         res.json({
@@ -114,15 +112,17 @@ module.exports = {
 
         Image.findOne({skipperFilename: req.params.id}).exec(function (err, image) {
             if (err) {
-                return res.json('404', {
-                    err: 'Image not found.'
-                });
+                return res.negotiate(err);
             }
 
             if (!err && !image) {
                 return res.json('500', {
                     err: 'Image look up failed.'
                 });
+            }
+
+            if (!image) {
+                return res.notFound();
             }
 
             return res.sendfile(image.fd);

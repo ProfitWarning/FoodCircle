@@ -51,9 +51,34 @@ module.exports = {
             return obj;
         }
     },
+
     beforeCreate: function (values, next) {
         'use strict';
         delete values.token;
         next();
+    },
+
+    afterDestroy: function (destroyedRecords, next) {
+        'use strict';
+        var async = require("async");
+
+        async.each(destroyedRecords, function (record, callback) {
+            // Call an asynchronous function, often a save() to DB
+            Image.destroy({forrecipe: record.id}).exec(function deleteCB(err, delRecords) {
+
+                callback();
+            });
+        },
+          // 3rd param is the function to call when everything's done
+            function (err) {
+            // All tasks are done now
+                next();
+            });
+
+
+
+
+
+
     }
 };

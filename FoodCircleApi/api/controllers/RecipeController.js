@@ -32,9 +32,7 @@ module.exports = {
 
         Recipe.create(req.body).exec(function (err, recipe) {
             if (err) {
-                return res.json(err.status, {
-                    err: err
-                });
+                return res.negotiate(err);
             }
             // If recipe created successfuly we return user and token as response
             if (recipe) {
