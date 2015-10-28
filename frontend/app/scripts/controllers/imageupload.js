@@ -34,7 +34,7 @@
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
         vm.invalidFilesArray = [];
-        vm.uploadMaxSize = '1.3MB'
+        vm.uploadMaxSize = '1.3MB';
         vm.API_URL = API_URL;
 
 
@@ -76,7 +76,7 @@
             });
 
             vm.upload.then(function (res) {
-                vm.recipe.images = vm.recipe.images.concat(res.data.file);
+                vm.recipe.images = res.data.file;
                 //upload finished reset everything
                 alert('success', 'Success', 'Upload finished', 2000);
                 $timeout(function () {
