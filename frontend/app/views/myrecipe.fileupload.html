@@ -51,6 +51,9 @@
             </div>
             <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
         </div>
+            <a class="btn btn-success btn-sm" translate="nav.back"
+                   ui-sref="main.myrecipes.edit({name:'{{vm.recipe.name}}'})"
+                   ng-click="$event.stopPropagation()"></a>
     </div>
     <div class="panel-body row">
         <!-- Progress Bar -->

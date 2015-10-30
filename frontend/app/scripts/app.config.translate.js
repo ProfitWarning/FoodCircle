@@ -32,7 +32,8 @@
                     calendar: ' Kalender',
                     addevent: ' Termin',
                     myrecipes: ' Meine Rezepte'
-                }
+                },
+                back: 'zurück'
             },
             login: {
                 headline: 'Sign in'
@@ -61,7 +62,9 @@
                         addrecipe: '',
                         saveeditimage: ' Speichern / Bilder bearbeiten'
                     },
-                    save: ' Speichern'
+                    save: ' Speichern',
+                    detail: 'anzeigen',
+                    edit: 'bearbeiten'
 
                 },
                 label: {
@@ -133,7 +136,8 @@
                     calendar: ' Calendar',
                     addevent: ' Event',
                     myrecipes: ' My Recipes'
-                }
+                },
+                back: 'back'
             },
             login: {
                 headline: 'Sign in'
@@ -161,7 +165,9 @@
                         addingrediant: ' add',
                         addrecipe: ''
                     },
-                    save: ' Save'
+                    save: ' Save',
+                    detail: 'detail',
+                    edit: 'edit'
 
                 },
                 label: {
