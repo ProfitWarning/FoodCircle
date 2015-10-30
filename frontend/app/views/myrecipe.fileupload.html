@@ -17,6 +17,7 @@
                                ngf-max-size="vm.uploadMaxSize"
                                ng-model-options="{allowInvalid: false}"
                                ngf-model-invalid="vm.invalidFilesArray"
+                               ngf-resize="{width: {{vm.resizeWidth}}, height: {{vm.resizeHeight}}}"
                                required>
                     </div>
                     <button ng-click="vm.uploadImage(vm.imagesToUpload)"

@@ -444,11 +444,13 @@ form .form-group {
 }
 .carousel {
     margin-bottom: 20px;
+    height: 360px;
+    background-color: @gray;
 }
 
 
 .carousel-inner {
-    height: 370px;
+    max-height: 360px;
 
     .item {
         overflow: hidden;
@@ -473,14 +475,19 @@ form .form-group {
     opacity: 1;
     text-shadow: none;
     cursor: pointer;
+    font-size: 30px;
     &.right {
-        right: 5px;
+        right: 10px;
         background-image: none !important;
     }
     &.left {
-        right: 35px;
+        right: 45px;
         background-image: none !important;
     }
+}
+
+.carousel-control:hover {
+    color: @brand-primary;
 }
 
 /* Event list*/

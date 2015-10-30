@@ -34,8 +34,10 @@
         vm.recipe = recipeToEdit;
         vm.imagesToUpload = [];
         vm.invalidFilesArray = [];
-        vm.uploadMaxSize = '1.3MB';
+        vm.uploadMaxSize = '4.6MB';
         vm.API_URL = API_URL;
+        vm.resizeHeight = 720;
+        vm.resizeWidth = 960;
 
 
         vm.createProgressbar = function (images) {
