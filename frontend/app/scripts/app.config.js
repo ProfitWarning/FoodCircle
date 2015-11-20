@@ -6,8 +6,16 @@
 (function () {
     'use strict';
 
-    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider', '$provide',
-        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider, $provide) {
+    angular.module('foodCircle').config(['sailsResourceProvider', '$httpProvider', '$authProvider', 'API_URL', 'localStorageServiceProvider', '$provide', 'cfpLoadingBarProvider',
+        function (sailsResourceProvider, $httpProvider, $authProvider, API_URL, localStorageServiceProvider, $provide, cfpLoadingBarProvider) {
+
+
+            //loading spinner
+            cfpLoadingBarProvider.latencyThreshold = 10;
+            cfpLoadingBarProvider.includeBar = true;
+            cfpLoadingBarProvider.includeSpinner = false;
+            cfpLoadingBarProvider.parentSelector = 'body'
+
 
             /*sailsResourceProvider.configuration = {
                 verbose: false, // sailsResource will log messages to console

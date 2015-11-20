@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -29,7 +30,14 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view></div>
+    <div ui-view>
+        <div class="container" style="text-align: center; margin: 5% auto;">
+            <h1>Preparing application...</h1>
+            <div class="progress progress-striped active" style="width: 50%; margin: 0 auto;">
+                <div class="progress-bar" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
 
     <div class="footer">
         <div class="container">
@@ -59,6 +67,7 @@
     <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <!-- endbower -->
 
     <!-- endbuild -->
