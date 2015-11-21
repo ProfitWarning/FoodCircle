@@ -30,18 +30,18 @@
             compile = directive.compile;
 
             directive.compile = function () {
-               /* var link = compile.apply(this, arguments);
-                debugger;
-                return function (scope, element, attrs, ctrls) {
-                    debugger;
-                    link.apply(this, arguments);
+                /* var link = compile.apply(this, arguments);
+                 debugger;
+                 return function (scope, element, attrs, ctrls) {
+                     debugger;
+                     link.apply(this, arguments);
 
-                    element.bind('click', function () {
-                        scope.$apply(function () {
-                            scope.onRecipesLabelClick();
-                        });
-                    });
-                };*/
+                     element.bind('click', function () {
+                         scope.$apply(function () {
+                             scope.onRecipesLabelClick();
+                         });
+                     });
+                 };*/
             };
 
             return $delegate;
@@ -57,5 +57,5 @@
         }]);
 
     }]);
-}());
+} ());
 
