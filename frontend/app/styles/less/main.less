@@ -447,16 +447,12 @@ form .form-group {
     height: 360px;
     background-color: @gray;
 }
-
-
 .carousel-inner {
     max-height: 360px;
-
     .item {
         overflow: hidden;
         max-width: 100%;
         max-height: 100%;
-
         img {
             width: 100%;
             min-height: 100%;
@@ -464,7 +460,6 @@ form .form-group {
         }
     }
 }
-
 .carousel-control {
     color: #fff;
     padding: 4px 0;
@@ -485,7 +480,6 @@ form .form-group {
         background-image: none !important;
     }
 }
-
 .carousel-control:hover {
     color: @brand-primary;
 }
@@ -743,7 +737,6 @@ cal-year-box .row:hover,
 .cal-row-fluid:hover {
     background-color: @gray-dark;
 }
-
 [class*="cal-cell"]:hover,
 .cell-focus,
 [class*="cal-cell"] .drop-active,
@@ -758,7 +751,6 @@ cal-year-box .row:hover,
     /* -webkit-box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);
     box-shadow: inset 0px 0px 15px 0px rgba(0, 0, 0, 0.5);*/
     box-shadow: none;
-
     ul:first {
         columns: 2;
         -webkit-columns: 2;
@@ -768,22 +760,19 @@ cal-year-box .row:hover,
 span[data-cal-date] {
     opacity: 0.8;
 }
-
 .datetimepicker {
     td {
         input {
-            width:52px !important;
+            width: 52px !important;
         }
     }
 }
-
 .list-item-btn-list {
     position: absolute;
     top: 0;
     right: 0;
     display: block;
     width: 40px;
-
     > ul {
         border-left: 1px solid #e6e6e6;
         margin: 0;
@@ -793,12 +782,10 @@ span[data-cal-date] {
         width: 100%;
         text-align: center;
         columns: 2;
-
         > li {
             display: block;
             padding: 0;
             cursor: pointer;
-
             a {
                 display: block;
                 width: 40px;
@@ -806,4 +793,19 @@ span[data-cal-date] {
             }
         }
     }
+}
+#loading-bar .bar {
+    -webkit-transition: width 350ms;
+    -moz-transition: width 350ms;
+    -o-transition: width 350ms;
+    transition: width 350ms;
+    background: #29d;
+    position: fixed;
+    z-index: 10002;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    border-bottom-right-radius: 1px;
+    border-top-right-radius: 1px;
 }
